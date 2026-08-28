@@ -1,0 +1,24 @@
+# Native Web Development (Lightweight PHP) Configuration
+
+# Aktifkan rewrite engine jika tersedia
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+</IfModule>
+
+# Keamanan direktori: sembunyikan file sensitif
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(schema\.sql|\.env|\.git)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Pengaturan default charset UTF-8
+AddDefaultCharset UTF-8
+
+# Matikan directory listing
+Options -Indexes

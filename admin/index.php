@@ -1,0 +1,231 @@
+<?php
+/**
+ * Admin Dashboard Main Index
+ */
+$active_menu = 'dashboard';
+$page_title = 'Ringkasan Dashboard';
+require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../helpers/format.php';
+require_once __DIR__ . '/../helpers/auth.php';
+
+$db = getDB();
+
+$totalProducts = 0;
+$activeProducts = 0;
+$totalCategories = 0;
+$totalOrders = 0;
+$pendingOrders = 0;
+$totalRevenue = 0;
+$lowStockProducts = [];
+$recentOrders = [];
+$recentProducts = [];
+
+if ($db) {
+    try {
+        // Product metrics
+        $totalProducts = (int)$db->query("SELECT COUNT(*) FROM products")->fetchColumn();
+        $activeProducts = (int)$db->query("SELECT COUNT(*) FROM products WHERE is_active = 1")->fetchColumn();
+        $totalCategories = (int)$db->query("SELECT COUNT(*) FROM categories")->fetchColumn();
+
+        // Orders metrics
+        $totalOrders = (int)$db->query("SELECT COUNT(*) FROM orders")->fetchColumn();
+        $pendingOrders = (int)$db->query("SELECT COUNT(*) FROM orders WHERE status = 'pending'")->fetchColumn();
+        $totalRevenue = (float)$db->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders WHERE status IN ('completed', 'processing')")->fetchColumn();
+
+        // Low stock products (stock <= 5)
+        $lowStockStmt = $db->query("SELECT id, name, stock, image FROM products WHERE stock <= 5 AND is_active = 1 ORDER BY stock ASC LIMIT 5");
+        $lowStockProducts = $lowStockStmt->fetchAll();
+
+        // Recent orders
+        $orderStmt = $db->query("SELECT * FROM orders ORDER BY created_at DESC LIMIT 6");
+        $recentOrders = $orderStmt->fetchAll();
+
+        // Recent products
+        $prodStmt = $db->query("SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC LIMIT 4");
+        $recentProducts = $prodStmt->fetchAll();
+
+    } catch (PDOException $e) {
+        error_log("Dashboard query error: " . $e->getMessage());
+    }
+}
+
+require_once __DIR__ . '/includes/admin_header.php';
+?>
+
+<!-- Metric Cards Grid (Using ui_stat_card Primitive, Zero Shadow) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <?= ui_stat_card('Total Produk', $totalProducts, [
+        'icon'     => 'package',
+        'subtitle' => $activeProducts . ' Aktif di Toko',
+    ]) ?>
+
+    <?= ui_stat_card('Kategori Produk', $totalCategories, [
+        'icon'     => 'tags',
+        'subtitle' => 'Struktur Katalog',
+    ]) ?>
+
+    <?= ui_stat_card('Pesanan WhatsApp', $totalOrders, [
+        'icon'      => 'shopping-cart',
+        'subtitle'  => $pendingOrders . ' Menunggu Proses',
+        'trend'     => $pendingOrders > 0 ? $pendingOrders . ' Baru' : null,
+        'trendType' => 'up',
+    ]) ?>
+
+    <?= ui_stat_card('Total Omzet Pesanan', format_rupiah($totalRevenue), [
+        'icon'     => 'banknote',
+        'subtitle' => 'Status Selesai / Diproses',
+    ]) ?>
+</div>
+
+<!-- Low Stock Warning Alert if any -->
+<?php if (!empty($lowStockProducts)): ?>
+    <div class="mb-8 p-5 bg-amber-50 border border-amber-200/90 rounded-card">
+        <div class="flex items-center gap-2 text-amber-800 font-bold text-xs mb-3">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600"></i>
+            <span>Peringatan: Ada <?= count($lowStockProducts) ?> produk dengan stok menipis (≤ 5 unit)!</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <?php foreach ($lowStockProducts as $low): ?>
+                <div class="bg-white p-3 rounded-btn border border-amber-200 flex items-center justify-between gap-3 text-xs">
+                    <span class="font-bold text-slate-800 truncate"><?= sanitize($low['name']) ?></span>
+                    <span class="px-2 py-0.5 rounded-badge bg-rose-100 text-rose-700 font-bold flex-shrink-0">
+                        Sisa: <?= $low['stock'] ?>
+                    </span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<!-- 2-Column Content: Recent Orders & Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Recent Orders Table (Zero Shadow, Crisp Border) -->
+    <div class="lg:col-span-8 bg-white rounded-card border border-slate-200/80 overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-extrabold text-slate-900 tracking-tight">Pesanan WhatsApp Terbaru</h2>
+                <p class="text-xs text-slate-400 mt-0.5">Daftar transaksi yang masuk melalui formulir pemesanan</p>
+            </div>
+            <a href="<?= base_url('admin/orders.php') ?>" class="text-xs font-bold text-brand-600 hover:text-brand-700">Lihat Semua →</a>
+        </div>
+
+        <?php if (empty($recentOrders)): ?>
+            <div class="p-12 text-center text-slate-400 text-xs">
+                <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-300"></i>
+                Belum ada pesanan yang tercatat.
+            </div>
+        <?php else: ?>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider">
+                        <tr>
+                            <th class="px-6 py-3.5">Kode Pesanan</th>
+                            <th class="px-6 py-3.5">Pelanggan</th>
+                            <th class="px-6 py-3.5">Total</th>
+                            <th class="px-6 py-3.5">Status</th>
+                            <th class="px-6 py-3.5 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <?php foreach ($recentOrders as $ord): ?>
+                            <?php 
+                                $statusVariant = match($ord['status']) {
+                                    'completed'  => 'success',
+                                    'processing' => 'info',
+                                    'cancelled'  => 'danger',
+                                    default      => 'warning',
+                                };
+                            ?>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-6 py-4 font-mono font-bold text-slate-900">
+                                    <?= sanitize($ord['order_number']) ?>
+                                    <span class="block font-sans text-[10px] text-slate-400 font-normal"><?= date('d/m/Y H:i', strtotime($ord['created_at'])) ?></span>
+                                </td>
+                                <td class="px-6 py-4 font-semibold text-slate-800">
+                                    <?= sanitize($ord['customer_name']) ?>
+                                    <span class="block text-[11px] text-slate-400"><?= sanitize($ord['customer_phone']) ?></span>
+                                </td>
+                                <td class="px-6 py-4 font-extrabold text-brand-600">
+                                    <?= format_rupiah($ord['total_amount']) ?>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <?= ui_badge(strtoupper($ord['status']), $statusVariant, ['dot' => true]) ?>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <?= ui_button('Rincian', [
+                                        'variant' => 'secondary',
+                                        'size'    => 'xs',
+                                        'href'    => base_url('admin/orders.php?search=' . urlencode($ord['order_number'])),
+                                    ]) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <!-- Quick Shortcuts & Product List -->
+    <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Quick Action Card -->
+        <div class="bg-white p-6 rounded-card border border-slate-200/80 space-y-3">
+            <h3 class="text-sm font-extrabold text-slate-900 mb-2 tracking-tight">Aksi Cepat</h3>
+            
+            <a href="<?= base_url('admin/product-form.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-brand-50 text-brand-800 border border-brand-200/80 hover:bg-brand-100 font-bold text-xs transition apple-tap">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="plus-circle" class="w-4 h-4 text-brand-600"></i>
+                    <span>Tambah Produk Baru</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-brand-600"></i>
+            </a>
+
+            <a href="<?= base_url('admin/categories.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="tag" class="w-4 h-4 text-slate-500"></i>
+                    <span>Kelola Kategori</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </a>
+
+            <a href="<?= base_url('admin/settings.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="palette" class="w-4 h-4 text-slate-500"></i>
+                    <span>Ganti Warna & Radius Tema</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </a>
+        </div>
+
+        <!-- Latest Products Box -->
+        <div class="bg-white p-6 rounded-card border border-slate-200/80">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Produk Terbaru</h3>
+                <a href="<?= base_url('admin/products.php') ?>" class="text-[11px] font-bold text-brand-600 hover:underline">Semua</a>
+            </div>
+
+            <div class="space-y-3">
+                <?php foreach ($recentProducts as $rp): ?>
+                    <div class="flex items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <img src="<?= upload_url($rp['image']) ?>" alt="<?= sanitize($rp['name']) ?>" class="w-10 h-10 rounded-btn object-cover border border-slate-200 flex-shrink-0 bg-slate-50">
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-slate-800 truncate tracking-tight"><?= sanitize($rp['name']) ?></h4>
+                                <span class="text-[11px] text-brand-600 font-semibold"><?= format_rupiah($rp['price']) ?></span>
+                            </div>
+                        </div>
+                        <a href="<?= base_url('admin/product-form.php?id=' . $rp['id']) ?>" class="text-slate-400 hover:text-slate-700 p-1 apple-tap">
+                            <i data-lucide="edit" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<?php require_once __DIR__ . '/includes/admin_footer.php'; ?>
