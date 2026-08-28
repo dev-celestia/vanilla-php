@@ -44,9 +44,9 @@ require_once __DIR__ . '/includes/header.php';
                     <?= ui_icon('palette', 'text-brand-400 text-sm') ?>
                     <span>Design Tokens</span>
                 </a>
-                <a href="#components" class="px-3.5 py-1.5 rounded-btn bg-slate-800/80 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition apple-tap flex items-center gap-1.5">
+                <a href="<?= base_url('components.php') ?>" class="px-3.5 py-1.5 rounded-btn bg-slate-800/80 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition apple-tap flex items-center gap-1.5">
                     <?= ui_icon('squares-four', 'text-brand-400 text-sm') ?>
-                    <span>Component Catalog</span>
+                    <span>Component Catalog (Dedicated Page)</span>
                 </a>
                 <a href="<?= base_url('demo.php') ?>" class="px-3.5 py-1.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold border border-brand-500/30 transition apple-tap flex items-center gap-1.5">
                     <?= ui_icon('shopping-bag', 'text-sm') ?>
@@ -190,13 +190,20 @@ require_once __DIR__ . '/includes/header.php';
     </section>
 
     <!-- Section 3: Component Catalog Showcase -->
-    <section id="components" class="space-y-10 scroll-mt-24">
-        <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600 block">UI Primitives</span>
-            <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mt-1">Component Primitives & Live Sandbox</h2>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
-                Pre-built, accessible, modular UI primitives designed for zero bloat and high performance.
-            </p>
+    <section id="components" class="space-y-8 scroll-mt-24">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-brand-600 block">UI Primitives</span>
+                <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mt-1">Component Primitives & Live Sandbox</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
+                    Pre-built, accessible, modular UI primitives designed for zero bloat and high performance.
+                </p>
+            </div>
+            <a href="<?= base_url('components.php') ?>" class="px-4 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition apple-tap flex items-center gap-2 self-start">
+                <?= ui_icon('sidebar', 'text-sm') ?>
+                <span>Open Dedicated Explorer with Sidebar</span>
+                <?= ui_icon('arrow-right', 'text-xs') ?>
+            </a>
         </div>
 
         <!-- 1. Buttons & Button Groups -->

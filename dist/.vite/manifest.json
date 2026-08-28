@@ -96,12 +96,12 @@
     "src": "node_modules/@phosphor-icons/web/src/thin/Phosphor-Thin.woff2"
   },
   "resources/js/main.js": {
-    "file": "assets/main-Cst7yN6n.js",
+    "file": "assets/main-Bm3syy2n.js",
     "name": "main",
     "src": "resources/js/main.js",
     "isEntry": true,
     "css": [
-      "assets/main-CXaSiG-0.css"
+      "assets/main--YoRBB_o.css"
     ],
     "assets": [
       "assets/Phosphor-DtdjzkpE.woff2",

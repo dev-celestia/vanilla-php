@@ -79,7 +79,7 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
                     <a href="<?= base_url('design-system.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'design_system' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
                         Tokens
                     </a>
-                    <a href="<?= base_url('design-system.php#components') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent">
+                    <a href="<?= base_url('components.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'components' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
                         Components
                     </a>
                     <a href="<?= base_url('demo.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= $is_demo_page ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
@@ -159,7 +159,10 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
                     Overview
                 </a>
                 <a href="<?= base_url('design-system.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'design_system' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    Design Tokens & Primitives
+                    Design Tokens
+                </a>
+                <a href="<?= base_url('components.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'components' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    UI Components
                 </a>
                 <a href="<?= base_url('demo.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= $is_demo_page ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                     Showcase Demo

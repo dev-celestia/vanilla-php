@@ -194,7 +194,7 @@ require_once __DIR__ . '/includes/header.php';
                 <i class="ph ph-palette text-sm"></i>
                 <span>Open Token Explorer</span>
             </a>
-            <a href="<?= base_url('design-system.php#components') ?>" class="px-4 py-2 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold border border-slate-200/80 transition apple-tap flex items-center gap-1.5">
+            <a href="<?= base_url('components.php') ?>" class="px-4 py-2 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold border border-slate-200/80 transition apple-tap flex items-center gap-1.5">
                 <i class="ph ph-squares-four text-sm"></i>
                 <span>View Component Primitives</span>
             </a>
