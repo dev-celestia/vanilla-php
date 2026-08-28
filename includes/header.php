@@ -39,6 +39,11 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <span class="font-normal text-slate-300">Storefront Demo &bull; Belanja Cepat Langsung via WhatsApp</span>
                 </div>
                 <div class="flex items-center gap-3 text-slate-400">
+                    <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1">
+                        <i class="ph ph-github-logo text-[11px]"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <span class="text-slate-700">•</span>
                     <a href="<?= base_url('scaffold.php') ?>" class="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center gap-1">
                         <i class="ph-bold ph-lightning text-[11px]"></i>
                         <span>Scaffold Proyek Toko Ini</span>
@@ -60,6 +65,11 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <span class="font-normal text-slate-300">Vanilla PHP UI Component Library & Starter Stack</span>
                 </div>
                 <div class="flex items-center gap-3 text-slate-400">
+                    <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1">
+                        <i class="ph ph-github-logo text-[11px]"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <span class="text-slate-700">•</span>
                     <a href="<?= base_url('scaffold.php') ?>" class="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1 font-semibold">
                         <i class="ph-bold ph-lightning text-[11px]"></i>
                         <span>App Scaffolder</span>
@@ -151,6 +161,11 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                             <span>Scaffold</span>
                         </a>
 
+                        <!-- GitHub Link -->
+                        <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-btn text-slate-600 hover:text-slate-900 bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 transition apple-tap" title="GitHub Repository">
+                            <i class="ph-bold ph-github-logo text-base"></i>
+                        </a>
+
                         <!-- Mobile Menu Button -->
                         <button 
                             @click="mobileMenuOpen = !mobileMenuOpen" 
@@ -213,6 +228,11 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                             <span>Scaffold App</span>
                         </a>
 
+                        <!-- GitHub Link -->
+                        <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-btn text-slate-600 hover:text-slate-900 bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 transition apple-tap" title="GitHub Repository">
+                            <i class="ph-bold ph-github-logo text-base"></i>
+                        </a>
+
                         <!-- Mobile Menu Button -->
                         <button 
                             @click="mobileMenuOpen = !mobileMenuOpen" 
@@ -250,6 +270,9 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <a href="<?= base_url('scaffold.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/80">
                         <i class="ph-bold ph-lightning mr-1"></i> Scaffold Toko Ini
                     </a>
+                    <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
+                        <i class="ph-bold ph-github-logo mr-1"></i> GitHub Repository
+                    </a>
                     <a href="<?= base_url() ?>" class="block px-3.5 py-2 rounded-btn font-medium text-slate-500 hover:bg-slate-50 border border-transparent">
                         <i class="ph ph-arrow-left mr-1"></i> Kembali ke Framework
                     </a>
@@ -286,6 +309,9 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     </a>
                     <a href="<?= base_url('scaffold.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/80">
                         <i class="ph-bold ph-lightning mr-1 text-emerald-600"></i> App Scaffolder
+                    </a>
+                    <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
+                        <i class="ph-bold ph-github-logo mr-1"></i> GitHub Repository
                     </a>
                 </div>
 
