@@ -1,7 +1,7 @@
 {
-  "name": "Native-PHP Storefront & Admin CMS",
+  "name": "Vanilla-PHP Storefront & Admin CMS",
   "version": "1.0.0",
-  "description": "Modular lightweight native PHP e-commerce feature, reactive Alpine.js cart, admin CMS backoffice, and database schema.",
+  "description": "Modular lightweight vanilla PHP e-commerce feature, reactive Alpine.js cart, admin CMS backoffice, and database schema.",
   "directories": [
     "config",
     "helpers",
@@ -16,7 +16,6 @@
     "scaffolder"
   ],
   "files": [
-    "about.php",
     "cart.php",
     "checkout.php",
     "contact.php",

@@ -1,4 +1,4 @@
--- Skema Database E-Commerce / Katalog Native PHP
+-- Skema Database E-Commerce / Katalog Vanilla PHP
 -- Karakter UTF-8 multibyte untuk emoji & karakter khusus
 
 CREATE TABLE IF NOT EXISTS `admins` (
@@ -93,7 +93,9 @@ INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
 ('facebook_url', 'https://facebook.com/'),
 ('hero_title', 'Temukan Produk Terbaik Dengan Harga Terjangkau'),
 ('hero_subtitle', 'Pilihan produk terlengkap untuk kebutuhan harian, gadget, fashion, dan rumah tangga dengan pengiriman ke seluruh Indonesia.'),
-('hero_badge', '🔥 Promo Spesial Hari Ini!')
+('hero_badge', '🔥 Promo Spesial Hari Ini!'),
+('theme_primary_color', 'zinc'),
+('theme_radius', 'standard')
 ON DUPLICATE KEY UPDATE `setting_key`=`setting_key`;
 
 -- Kategori Produk

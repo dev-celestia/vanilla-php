@@ -3,10 +3,10 @@
  * Public Design System & UI Component Library Explorer
  *
  * An interactive living style guide, token explorer, and component catalog.
- * Built with Apple Human Interface principles, zero bloat, and pure Native PHP.
+ * Built with Apple Human Interface principles, zero bloat, and pure Vanilla PHP.
  */
 $active_nav = 'design_system';
-$page_title = 'Design System & Component Library - Native PHP UI';
+$page_title = 'Design System & Component Library - Vanilla PHP UI';
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
 
@@ -35,7 +35,7 @@ require_once __DIR__ . '/includes/header.php';
             </h1>
             
             <p class="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed">
-                Explore centralized design tokens, color palettes, corner radius presets, typography scales, and fluid UI component primitives for Native PHP. Click on any token to preview it live across the entire interface.
+                Explore centralized design tokens, color palettes, corner radius presets, typography scales, and fluid UI component primitives for Vanilla PHP. Click on any token to preview it live across the entire interface.
             </p>
 
             <!-- Quick Jump Navigation -->
@@ -327,7 +327,7 @@ require_once __DIR__ . '/includes/header.php';
                         'icon'         => 'terminal',
                         'variant'      => 'dark',
                         'headerAction' => ui_badge('CLI Ready', 'brand'),
-                        'footer'       => '<span class="text-[11px] text-slate-400">Pure Native PHP</span>',
+                        'footer'       => '<span class="text-[11px] text-slate-400">Pure Vanilla PHP</span>',
                     ]
                 ) ?>
             </div>
@@ -359,7 +359,7 @@ require_once __DIR__ . '/includes/header.php';
                     'dismissible' => true,
                 ]) ?>
 
-                <?= ui_alert('A new version of Native PHP UI Starter (v2.0) is now available for download.', 'info', [
+                <?= ui_alert('A new version of Vanilla PHP UI Starter (v2.0) is now available for download.', 'info', [
                     'title'       => 'Update Available',
                     'dismissible' => true,
                 ]) ?>
@@ -502,7 +502,7 @@ require_once __DIR__ . '/includes/header.php';
         </p>
         <div class="p-4 rounded-btn bg-brand-50 border border-brand-200/80 text-brand-900 text-xs flex items-center gap-2.5">
             ' . ui_icon('sparkle', 'text-brand-600 text-base') . '
-            <span>100% Native PHP + Alpine.js zero-bloat architecture.</span>
+            <span>100% Vanilla PHP + Alpine.js zero-bloat architecture.</span>
         </div>
     ', [
         'isVar'       => true,

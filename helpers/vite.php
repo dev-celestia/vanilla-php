@@ -1,6 +1,6 @@
 <?php
 /**
- * Vite Asset Loader Helper for Native PHP
+ * Vite Asset Loader Helper for Vanilla PHP
  * 
  * Provides transparent switching between Vite Dev Server (HMR) and Production Manifest.
  * Works with zero configuration across development and production environments.

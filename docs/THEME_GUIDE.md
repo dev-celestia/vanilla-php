@@ -1,6 +1,6 @@
 # 🎨 Panduan Lengkap Kustomisasi Tema & Design System
 
-Panduan ini menjelaskan cara mengonfigurasi, mengubah, dan memperluas tema warna, corner radius, sistem ikon **[Phosphor Icons](https://phosphoricons.com/)**, serta komponen primitif pada platform **Native-PHP Storefront & Admin**.
+Panduan ini menjelaskan cara mengonfigurasi, mengubah, dan memperluas tema warna, corner radius, sistem ikon **[Phosphor Icons](https://phosphoricons.com/)**, serta komponen primitif pada platform **Vanilla-PHP Storefront & Admin**.
 
 ---
 

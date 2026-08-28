@@ -1,6 +1,6 @@
-# ⚡ Lightweight Native PHP Micro-Framework & Web Starter
+# ⚡ Lightweight Vanilla PHP Micro-Framework & Web Starter
 
-> **Micro-framework & starter kit web modular** berbasis **Native PHP 8.x**, **Tailwind CSS v4**, **Alpine.js**, dan **MySQL / MariaDB**. Dirancang untuk menghasilkan website dan aplikasi web modern yang sangat cepat (TTFB < 50ms), hemat memori RAM, bebas dependensi vendor yang berat (*zero bloat*), dan 100% siap dijalankan di berbagai lingkungan hosting (Shared Hosting / cPanel, VPS, Docker, maupun Localhost).
+> **Micro-framework & starter kit web modular** berbasis **Vanilla PHP 8.x**, **Tailwind CSS v4**, **Alpine.js**, dan **MySQL / MariaDB**. Dirancang untuk menghasilkan website dan aplikasi web modern yang sangat cepat (TTFB < 50ms), hemat memori RAM, bebas dependensi vendor yang berat (*zero bloat*), dan 100% siap dijalankan di berbagai lingkungan hosting (Shared Hosting / cPanel, VPS, Docker, maupun Localhost).
 
 ---
 
@@ -50,7 +50,6 @@
    - Pengaturan toko, kontak bisnis, dan live customizer tema.
 3. **Halaman Pendukung Siap Pakai**:
    - Landing Page / Showcase (`index.php`)
-   - Halaman Profil Bisnis (`about.php`)
    - Halaman Kontak & Formulir Pesan (`contact.php`)
    - Detail Produk (`product.php`), Keranjang (`cart.php`), Checkout (`checkout.php`), & Sukses (`order-success.php`).
 
@@ -68,7 +67,7 @@ Sesuaikan kredensial database pada file `config/database.php` (atau file `.env`)
 ```php
 define('DB_HOST', '127.0.0.1');
 define('DB_PORT', '3306');
-define('DB_NAME', 'native_shop');
+define('DB_NAME', 'vanilla_shop');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 ```
@@ -259,7 +258,7 @@ Framework ini memiliki Theme Token Engine terpusat di [`config/theme.php`](file:
 ## 📁 Struktur Direktori Proyek
 
 ```text
-Native-PHP/
+vanilla-php/
 ├── config/
 │   ├── app.php             # Master bootstrapper & global config loader
 │   ├── database.php        # Konfigurasi & singleton koneksi database PDO
@@ -315,7 +314,6 @@ Native-PHP/
 ├── cart.php                # Halaman Keranjang Belanja
 ├── checkout.php            # Halaman Checkout & Formulir Pesanan
 ├── order-success.php       # Halaman Konfirmasi Pesanan
-├── about.php               # Halaman Profil Bisnis
 ├── contact.php             # Halaman Kontak & Pertanyaan
 ├── package.json            # Scripts NPM / PNPM (Vite, Dev, Build, Zip)
 ├── .htaccess               # Apache routing & security headers
@@ -361,7 +359,7 @@ Gunakan blok server Nginx berikut:
 server {
     listen 80;
     server_name domainanda.com;
-    root /var/www/native-php;
+    root /var/www/vanilla-php;
     index index.php index.html;
 
     location / {

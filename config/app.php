@@ -60,7 +60,7 @@ function get_settings(): array {
         'hero_title'        => 'Katalog Produk Pilihan Berkualitas',
         'hero_subtitle'     => 'Pilih barang favorit Anda, masukkan ke keranjang, dan pesan instan via WhatsApp langsung ke admin kami.',
         'hero_badge'        => '✨ Promo Spesial Bulan Ini',
-        'theme_primary_color' => 'emerald',
+        'theme_primary_color' => 'zinc',
         'theme_radius'      => 'standard'
     ];
 

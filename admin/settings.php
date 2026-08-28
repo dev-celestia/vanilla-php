@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'hero_badge'          => trim($_POST['hero_badge'] ?? ''),
                 'instagram_url'       => trim($_POST['instagram_url'] ?? ''),
                 'facebook_url'        => trim($_POST['facebook_url'] ?? ''),
-                'theme_primary_color' => trim($_POST['theme_primary_color'] ?? 'emerald'),
+                'theme_primary_color' => trim($_POST['theme_primary_color'] ?? 'zinc'),
                 'theme_radius'        => trim($_POST['theme_radius'] ?? 'standard')
             ];
 
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $colorPalettes = get_theme_color_palettes();
 $radiusPresets = get_theme_radius_presets();
-$currentColor  = $settings['theme_primary_color'] ?? 'emerald';
+$currentColor  = $settings['theme_primary_color'] ?? 'zinc';
 $currentRadius = $settings['theme_radius'] ?? 'standard';
 
 require_once __DIR__ . '/includes/admin_header.php';

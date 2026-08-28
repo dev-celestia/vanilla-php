@@ -9,8 +9,23 @@
 // ponytail: single source of truth for color palettes (50-950)
 function get_theme_color_palettes(): array {
     return [
+        'zinc' => [
+            'name'     => 'Apple Zinc (Default)',
+            'bg_class' => 'bg-zinc-800',
+            '50'  => '#fafafa',
+            '100' => '#f4f4f5',
+            '200' => '#e4e4e7',
+            '300' => '#d4d4d8',
+            '400' => '#a1a1aa',
+            '500' => '#71717a',
+            '600' => '#52525b',
+            '700' => '#3f3f46',
+            '800' => '#27272a',
+            '900' => '#18181b',
+            '950' => '#09090b',
+        ],
         'emerald' => [
-            'name'     => 'Emerald Green (Default)',
+            'name'     => 'Emerald Green',
             'bg_class' => 'bg-emerald-600',
             '50'  => '#ecfdf5',
             '100' => '#d1fae5',
@@ -216,13 +231,13 @@ function get_active_theme(): array {
         $_SESSION['preview_radius'] = $_GET['radius'];
     }
 
-    $colorKey = $_SESSION['preview_theme'] ?? ($settings['theme_primary_color'] ?? 'emerald');
+    $colorKey = $_SESSION['preview_theme'] ?? ($settings['theme_primary_color'] ?? 'zinc');
     $radiusKey = $_SESSION['preview_radius'] ?? ($settings['theme_radius'] ?? 'standard');
 
     $palettes = get_theme_color_palettes();
     $radiusPresets = get_theme_radius_presets();
 
-    $activePalette = $palettes[$colorKey] ?? $palettes['emerald'];
+    $activePalette = $palettes[$colorKey] ?? $palettes['zinc'];
     $activeRadius = $radiusPresets[$radiusKey] ?? $radiusPresets['standard'];
 
     return [

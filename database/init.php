@@ -17,7 +17,7 @@ function printMsg($msg, $isCli) {
 }
 
 if (!$isCli) {
-    echo "<!DOCTYPE html><html lang='id'><head><meta charset='UTF-8'><title>Database Setup - Native Shop</title>";
+    echo "<!DOCTYPE html><html lang='id'><head><meta charset='UTF-8'><title>Database Setup - Vanilla Shop</title>";
     echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
     echo "<script src='https://cdn.tailwindcss.com'></script>";
     echo "</head><body class='bg-slate-50 text-slate-800 p-6 min-h-screen flex items-center justify-center'>";

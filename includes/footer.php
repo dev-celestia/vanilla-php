@@ -38,7 +38,7 @@ $settings = get_settings();
                             <i class="ph ph-code-simple text-xl"></i>
                         </div>
                         <span class="font-semibold text-lg text-white tracking-tight">
-                            NativePHP UI
+                            VanillaPHP UI
                         </span>
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">
@@ -49,7 +49,7 @@ $settings = get_settings();
                             <i class="ph ph-palette text-brand-400"></i>
                             <span>Token Explorer</span>
                         </a>
-                        <a href="https://github.com/dev-celestia/simple-native-php" target="_blank" class="w-8 h-8 rounded-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 flex items-center justify-center transition apple-tap" title="GitHub Repository">
+                        <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" class="w-8 h-8 rounded-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 flex items-center justify-center transition apple-tap" title="GitHub Repository">
                             <i class="ph ph-github-logo text-base"></i>
                         </a>
                     </div>
@@ -107,7 +107,7 @@ $settings = get_settings();
                         </li>
                         <li class="flex items-center gap-2.5">
                             <i class="ph ph-envelope-simple text-brand-400 text-base flex-shrink-0"></i>
-                            <span><?= sanitize($settings['store_email'] ?? 'support@nativephp-ui.dev') ?></span>
+                            <span><?= sanitize($settings['store_email'] ?? 'support@vanillaphp-ui.dev') ?></span>
                         </li>
                         <li class="flex items-center gap-2.5">
                             <i class="ph ph-check-circle text-brand-400 text-base flex-shrink-0"></i>
@@ -120,7 +120,7 @@ $settings = get_settings();
 
             <!-- Bottom Copyright -->
             <div class="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-                <p>&copy; <?= date('Y') ?> NativePHP UI Framework & Component Kit. MIT License.</p>
+                <p>&copy; <?= date('Y') ?> VanillaPHP UI Framework & Component Kit. MIT License.</p>
                 <p class="flex items-center gap-2">
                     <span>Phosphor Icons</span>
                     <span>•</span>

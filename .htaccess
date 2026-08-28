@@ -1,4 +1,4 @@
-# Native Web Development (Lightweight PHP) Configuration
+# Vanilla Web Development (Lightweight PHP) Configuration
 
 # Aktifkan rewrite engine jika tersedia
 <IfModule mod_rewrite.c>

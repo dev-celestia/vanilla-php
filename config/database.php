@@ -1,7 +1,7 @@
 <?php
 /**
  * Database Configuration & Connection
- * Native PHP 8.x PDO MySQL Connection
+ * Vanilla PHP 8.x PDO MySQL Connection
  */
 
 // Lightweight .env Loader
@@ -48,7 +48,7 @@ load_env(dirname(__DIR__) . '/.env');
 // Konfigurasi Database (Bisa diatur melalui file .env atau konstanta ini)
 if (!defined('DB_HOST')) define('DB_HOST', env('DB_HOST', '127.0.0.1'));
 if (!defined('DB_PORT')) define('DB_PORT', env('DB_PORT', '3306'));
-if (!defined('DB_NAME')) define('DB_NAME', env('DB_NAME', 'native_shop'));
+if (!defined('DB_NAME')) define('DB_NAME', env('DB_NAME', 'vanilla_shop'));
 if (!defined('DB_USER')) define('DB_USER', env('DB_USER', 'root'));
 if (!defined('DB_PASS')) define('DB_PASS', env('DB_PASS', ''));
 

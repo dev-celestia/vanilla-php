@@ -2,11 +2,11 @@
 /**
  * Standalone E-Commerce Showcase Demo Application
  *
- * Distinct implementation showcasing real-world Native PHP UI component primitives,
+ * Distinct implementation showcasing real-world Vanilla PHP UI component primitives,
  * dynamic Alpine.js reactive cart, and instant WhatsApp order generation.
  */
 $active_nav = 'demo';
-$page_title = 'Showcase Demo Store - Native PHP UI';
+$page_title = 'Showcase Demo Store - Vanilla PHP UI';
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
 

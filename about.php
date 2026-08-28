@@ -3,7 +3,7 @@
  * Architecture & Framework Philosophy Page
  */
 $active_nav = 'about';
-$page_title = 'Architecture & Performance - Native PHP UI';
+$page_title = 'Architecture & Performance - Vanilla PHP UI';
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
 
@@ -20,7 +20,7 @@ require_once __DIR__ . '/includes/header.php';
             Speed, Simplicity & Zero-Bloat Engineering
         </h1>
         <p class="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed max-w-2xl mx-auto">
-            Why we chose pure Native PHP 8.x, Apple Human Interface motion, Tailwind CSS, and Alpine.js to deliver instant response times without heavy framework overhead.
+            Why we chose pure Vanilla PHP 8.x, Apple Human Interface motion, Tailwind CSS, and Alpine.js to deliver instant response times without heavy framework overhead.
         </p>
     </div>
 </section>
@@ -43,7 +43,7 @@ require_once __DIR__ . '/includes/header.php';
             </p>
 
             <p class="text-sm text-slate-600 leading-relaxed">
-                <strong>NativePHP UI</strong> proves you don't need a heavy full-stack framework to build world-class, fluid web applications. By pairing pure Native PHP 8 with Tailwind CSS and Alpine.js, we achieve sub-50ms server responses, zero vendor bloat, and effortless hosting on everything from $2 shared cPanel accounts to multi-core dedicated servers.
+                <strong>VanillaPHP UI</strong> proves you don't need a heavy full-stack framework to build world-class, fluid web applications. By pairing pure Vanilla PHP 8 with Tailwind CSS and Alpine.js, we achieve sub-50ms server responses, zero vendor bloat, and effortless hosting on everything from $2 shared cPanel accounts to multi-core dedicated servers.
             </p>
 
             <div class="pt-2 flex flex-wrap gap-4">
@@ -58,7 +58,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="flex items-center gap-3 p-4 bg-white rounded-card border border-slate-200/80">
                     <?= ui_icon_box('shield-check', 'brand', ['size' => 'md']) ?>
                     <div>
-                        <h4 class="text-xs font-semibold text-slate-900 tracking-tight">100% Native PHP</h4>
+                        <h4 class="text-xs font-semibold text-slate-900 tracking-tight">100% Vanilla PHP</h4>
                         <p class="text-[11px] text-slate-500">Pure PDO & Session Security</p>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="space-y-4 text-xs">
                 <div>
                     <div class="flex justify-between font-semibold mb-1">
-                        <span>Native PHP UI Starter</span>
+                        <span>Vanilla PHP UI Starter</span>
                         <span class="text-brand-400 font-semibold">&lt; 50ms / 1.8 MB RAM</span>
                     </div>
                     <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">

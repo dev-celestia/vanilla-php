@@ -1,5 +1,5 @@
 {
-  "name": "native-php",
+  "name": "vanilla-php",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,16 +19,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dev-celestia/simple-native-php.git"
+    "url": "git+https://github.com/dev-celestia/vanilla-php.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/dev-celestia/simple-native-php/issues"
+    "url": "https://github.com/dev-celestia/vanilla-php/issues"
   },
-  "homepage": "https://github.com/dev-celestia/simple-native-php#readme",
+  "homepage": "https://github.com/dev-celestia/vanilla-php#readme",
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "autoprefixer": "^10.5.4",

@@ -11,7 +11,7 @@ import Alpine from 'alpinejs';
 document.addEventListener('alpine:init', () => {
   if (!Alpine.store('cart')) {
     Alpine.store('cart', {
-      items: JSON.parse(localStorage.getItem('native_shop_cart') || '[]'),
+      items: JSON.parse(localStorage.getItem('vanilla_shop_cart') || localStorage.getItem('native_shop_cart') || '[]'),
       isOpen: false,
 
       init() {
@@ -19,7 +19,7 @@ document.addEventListener('alpine:init', () => {
       },
 
       save() {
-        localStorage.setItem('native_shop_cart', JSON.stringify(this.items));
+        localStorage.setItem('vanilla_shop_cart', JSON.stringify(this.items));
       },
 
       addItem(product, qty = 1) {

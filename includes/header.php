@@ -6,8 +6,8 @@ require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../helpers/format.php';
 $settings = get_settings();
 
-// Check if currently on the demo showcase or its checkout/product pages
-$is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basename($_SERVER['PHP_SELF'] ?? ''), ['demo.php', 'product.php', 'cart.php', 'checkout.php', 'order-success.php']);
+// Check if currently on the demo showcase or its checkout/product/contact pages
+$is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'checkout', 'contact'])) || in_array(basename($_SERVER['PHP_SELF'] ?? ''), ['demo.php', 'product.php', 'cart.php', 'checkout.php', 'order-success.php', 'contact.php']);
 ?>
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
@@ -57,7 +57,7 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
             <?php else: ?>
                 <div class="flex items-center gap-2">
                     <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
-                    <span class="font-normal text-slate-300">Native PHP UI Component Library & Starter Stack</span>
+                    <span class="font-normal text-slate-300">Vanilla PHP UI Component Library & Starter Stack</span>
                 </div>
                 <div class="flex items-center gap-3 text-slate-400">
                     <a href="<?= base_url('scaffold.php') ?>" class="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1 font-semibold">
@@ -171,7 +171,7 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
                         </div>
                         <div>
                             <span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
-                                NativePHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
+                                VanillaPHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
                             </span>
                             <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
                                 Design System
@@ -198,9 +198,6 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
                         </a>
                         <a href="<?= base_url('scaffold.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'scaffold' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50/80 border border-transparent font-medium' ?>">
                             <i class="ph-bold ph-lightning mr-1 text-emerald-600"></i> Scaffolder
-                        </a>
-                        <a href="<?= base_url('contact.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'contact' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
-                            Contact
                         </a>
                     </nav>
 
@@ -238,16 +235,16 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
             
             <?php if ($is_demo_page): ?>
                 <div class="space-y-1 text-[13px]">
-                    <a href="<?= base_url('demo.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium bg-brand-50 text-brand-700 font-semibold border border-brand-200/80">
+                    <a href="<?= base_url('demo.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= !isset($active_nav) || $active_nav === 'demo' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                         <i class="ph ph-storefront mr-1"></i> Katalog Produk
                     </a>
-                    <a href="<?= base_url('cart.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
+                    <a href="<?= base_url('cart.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'cart' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                         <i class="ph ph-shopping-bag mr-1"></i> Keranjang Belanja
                     </a>
-                    <a href="<?= base_url('about.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
+                    <a href="<?= base_url('about.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'about' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                         Tentang Kami
                     </a>
-                    <a href="<?= base_url('contact.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
+                    <a href="<?= base_url('contact.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'contact' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                         Hubungi Kami
                     </a>
                     <a href="<?= base_url('scaffold.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/80">
@@ -289,9 +286,6 @@ $is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basen
                     </a>
                     <a href="<?= base_url('scaffold.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/80">
                         <i class="ph-bold ph-lightning mr-1 text-emerald-600"></i> App Scaffolder
-                    </a>
-                    <a href="<?= base_url('contact.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'contact' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                        Contact & Support
                     </a>
                 </div>
 

@@ -151,7 +151,7 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
         }
 
         // Copy files defined in manifest
-        $files = $manifest['files'] ?? ['about.php', 'cart.php', 'checkout.php', 'contact.php', 'order-success.php', 'product.php', 'scaffold.php', '.htaccess', '.env.example', 'package.json', 'vite.config.js'];
+        $files = $manifest['files'] ?? ['cart.php', 'checkout.php', 'contact.php', 'order-success.php', 'product.php', 'scaffold.php', '.htaccess', '.env.example', 'package.json', 'vite.config.js'];
         foreach ($files as $file) {
             $srcFile = $sourceDir . '/' . $file;
             $dstFile = $targetDir . '/' . $file;
@@ -168,6 +168,7 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
         if (file_exists($srcTransform)) {
             $demoContent = file_get_contents($srcTransform);
             $demoContent = str_replace("\$active_nav = 'demo';", "\$active_nav = 'home';", $demoContent);
+            $demoContent = str_replace("\$page_title = 'Showcase Demo Store - Vanilla PHP UI';", "\$page_title = \$settings['store_name'] . ' - Katalog Produk';", $demoContent);
             $demoContent = str_replace("\$page_title = 'Showcase Demo Store - Native PHP UI';", "\$page_title = \$settings['store_name'] . ' - Katalog Produk';", $demoContent);
             file_put_contents($dstTransform, $demoContent);
         }
@@ -196,6 +197,12 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
         $header = file_get_contents($headerFile);
 
         $brandSearch = '<span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
+                            VanillaPHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
+                            Design System
+                        </span>';
+        $brandSearchOld = '<span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
                             NativePHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
                         </span>
                         <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
@@ -203,14 +210,15 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
                         </span>';
         
         $brandReplace = '<span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none">
-                            <?= sanitize($settings[\'store_name\'] ?? \'Native Shop\') ?>
+                            <?= sanitize($settings[\'store_name\'] ?? \'Vanilla Shop\') ?>
                         </span>
                         <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
                             <?= sanitize($settings[\'store_slogan\'] ?? \'Official Online Store\') ?>
                         </span>';
 
-        if (str_contains($header, 'NativePHP UI')) {
+        if (str_contains($header, 'VanillaPHP UI') || str_contains($header, 'NativePHP UI')) {
             $header = str_replace($brandSearch, $brandReplace, $header);
+            $header = str_replace($brandSearchOld, $brandReplace, $header);
         }
 
         // Clean Desktop Navigation Links
@@ -222,9 +230,6 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
                     <a href="<?= base_url(\'cart.php\') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === \'cart\' ? \'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold\' : \'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent\' ?>">
                         <i class="ph ph-shopping-bag mr-1"></i> Keranjang
                     </a>
-                    <a href="<?= base_url(\'about.php\') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === \'about\' ? \'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold\' : \'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent\' ?>">
-                        Tentang Kami
-                    </a>
                     <a href="<?= base_url(\'contact.php\') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === \'contact\' ? \'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold\' : \'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent\' ?>">
                         Hubungi Kami
                     </a>
@@ -232,7 +237,7 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
 
         $header = preg_replace('/<!-- Desktop Nav Links.*?<\/nav>/s', $cleanNav, $header);
         $header = str_replace(
-            '$is_demo_page = (isset($active_nav) && $active_nav === \'demo\') || in_array(basename($_SERVER[\'PHP_SELF\'] ?? \'\'), [\'demo.php\', \'product.php\', \'cart.php\', \'checkout.php\', \'order-success.php\']);',
+            '$is_demo_page = (isset($active_nav) && in_array($active_nav, [\'demo\', \'cart\', \'checkout\', \'contact\'])) || in_array(basename($_SERVER[\'PHP_SELF\'] ?? \'\'), [\'demo.php\', \'product.php\', \'cart.php\', \'checkout.php\', \'order-success.php\', \'contact.php\']);',
             '$is_demo_page = true;',
             $header
         );
@@ -258,11 +263,11 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
     // ----------------------------------------------------
     $targetEnv = $targetDir . '/.env';
     if (!file_exists($targetEnv)) {
-        $dbNameSlug = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '_', $customAppName ?: 'native_shop'), '_'));
-        if (empty($dbNameSlug)) $dbNameSlug = 'native_shop';
+        $dbNameSlug = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '_', $customAppName ?: 'vanilla_shop'), '_'));
+        if (empty($dbNameSlug)) $dbNameSlug = 'vanilla_shop';
 
-        $envContent = "# Generated by Native-PHP Scaffolder on " . date('Y-m-d H:i:s') . "\n";
-        $envContent .= "APP_NAME=\"" . addcslashes($customAppName ?: 'Native Shop', '"') . "\"\n";
+        $envContent = "# Generated by Vanilla-PHP Scaffolder on " . date('Y-m-d H:i:s') . "\n";
+        $envContent .= "APP_NAME=\"" . addcslashes($customAppName ?: 'Vanilla Shop', '"') . "\"\n";
         $envContent .= "APP_ENV=local\n";
         $envContent .= "APP_DEBUG=true\n";
         $envContent .= "APP_URL=http://localhost:8000\n\n";
@@ -328,7 +333,7 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
 // ----------------------------------------------------
 if ($isCli) {
     echo "\n========================================================\n";
-    echo "⚡ Native PHP - " . ($manifest['name'] ?? 'Feature Installer & Scaffolder') . "\n";
+    echo "⚡ Vanilla PHP - " . ($manifest['name'] ?? 'Feature Installer & Scaffolder') . "\n";
     echo "========================================================\n\n";
 
     // If no target directory was specified or --help was requested
@@ -401,9 +406,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
 
         <!-- Header -->
         <div class="flex items-center gap-3.5 mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl font-bold">
-                <i class="ph-bold ph-package"></i>
-            </div>
             <div>
                 <h1 class="text-xl font-bold text-white tracking-tight"><?= htmlspecialchars($manifest['name'] ?? 'Feature Installer & Scaffolder') ?></h1>
                 <p class="text-xs text-slate-400"><?= htmlspecialchars($manifest['description'] ?? 'Scaffold Toko Online & Admin CMS Bersih ke Lokasi Pilihan') ?></p>
@@ -509,7 +511,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
         <?php endif; ?>
 
         <div class="mt-8 pt-5 border-t border-slate-800/80 text-center text-[11px] text-slate-500">
-            Native PHP UI Framework &bull; Modular Scaffolder &bull; Production Ready
+            Vanilla PHP UI Framework &bull; Modular Scaffolder &bull; Production Ready
         </div>
 
     </div>

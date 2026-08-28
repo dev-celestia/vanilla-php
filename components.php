@@ -3,10 +3,10 @@
  * UI Component Library & Primitives Explorer
  *
  * Dedicated interactive catalog, API documentation, and live preview for all
- * Native PHP UI component primitives built with Apple Human Interface standards.
+ * Vanilla PHP UI component primitives built with Apple Human Interface standards.
  */
 $active_nav = 'components';
-$page_title = 'UI Component Library & Primitives - Native PHP';
+$page_title = 'UI Component Library & Primitives - Vanilla PHP';
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
 
@@ -37,7 +37,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="flex flex-wrap items-center gap-2 mb-4">
                 <?= ui_badge('16 UI Primitives', 'brand', ['dot' => true, 'pulse' => true]) ?>
                 <?= ui_badge('Zero Dependencies', 'success') ?>
-                <?= ui_badge('Pure Native PHP', 'neutral') ?>
+                <?= ui_badge('Pure Vanilla PHP', 'neutral') ?>
             </div>
             
             <h1 class="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight">
@@ -622,9 +622,9 @@ require_once __DIR__ . '/includes/header.php';
                             'phosphor' => 'Phosphor Icons',
                         ],
                         'Backend Stack' => [
-                            'php8'  => 'Pure Native PHP 8.2+',
+                            'php8'  => 'Pure Vanilla PHP 8.2+',
                             'mysql' => 'MySQL PDO Prepared',
-                            'auth'  => 'Native Session Auth',
+                            'auth'  => 'Vanilla Session Auth',
                         ],
                     ], [
                         'label'       => 'Grouped Option Select (Optgroups)',
@@ -797,7 +797,7 @@ require_once __DIR__ . '/includes/header.php';
                             'icon'         => 'terminal',
                             'variant'      => 'dark',
                             'headerAction' => ui_badge('CLI Ready', 'brand'),
-                            'footer'       => '<span class="text-[11px] text-slate-400">Pure Native PHP</span>',
+                            'footer'       => '<span class="text-[11px] text-slate-400">Pure Vanilla PHP</span>',
                         ]
                     ) ?>
                 </div>
@@ -852,7 +852,7 @@ require_once __DIR__ . '/includes/header.php';
                         'dismissible' => true,
                     ]) ?>
 
-                    <?= ui_alert('A new version of Native PHP UI Starter (v2.0) is ready for download.', 'info', [
+                    <?= ui_alert('A new version of Vanilla PHP UI Starter (v2.0) is ready for download.', 'info', [
                         'title'       => 'System Update',
                         'dismissible' => true,
                     ]) ?>
@@ -1309,7 +1309,7 @@ require_once __DIR__ . '/includes/header.php';
         </p>
         <div class="p-4 rounded-btn bg-brand-50 border border-brand-200/80 text-brand-900 text-xs flex items-center gap-2.5">
             ' . ui_icon('sparkle', 'text-brand-600 text-base') . '
-            <span>100% Native PHP + Alpine.js zero-bloat architecture.</span>
+            <span>100% Vanilla PHP + Alpine.js zero-bloat architecture.</span>
         </div>
     ', [
         'isVar'       => true,
