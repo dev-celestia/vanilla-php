@@ -74,21 +74,26 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Distinct Showcase App Header Banner -->
-<div class="bg-gradient-to-r from-brand-900 via-slate-900 to-slate-950 text-white border-b border-slate-800 py-3 px-4">
+<div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 text-white border-b border-slate-800 py-3 px-4">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 rounded-badge bg-brand-500 text-white font-semibold text-[10px]">LIVE DEMO</span>
-            <span class="text-slate-300 font-medium">Standalone E-Commerce Showcase App — Powered by Native PHP UI Primitives</span>
+            <span class="px-2 py-0.5 rounded-badge bg-emerald-500 text-white font-semibold text-[10px]">LIVE DEMO STORE</span>
+            <span class="text-slate-300 font-medium">Katalog Toko Online &amp; WhatsApp Checkout &bull; Siap di-scaffold ke folder baru</span>
         </div>
         <div class="flex items-center gap-3">
-            <a href="<?= base_url('design-system.php') ?>" class="text-brand-300 hover:text-white transition flex items-center gap-1 font-semibold">
+            <a href="<?= base_url('scaffold.php') ?>" class="text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1 font-semibold">
+                <i class="ph-bold ph-lightning"></i>
+                <span>Scaffold / Install Toko Ini</span>
+            </a>
+            <span class="text-slate-600">•</span>
+            <a href="<?= base_url('design-system.php') ?>" class="text-brand-300 hover:text-white transition flex items-center gap-1">
                 <i class="ph ph-palette"></i>
-                <span>Explore Design System</span>
+                <span>Design System</span>
             </a>
             <span class="text-slate-600">•</span>
             <a href="<?= base_url() ?>" class="text-slate-400 hover:text-white transition flex items-center gap-1">
                 <i class="ph ph-arrow-left"></i>
-                <span>Return to Overview</span>
+                <span>Kembali ke Overview</span>
             </a>
         </div>
     </div>

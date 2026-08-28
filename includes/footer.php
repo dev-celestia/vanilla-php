@@ -61,9 +61,9 @@ $settings = get_settings();
                     <ul class="space-y-2.5 text-xs">
                         <li><a href="<?= base_url() ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Overview & Architecture</a></li>
                         <li><a href="<?= base_url('design-system.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Design System & Tokens</a></li>
-                        <li><a href="<?= base_url('components.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Component Primitives</a></li>
+                        <li><a href="<?= base_url('components.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> UI Components Primitives</a></li>
                         <li><a href="<?= base_url('demo.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> E-Commerce Demo Store</a></li>
-                        <li><a href="<?= base_url('about.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Performance Philosophy</a></li>
+                        <li><a href="<?= base_url('scaffold.php') ?>" class="hover:text-emerald-400 transition flex items-center gap-1.5 text-emerald-400"><i class="ph-bold ph-lightning text-xs"></i> App Scaffolder</a></li>
                         <li><a href="<?= base_url('admin/login.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Admin Panel</a></li>
                     </ul>
                 </div>

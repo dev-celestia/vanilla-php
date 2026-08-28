@@ -1,0 +1,47 @@
+{
+  "name": "Native-PHP Storefront & Admin CMS",
+  "version": "1.0.0",
+  "description": "Modular lightweight native PHP e-commerce feature, reactive Alpine.js cart, admin CMS backoffice, and database schema.",
+  "directories": [
+    "config",
+    "helpers",
+    "components",
+    "ui",
+    "includes",
+    "admin",
+    "database",
+    "uploads",
+    "dist",
+    "resources",
+    "scaffolder"
+  ],
+  "files": [
+    "about.php",
+    "cart.php",
+    "checkout.php",
+    "contact.php",
+    "order-success.php",
+    "product.php",
+    "scaffold.php",
+    "package.json",
+    "vite.config.js",
+    ".gitignore",
+    ".htaccess",
+    ".env.example"
+  ],
+  "entrypoint_transform": {
+    "source": "demo.php",
+    "destination": "index.php"
+  },
+  "docs_to_remove": [
+    "components.php",
+    "design-system.php",
+    "THEME_GUIDE.md"
+  ],
+  "ignore": [
+    ".git",
+    "node_modules",
+    ".DS_Store",
+    "release*.zip"
+  ]
+}

@@ -12,7 +12,10 @@
     "dev:php": "php -S 0.0.0.0:8000",
     "build": "vite build",
     "preview": "vite preview",
-    "zip": "vite build && zip -rq release.zip . -x 'node_modules/*' 'resources/*' '.git/*' 'release.zip' 'package.json' 'package-lock.json' 'pnpm-lock.yaml' 'vite.config.js' 'docs/*' '*.md'"
+    "scaffold": "php scaffold.php",
+    "db:init": "php database/init.php",
+    "zip": "vite build && zip -rq release.zip . -x 'node_modules/*' 'resources/*' '.git/*' 'release*.zip' 'package.json' 'package-lock.json' 'pnpm-lock.yaml' 'vite.config.js' 'docs/*' '*.md'",
+    "zip:clean": "vite build && zip -rq release-app.zip . -x 'node_modules/*' 'resources/*' '.git/*' 'release*.zip' 'package-lock.json' 'pnpm-lock.yaml' 'vite.config.js' 'docs/*' 'components.php' 'design-system.php' '*.md'"
   },
   "repository": {
     "type": "git",

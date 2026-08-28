@@ -134,13 +134,18 @@ function abort(int $status = 404, string $message = ''): never {
     exit;
 }
 
-/**
- * Get an environment variable with default fallback.
- */
-function env(string $key, mixed $default = null): mixed {
-    $val = getenv($key);
-    if ($val === false) {
-        $val = $_ENV[$key] ?? $_SERVER[$key] ?? null;
+if (!function_exists('env')) {
+    /**
+     * Get an environment variable with default fallback.
+     */
+    function env(string $key, mixed $default = null): mixed {
+        $val = getenv($key);
+        if ($val === false) {
+            $val = $_ENV[$key] ?? $_SERVER[$key] ?? null;
+        }
+        if ($val === 'true' || $val === '(true)') return true;
+        if ($val === 'false' || $val === '(false)') return false;
+        if ($val === 'null' || $val === '(null)') return null;
+        return $val !== null ? $val : $default;
     }
-    return $val !== null ? $val : $default;
 }
