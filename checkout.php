@@ -161,7 +161,7 @@ require_once __DIR__ . '/includes/header.php';
     <!-- If cart is empty -->
     <div x-cloak x-show="$store.cart.items.length === 0" class="bg-white rounded-card border border-slate-200/80 p-16 text-center max-w-xl mx-auto my-8">
         <div class="w-20 h-20 rounded-card bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-5">
-            <i data-lucide="shopping-cart" class="w-10 h-10"></i>
+            <i class="ph ph-shopping-cart text-5xl"></i>
         </div>
         <h2 class="text-xl font-bold text-slate-900 mb-2 tracking-tight">Keranjang Belanja Anda Kosong</h2>
         <p class="text-xs text-slate-500 mb-8 max-w-sm mx-auto leading-relaxed">
@@ -193,7 +193,7 @@ require_once __DIR__ . '/includes/header.php';
                 
                 <div class="border-b border-slate-100 pb-4">
                     <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                        <i data-lucide="user-check" class="w-5 h-5 text-brand-600"></i>
+                        <i class="ph ph-user-check text-xl text-brand-600"></i>
                         <span>Informasi Pemesan & Pengiriman</span>
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">Pastikan data yang dimasukkan benar agar pengiriman lancar.</p>
@@ -230,14 +230,14 @@ require_once __DIR__ . '/includes/header.php';
                         'label'       => 'Catatan Pesanan (Opsional)',
                         'placeholder' => 'Contoh: Titipkan di satpam jika tidak ada orang / Packing tambahan',
                         'value'       => $_POST['customer_notes'] ?? '',
-                        'icon'        => 'edit-2',
+                        'icon'        => 'pencil-simple',
                     ]) ?>
                 </div>
 
                 <!-- Trust banner inside form -->
                 <div class="p-4 rounded-card bg-brand-50/50 border border-brand-200/70 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-btn bg-brand-100 text-brand-700 flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <i class="ph ph-whatsapp-logo text-xl"></i>
                     </div>
                     <div class="text-xs">
                         <span class="font-bold text-slate-800 block">Bagaimana Alur WhatsApp Checkout Bekerja?</span>
@@ -297,7 +297,7 @@ require_once __DIR__ . '/includes/header.php';
                     <button 
                         type="submit" 
                         class="w-full py-4 px-6 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm border border-brand-500/20 transition apple-tap flex items-center justify-center gap-2 group">
-                        <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-0.5 transition-transform"></i>
+                        <i class="ph ph-whatsapp-logo text-xl group-hover:scale-110 transition-transform"></i>
                         <span>Proses Pesanan via WhatsApp</span>
                     </button>
 

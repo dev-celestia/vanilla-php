@@ -39,7 +39,7 @@
                     <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                         <div class="flex items-center gap-3">
                             <div class="w-9 h-9 rounded-btn bg-brand-50 border border-brand-200/80 text-brand-600 flex items-center justify-center">
-                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                <i class="ph ph-shopping-bag text-xl"></i>
                             </div>
                             <div>
                                 <h2 class="text-base font-bold text-slate-900" id="slide-over-title">Keranjang Belanja</h2>
@@ -52,7 +52,7 @@
                             type="button" 
                             @click="$store.cart.isOpen = false"
                             class="p-2 rounded-btn text-slate-400 hover:text-slate-600 hover:bg-slate-100 border border-transparent transition apple-tap">
-                            <i data-lucide="x" class="w-5 h-5"></i>
+                            <i class="ph ph-x text-lg"></i>
                         </button>
                     </div>
 
@@ -63,7 +63,7 @@
                         <template x-if="$store.cart.items.length === 0">
                             <div class="text-center py-16 px-4">
                                 <div class="w-16 h-16 rounded-full bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-4">
-                                    <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+                                    <i class="ph ph-shopping-cart text-3xl"></i>
                                 </div>
                                 <h3 class="text-base font-bold text-slate-800 mb-1">Keranjang Masih Kosong</h3>
                                 <p class="text-xs text-slate-500 max-w-xs mx-auto mb-6">Yuk temukan produk-produk menarik pilihan kami dan tambahkan ke keranjang.</p>
@@ -72,7 +72,7 @@
                                     @click="$store.cart.isOpen = false"
                                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition border border-brand-500/20 apple-tap">
                                     <span>Mulai Belanja Sekarang</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                    <i class="ph ph-arrow-right text-xs"></i>
                                 </button>
                             </div>
                         </template>
@@ -95,7 +95,7 @@
                                             @click="$store.cart.removeItem(item.id)" 
                                             class="text-slate-400 hover:text-rose-500 transition p-1 apple-tap" 
                                             title="Hapus">
-                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                            <i class="ph ph-trash text-sm"></i>
                                         </button>
                                     </div>
 
@@ -143,13 +143,13 @@
                                 <a 
                                     href="<?= base_url('cart.php') ?>" 
                                     class="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80 font-bold text-xs transition apple-tap text-center">
-                                    <i data-lucide="eye" class="w-4 h-4"></i>
+                                    <i class="ph ph-eye text-sm"></i>
                                     <span>Lihat Rincian</span>
                                 </a>
                                 <a 
                                     href="<?= base_url('checkout.php') ?>" 
                                     class="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs border border-brand-500/20 transition apple-tap text-center">
-                                    <i data-lucide="send" class="w-4 h-4"></i>
+                                    <i class="ph ph-paper-plane-tilt text-sm"></i>
                                     <span>Pesan via WA</span>
                                 </a>
                             </div>

@@ -202,7 +202,7 @@ require_once __DIR__ . '/includes/header.php';
             <?php endif; ?>
 
             <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-btn border border-slate-200/80">
-                <i data-lucide="arrow-up-down" class="w-4 h-4 text-slate-400"></i>
+                <i class="ph ph-arrows-down-up text-slate-400 text-sm"></i>
                 <label for="sort" class="text-xs font-medium text-slate-500">Urutkan:</label>
                 <select name="sort" id="sort" onchange="this.form.submit()" class="text-xs font-semibold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
                     <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>Terbaru / Rekomendasi</option>
@@ -234,7 +234,7 @@ require_once __DIR__ . '/includes/header.php';
     <?php if (!empty($search)): ?>
         <div class="mt-4 flex items-center justify-between p-3 rounded-card bg-brand-50 border border-brand-200/80 text-xs text-brand-800">
             <div class="flex items-center gap-2">
-                <i data-lucide="search" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-magnifying-glass text-brand-600 text-sm"></i>
                 <span>Hasil pencarian untuk: <strong>"<?= sanitize($search) ?>"</strong></span>
             </div>
             <a href="<?= base_url('index.php') ?>#katalog" class="text-brand-700 hover:text-brand-900 font-bold underline">Reset Pencarian</a>
@@ -245,7 +245,7 @@ require_once __DIR__ . '/includes/header.php';
     <?php if (empty($products)): ?>
         <div class="bg-white rounded-card border border-slate-200/80 p-12 text-center my-8">
             <div class="w-16 h-16 rounded-btn bg-slate-100 text-slate-400 border border-slate-200/80 flex items-center justify-center mx-auto mb-4">
-                <i data-lucide="package-search" class="w-8 h-8"></i>
+                <i class="ph ph-package text-3xl"></i>
             </div>
             <h3 class="text-lg font-bold text-slate-800 tracking-tight">Tidak Ada Produk Ditemukan</h3>
             <p class="text-xs text-slate-500 max-w-md mx-auto mt-1 mb-6">
@@ -356,7 +356,7 @@ require_once __DIR__ . '/includes/header.php';
                                         stock: <?= (int)$product['stock'] ?>
                                     }, 1)"
                                     class="py-2.5 px-3 rounded-btn <?= $isOutOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300' : 'bg-brand-600 hover:bg-brand-700 text-white border border-brand-500/20' ?> text-xs font-bold text-center transition apple-tap flex items-center justify-center gap-1.5">
-                                    <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                                    <i class="ph ph-shopping-cart text-sm"></i>
                                     <span>+ Keranjang</span>
                                 </button>
                             </div>
@@ -376,7 +376,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div class="flex items-start gap-4">
                 <div class="w-12 h-12 rounded-card bg-brand-50 border border-brand-200/70 text-brand-600 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    <i class="ph ph-shield-check text-2xl"></i>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold text-slate-900 tracking-tight">Produk 100% Original</h4>
@@ -386,7 +386,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="flex items-start gap-4">
                 <div class="w-12 h-12 rounded-card bg-brand-50 border border-brand-200/70 text-brand-600 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="message-square" class="w-6 h-6"></i>
+                    <i class="ph ph-chat-teardrop-text text-2xl"></i>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold text-slate-900 tracking-tight">Pemesanan WhatsApp</h4>
@@ -396,7 +396,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="flex items-start gap-4">
                 <div class="w-12 h-12 rounded-card bg-slate-100 border border-slate-200/80 text-slate-700 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="truck" class="w-6 h-6"></i>
+                    <i class="ph ph-truck text-2xl"></i>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold text-slate-900 tracking-tight">Pengiriman Luas</h4>
@@ -406,7 +406,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="flex items-start gap-4">
                 <div class="w-12 h-12 rounded-card bg-amber-50 border border-amber-200/70 text-amber-600 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="award" class="w-6 h-6"></i>
+                    <i class="ph ph-medal text-2xl"></i>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold text-slate-900 tracking-tight">Pelayanan Ramah</h4>

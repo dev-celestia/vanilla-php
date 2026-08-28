@@ -12,22 +12,41 @@ Aplikasi web toko online & katalog produk modern berbasis **Native PHP 8.x**, **
    - Halaman **Tentang Kami (About Us)** & Nilai Keunggulan Toko.
    - Halaman **Kontak & Lokasi** dengan interaksi WhatsApp langsung.
 
-2. **Interactive Shopping Cart (Keranjang Belanja)**
+2. **Apple Design System & 100% Zero Shadow**
+   - Flat crisp hairline borders (`border-slate-200/80`), translucent glass materials (`backdrop-blur-xl bg-white/90`), dan zero drop shadows.
+   - Respon fisik tekan instan Apple (`apple-tap` dengan `scale 0.975`).
+   - Komponen UI primitif PHP reusable: `ui_button()`, `ui_input()`, `ui_select()`, `ui_toggle()`, `ui_card()`, `ui_badge()`, `ui_alert()`, `ui_stat_card()`, `ui_avatar()`.
+
+3. **Global Theme & Palette Customizer**
+   - **8 Pilihan Palet Warna Primer**: Emerald, Classic Blue, Indigo, Violet, Rose, Amber, Teal, Slate.
+   - **6 Preset Corner Radius**: Sharp (0px), Subtle (6px), Standard Apple (12px), Soft (16px), Round (24px), Pill (9999px).
+   - Pengaturan instan langsung via Panel Admin (`admin/settings.php`) atau kode (`config/theme.php`).
+   - Panduan lengkap kustomisasi di [`THEME_GUIDE.md`](./THEME_GUIDE.md).
+
+4. **Interactive Shopping Cart (Keranjang Belanja)**
    - Slide-over Cart Drawer reaktif (Alpine.js) tanpa reload halaman.
    - Tambah/kurang jumlah barang, hapus item, dan perhitungan subtotal otomatis (Format Rupiah).
    - Sinkronisasi penyimpanan LocalStorage agar keranjang tidak hilang saat halaman di-refresh.
 
-3. **Integrasi Checkout / Order via WhatsApp**
+5. **Integrasi Checkout / Order via WhatsApp**
    - Formulir checkout: Nama Pembeli, Nomor WhatsApp, Alamat Lengkap, dan Catatan Pesanan.
    - Otomatis mencatat order ke database (`orders` & `order_items`) dengan kode unik transaksi.
    - Otomatis membuat template pesan WhatsApp yang rapi dan terstruktur untuk dikirimkan ke Admin.
 
-4. **Dashboard Admin (Katalog & Pengaturan)**
+6. **Dashboard Admin (Katalog & Pengaturan)**
    - Login & autentikasi aman dengan Bcrypt hash & proteksi CSRF.
    - **Manajemen Produk (CRUD):** Tambah, Ubah, Hapus produk, upload foto dengan preview, atur stok, harga normal, harga promo/diskon, dan badge unggulan.
    - **Manajemen Kategori (CRUD):** Tambah, ubah, dan hapus kategori produk.
-   - **Riwayat Pesanan WhatsApp:** Memantau semua transaksi masuk, melihat rincian item, dan mengubah status pesanan (Pending, Processing, Completed, Cancelled).
-   - **Pengaturan Toko:** Ubah Nama Toko, Nomor WhatsApp CS/Admin, Slogan, Alamat, Sosial Media, dan Banner langsung dari panel admin.
+   - **Riwayat Pesanan WhatsApp:** Memantau semua transaksi masuk, melihat rincian item, dan mengubah status pesanan.
+   - **Showcase & Guide Design System:** Akses living style guide di `/admin/design-system.php`.
+   - **Pengaturan Toko:** Ubah Nama Toko, Nomor WhatsApp CS/Admin, Slogan, Alamat, Sosial Media, Warna Tema, dan Radius Corner.
+
+---
+
+## 🎨 Panduan Kustomisasi Tema
+
+Untuk panduan mendalam tentang cara mengubah warna, corner radius, token design system, dan membuat komponen baru, silakan baca dokumentasi khusus:
+👉 **[Lihat Panduan Kustomisasi Tema (THEME_GUIDE.md)](./THEME_GUIDE.md)** atau kunjungi halaman **Showcase & Guide** di `/admin/design-system.php`.
 
 ---
 
@@ -70,11 +89,13 @@ Anda dapat menginisialisasi tabel database dan data awal melalui salah satu cara
 Native-PHP/
 ├── config/
 │   ├── database.php        # Konfigurasi koneksi database PDO
+│   ├── theme.php           # Token Design System, Palet Warna & Radius
 │   └── app.php             # Base URL & helper settings
 ├── database/
 │   ├── schema.sql          # Skema database MySQL & Data Seed
 │   └── init.php            # Script auto-setup database
 ├── helpers/
+│   ├── components.php      # Library Komponen Primitif PHP (Button, Input, Card, Badge, Alert)
 │   ├── auth.php            # Helper session login & guard
 │   ├── csrf.php            # Helper token CSRF keamanan
 │   ├── format.php          # Helper rupiah, tanggal, slug
@@ -91,7 +112,8 @@ Native-PHP/
 │   ├── product-form.php    # Form tambah & edit produk + upload
 │   ├── categories.php      # Manajemen kategori
 │   ├── orders.php          # Riwayat pesanan WhatsApp
-│   ├── settings.php        # Pengaturan toko & nomor WhatsApp
+│   ├── settings.php        # Pengaturan toko & kustomisasi tema
+│   ├── design-system.php   # Showcase & Panduan Design System
 │   └── includes/           # Layout header/footer admin
 ├── uploads/
 │   └── products/           # Folder foto produk upload
@@ -102,5 +124,6 @@ Native-PHP/
 ├── cart.php                # Halaman Keranjang Belanja
 ├── checkout.php            # Halaman Checkout WhatsApp
 ├── order-success.php       # Halaman Konfirmasi Pesanan
-└── .htaccess               # Konfigurasi keamanan Apache / LiteSpeed
+├── THEME_GUIDE.md          # Panduan Kustomisasi Tema & Design Tokens
+└── README.md
 ```

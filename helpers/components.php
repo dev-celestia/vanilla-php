@@ -207,10 +207,10 @@ function ui_input(string $name, array $options = []): string {
     $reqStar = $required ? '<span class="text-rose-500 ml-0.5">*</span>' : '';
     $labelHtml = $label ? "<label for=\"$id\" class=\"block text-xs font-bold text-slate-700 mb-1.5 tracking-tight\">" . sanitize($label) . "$reqStar</label>" : '';
     
-    $iconHtml = $icon ? "<div class=\"absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none flex items-center\"><i data-lucide=\"" . sanitize($icon) . "\" class=\"w-4 h-4\"></i></div>" : '';
+    $iconHtml = $icon ? "<div class=\"absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none flex items-center\">" . ui_icon($icon, 'text-base') . "</div>" : '';
     
     $helperHtml = $helper && !$error ? "<p class=\"mt-1.5 text-[11px] text-slate-500\">" . sanitize($helper) . "</p>" : '';
-    $errorHtml = $error ? "<p class=\"mt-1.5 text-[11px] text-rose-600 font-semibold flex items-center gap-1\"><i data-lucide=\"alert-circle\" class=\"w-3 h-3\"></i>" . sanitize($error) . "</p>" : '';
+    $errorHtml = $error ? "<p class=\"mt-1.5 text-[11px] text-rose-600 font-semibold flex items-center gap-1.5\">" . ui_icon('warning-circle', 'text-xs') . sanitize($error) . "</p>" : '';
 
     $reqAttr = $required ? 'required' : '';
     $disAttr = $disabled ? 'disabled' : '';
@@ -254,7 +254,7 @@ function ui_textarea(string $name, array $options = []): string {
     $reqStar = $required ? '<span class="text-rose-500 ml-0.5">*</span>' : '';
     $labelHtml = $label ? "<label for=\"$id\" class=\"block text-xs font-bold text-slate-700 mb-1.5 tracking-tight\">" . sanitize($label) . "$reqStar</label>" : '';
     $helperHtml = $helper && !$error ? "<p class=\"mt-1.5 text-[11px] text-slate-500\">" . sanitize($helper) . "</p>" : '';
-    $errorHtml = $error ? "<p class=\"mt-1.5 text-[11px] text-rose-600 font-semibold flex items-center gap-1\"><i data-lucide=\"alert-circle\" class=\"w-3 h-3\"></i>" . sanitize($error) . "</p>" : '';
+    $errorHtml = $error ? "<p class=\"mt-1.5 text-[11px] text-rose-600 font-semibold flex items-center gap-1.5\">" . ui_icon('warning-circle', 'text-xs') . sanitize($error) . "</p>" : '';
 
     $reqAttr = $required ? 'required' : '';
     $disAttr = $disabled ? 'disabled' : '';
@@ -298,10 +298,12 @@ function ui_select(string $name, array $items = [], array $options = []): string
     }
 
     $helperHtml = $helper && !$error ? "<p class=\"mt-1.5 text-[11px] text-slate-500\">" . sanitize($helper) . "</p>" : '';
-    $errorHtml = $error ? "<p class=\"mt-1.5 text-[11px] text-rose-600 font-semibold flex items-center gap-1\"><i data-lucide=\"alert-circle\" class=\"w-3 h-3\"></i>" . sanitize($error) . "</p>" : '';
+    $errorHtml = $error ? "<p class=\"mt-1.5 text-[11px] text-rose-600 font-semibold flex items-center gap-1.5\">" . ui_icon('warning-circle', 'text-xs') . sanitize($error) . "</p>" : '';
 
     $reqAttr = $required ? 'required' : '';
     $disAttr = $disabled ? 'disabled' : '';
+
+    $caretIcon = ui_icon('caret-down', 'text-sm');
 
     return "
     <div class=\"w-full\">
@@ -317,7 +319,7 @@ function ui_select(string $name, array $items = [], array $options = []): string
                 $optionsHtml
             </select>
             <div class=\"absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none flex items-center\">
-                <i data-lucide=\"chevron-down\" class=\"w-4 h-4\"></i>
+                $caretIcon
             </div>
         </div>
         $helperHtml
@@ -368,7 +370,7 @@ function ui_card(string $content, array $options = []): string {
 
     $headerHtml = '';
     if ($title || $icon || $headerAction) {
-        $iconHtml = $icon ? "<div class=\"w-8 h-8 rounded-btn bg-brand-50 text-brand-600 flex items-center justify-center\"><i data-lucide=\"" . sanitize($icon) . "\" class=\"w-4 h-4\"></i></div>" : '';
+        $iconHtml = $icon ? "<div class=\"w-8 h-8 rounded-btn bg-brand-50 text-brand-600 flex items-center justify-center\">" . ui_icon($icon, 'text-base') . "</div>" : '';
         $titleHtml = $title ? "<h3 class=\"text-sm sm:text-base font-bold text-slate-900 tracking-tight\">" . sanitize($title) . "</h3>" : '';
         $subHtml = $subtitle ? "<p class=\"text-xs text-slate-500 mt-0.5\">" . sanitize($subtitle) . "</p>" : '';
         $actionHtml = $headerAction ? "<div>$headerAction</div>" : '';
@@ -439,7 +441,7 @@ function ui_badge(string $label, string $variant = 'brand', array $options = [])
         $dotHtml = "<span class=\"w-1.5 h-1.5 rounded-full $dotColor\"></span>";
     }
 
-    $iconHtml = $icon ? "<i data-lucide=\"" . sanitize($icon) . "\" class=\"w-3 h-3\"></i>" : '';
+    $iconHtml = $icon ? ui_icon($icon, 'text-xs') : '';
 
     return "<span class=\"inline-flex items-center gap-1.5 font-bold tracking-tight rounded-badge border $vStyle $sizeCls $extraCls\">$dotHtml$iconHtml<span>" . sanitize($label) . "</span></span>";
 }
@@ -456,23 +458,24 @@ function ui_alert(string $message, string $variant = 'success', array $options =
 
     $config = match($variant) {
         'success' => ['bg' => 'bg-emerald-50 border-emerald-200/90 text-emerald-900', 'icon' => 'check-circle', 'iconCol' => 'text-emerald-600'],
-        'danger', 'error' => ['bg' => 'bg-rose-50 border-rose-200/90 text-rose-900', 'icon' => 'alert-circle', 'iconCol' => 'text-rose-600'],
-        'warning' => ['bg' => 'bg-amber-50 border-amber-200/90 text-amber-900', 'icon' => 'alert-triangle', 'iconCol' => 'text-amber-600'],
+        'danger', 'error' => ['bg' => 'bg-rose-50 border-rose-200/90 text-rose-900', 'icon' => 'warning-circle', 'iconCol' => 'text-rose-600'],
+        'warning' => ['bg' => 'bg-amber-50 border-amber-200/90 text-amber-900', 'icon' => 'warning', 'iconCol' => 'text-amber-600'],
         'info'    => ['bg' => 'bg-sky-50 border-sky-200/90 text-sky-900', 'icon' => 'info', 'iconCol' => 'text-sky-600'],
         default   => ['bg' => 'bg-brand-50 border-brand-200/90 text-brand-900', 'icon' => 'info', 'iconCol' => 'text-brand-600'],
     };
 
     $titleHtml = $title ? "<h4 class=\"font-bold text-xs sm:text-sm mb-0.5 tracking-tight\">" . sanitize($title) . "</h4>" : '';
     $dismissHtml = $dismissible 
-        ? "<button type=\"button\" @click=\"showAlert = false\" class=\"text-slate-400 hover:text-slate-700 p-1 rounded-btn transition\"><i data-lucide=\"x\" class=\"w-4 h-4\"></i></button>" 
+        ? "<button type=\"button\" @click=\"showAlert = false\" class=\"text-slate-400 hover:text-slate-700 p-1 rounded-btn transition\">" . ui_icon('x', 'text-base') . "</button>" 
         : '';
     
     $xData = $dismissible ? 'x-data="{ showAlert: true }" x-show="showAlert" x-transition' : '';
+    $mainIcon = ui_icon($config['icon'], 'text-lg ' . $config['iconCol'] . ' flex-shrink-0 mt-0.5');
 
     return "
     <div $xData class=\"p-4 rounded-card border {$config['bg']} flex items-start justify-between gap-3 text-xs sm:text-sm $extraCls\">
         <div class=\"flex items-start gap-3\">
-            <i data-lucide=\"{$config['icon']}\" class=\"w-5 h-5 {$config['iconCol']} flex-shrink-0 mt-0.5\"></i>
+            $mainIcon
             <div class=\"space-y-0.5\">
                 $titleHtml
                 <div class=\"text-xs leading-relaxed opacity-90\">$message</div>
@@ -513,12 +516,13 @@ function ui_avatar(string $nameOrImage, array $options = []): string {
 
 function ui_icon_box(string $icon, string $variant = 'brand', array $options = []): string {
     $size     = $options['size'] ?? 'md'; // sm, md, lg
+    $weight   = $options['weight'] ?? 'regular';
     $extraCls = $options['class'] ?? '';
     
     $sizeStyles = [
-        'sm' => ['box' => 'w-8 h-8 rounded-btn', 'icon' => 'w-4 h-4'],
-        'md' => ['box' => 'w-10 h-10 rounded-btn', 'icon' => 'w-5 h-5'],
-        'lg' => ['box' => 'w-12 h-12 rounded-card', 'icon' => 'w-6 h-6'],
+        'sm' => ['box' => 'w-8 h-8 rounded-btn', 'iconSize' => 'text-base'],
+        'md' => ['box' => 'w-10 h-10 rounded-btn', 'iconSize' => 'text-lg'],
+        'lg' => ['box' => 'w-12 h-12 rounded-card', 'iconSize' => 'text-xl'],
     ];
     $s = $sizeStyles[$size] ?? $sizeStyles['md'];
 
@@ -530,7 +534,9 @@ function ui_icon_box(string $icon, string $variant = 'brand', array $options = [
     ];
     $vStyle = $variants[$variant] ?? $variants['brand'];
 
-    return "<div class=\"{$s['box']} $vStyle flex items-center justify-center flex-shrink-0 $extraCls\"><i data-lucide=\"" . sanitize($icon) . "\" class=\"{$s['icon']}\"></i></div>";
+    $iconHtml = ui_icon($icon, $s['iconSize'], $weight);
+
+    return "<div class=\"{$s['box']} $vStyle flex items-center justify-center flex-shrink-0 $extraCls\">$iconHtml</div>";
 }
 
 /**
@@ -550,8 +556,9 @@ function ui_stat_card(string $title, string|int $value, array $options = []): st
     $trendHtml = '';
     if ($trend) {
         $tCol = $trendType === 'up' ? 'text-emerald-600 bg-emerald-50 border-emerald-200/80' : 'text-rose-600 bg-rose-50 border-rose-200/80';
-        $tIcon = $trendType === 'up' ? 'trending-up' : 'trending-down';
-        $trendHtml = "<span class=\"inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-badge border $tCol\"><i data-lucide=\"$tIcon\" class=\"w-3 h-3\"></i>$trend</span>";
+        $tIcon = $trendType === 'up' ? 'trend-up' : 'trend-down';
+        $tIconHtml = ui_icon($tIcon, 'text-xs');
+        $trendHtml = "<span class=\"inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-badge border $tCol\">$tIconHtml$trend</span>";
     }
 
     $subHtml = $subtitle ? "<p class=\"text-xs text-slate-500 mt-1\">" . sanitize($subtitle) . "</p>" : '';

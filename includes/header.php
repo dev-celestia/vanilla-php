@@ -28,8 +28,11 @@ $settings = get_settings();
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Phosphor Icons (https://phosphoricons.com/) -->
+    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
 
     <style>
         [x-cloak] { display: none !important; }
@@ -139,12 +142,12 @@ $settings = get_settings();
             </div>
             <div class="flex items-center gap-4 text-slate-300">
                 <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) ?>" target="_blank" class="hover:text-brand-300 transition flex items-center gap-1">
-                    <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                    <i class="ph ph-phone-call text-xs"></i>
                     <span>CS WhatsApp: <?= sanitize($settings['whatsapp_number']) ?></span>
                 </a>
                 <span class="hidden sm:inline text-slate-600">•</span>
                 <a href="<?= base_url('admin/login.php') ?>" class="hover:text-white transition flex items-center gap-1 text-slate-400">
-                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    <i class="ph ph-shield-check text-xs"></i>
                     <span>Admin Panel</span>
                 </a>
             </div>
@@ -159,7 +162,7 @@ $settings = get_settings();
                 <!-- Logo -->
                 <a href="<?= base_url() ?>" class="flex items-center gap-3 group apple-tap">
                     <div class="w-11 h-11 rounded-btn bg-brand-600 flex items-center justify-center text-white border border-brand-500/20 group-hover:scale-105 transition-transform duration-150">
-                        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        <i class="ph ph-shopping-bag text-2xl"></i>
                     </div>
                     <div>
                         <span class="font-extrabold text-xl tracking-tight text-slate-900 block leading-tight">
@@ -190,7 +193,7 @@ $settings = get_settings();
                     <!-- Search Input (Desktop) -->
                     <form action="<?= base_url() ?>" method="GET" class="hidden lg:flex items-center relative">
                         <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari produk..." class="w-44 focus:w-64 transition-all duration-300 pl-9 pr-4 py-2 text-xs rounded-input bg-slate-100 border border-slate-200/60 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
-                        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 pointer-events-none"></i>
+                        <i class="ph ph-magnifying-glass text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-sm"></i>
                     </form>
 
                     <!-- Cart Drawer Trigger Button -->
@@ -199,7 +202,7 @@ $settings = get_settings();
                         @click="$store.cart.isOpen = true"
                         class="relative p-2.5 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 border border-slate-200/80 transition flex items-center gap-2 group apple-tap"
                         title="Lihat Keranjang">
-                        <i data-lucide="shopping-cart" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <i class="ph ph-shopping-cart text-lg group-hover:scale-110 transition-transform"></i>
                         <span class="hidden sm:inline text-xs font-bold text-slate-800 group-hover:text-brand-600" x-text="$store.cart.formatRupiah($store.cart.subtotal)">Rp 0</span>
                         
                         <!-- Badge Count -->
@@ -225,7 +228,7 @@ $settings = get_settings();
                     <button 
                         @click="mobileMenuOpen = !mobileMenuOpen" 
                         class="md:hidden p-2.5 rounded-btn text-slate-600 hover:bg-slate-100 border border-slate-200/80 apple-tap focus:outline-none">
-                        <i :data-lucide="mobileMenuOpen ? 'x' : 'menu'" class="w-6 h-6"></i>
+                        <i class="ph text-2xl" :class="mobileMenuOpen ? 'ph-x' : 'ph-list'"></i>
                     </button>
                 </div>
             </div>
@@ -240,7 +243,7 @@ $settings = get_settings();
             
             <form action="<?= base_url() ?>" method="GET" class="relative">
                 <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari nama produk..." class="w-full pl-10 pr-4 py-2.5 text-sm rounded-input bg-slate-100 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
-                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none"></i>
+                <i class="ph ph-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-base"></i>
             </form>
 
             <div class="space-y-1">

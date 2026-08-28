@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Empty Cart State -->
     <div x-cloak x-show="$store.cart.items.length === 0" class="bg-white rounded-card border border-slate-200/80 p-16 text-center max-w-xl mx-auto my-8">
         <div class="w-20 h-20 rounded-card bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-5">
-            <i data-lucide="shopping-bag" class="w-10 h-10"></i>
+            <i class="ph ph-shopping-bag text-5xl"></i>
         </div>
         <h2 class="text-xl font-bold text-slate-900 mb-2 tracking-tight">Keranjang Belanja Anda Masih Kosong</h2>
         <p class="text-xs text-slate-500 mb-8 max-w-sm mx-auto leading-relaxed">
@@ -48,7 +48,7 @@ require_once __DIR__ . '/includes/header.php';
                         type="button" 
                         @click="if(confirm('Yakin ingin mengosongkan keranjang belanja?')) $store.cart.clearCart()"
                         class="text-xs font-bold text-rose-500 hover:text-rose-700 flex items-center gap-1 transition apple-tap">
-                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        <i class="ph ph-trash text-sm"></i>
                         <span>Kosongkan Keranjang</span>
                     </button>
                 </div>
@@ -100,7 +100,7 @@ require_once __DIR__ . '/includes/header.php';
                                     @click="$store.cart.removeItem(item.id)" 
                                     class="p-2 rounded-btn text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition apple-tap" 
                                     title="Hapus produk">
-                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    <i class="ph ph-trash text-base"></i>
                                 </button>
                             </div>
 
@@ -112,7 +112,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Back to shop link -->
             <div class="pt-2">
                 <a href="<?= base_url() ?>" class="inline-flex items-center gap-2 text-xs font-bold text-brand-600 hover:text-brand-700">
-                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <i class="ph ph-arrow-left text-xs"></i>
                     <span>Tambah Produk Lainnya dari Katalog</span>
                 </a>
             </div>
@@ -148,17 +148,17 @@ require_once __DIR__ . '/includes/header.php';
                     'variant' => 'primary',
                     'size'    => 'lg',
                     'href'    => base_url('checkout.php'),
-                    'icon'    => 'send',
+                    'icon'    => 'paper-plane-tilt',
                     'class'   => 'w-full text-center',
                 ]) ?>
 
                 <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-400 space-y-2">
                     <div class="flex items-center gap-2">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-brand-600 flex-shrink-0"></i>
+                        <i class="ph ph-shield-check text-base text-brand-600 flex-shrink-0"></i>
                         <span>Transaksi Terhubung Langsung ke WhatsApp</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <i data-lucide="lock" class="w-4 h-4 text-slate-400 flex-shrink-0"></i>
+                        <i class="ph ph-lock text-base text-slate-400 flex-shrink-0"></i>
                         <span>Data Anda Aman dan Dijamin Kerahasiaannya</span>
                     </div>
                 </div>

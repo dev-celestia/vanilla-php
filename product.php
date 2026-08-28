@@ -73,11 +73,11 @@ require_once __DIR__ . '/includes/header.php';
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex text-xs text-slate-500 gap-2 items-center flex-wrap">
             <a href="<?= base_url() ?>" class="hover:text-brand-600 transition">Beranda</a>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
+            <i class="ph ph-caret-right text-slate-300 text-xs"></i>
             <a href="<?= base_url('index.php?category=' . $product['category_id']) ?>" class="hover:text-brand-600 transition">
                 <?= sanitize($product['category_name'] ?? 'Kategori') ?>
             </a>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
+            <i class="ph ph-caret-right text-slate-300 text-xs"></i>
             <span class="text-slate-800 font-semibold truncate max-w-xs sm:max-w-md"><?= sanitize($product['name']) ?></span>
         </nav>
     </div>
@@ -106,12 +106,12 @@ require_once __DIR__ . '/includes/header.php';
                 <!-- Quick trust info -->
                 <div class="grid grid-cols-2 gap-3 text-center">
                     <div class="p-3 bg-white rounded-card border border-slate-200/80">
-                        <i data-lucide="package-check" class="w-5 h-5 text-brand-600 mx-auto mb-1"></i>
+                        <i class="ph ph-package text-brand-600 text-xl mx-auto mb-1"></i>
                         <p class="text-[11px] font-bold text-slate-800 tracking-tight">Quality Check</p>
                         <p class="text-[10px] text-slate-500">Dicek sebelum kirim</p>
                     </div>
                     <div class="p-3 bg-white rounded-card border border-slate-200/80">
-                        <i data-lucide="truck" class="w-5 h-5 text-brand-600 mx-auto mb-1"></i>
+                        <i class="ph ph-truck text-brand-600 text-xl mx-auto mb-1"></i>
                         <p class="text-[11px] font-bold text-slate-800 tracking-tight">Pengiriman Cepat</p>
                         <p class="text-[10px] text-slate-500">Packing aman bubble wrap</p>
                     </div>
@@ -198,7 +198,7 @@ require_once __DIR__ . '/includes/header.php';
                             stock: <?= (int)$product['stock'] ?>
                         }, orderQty)"
                         class="w-full py-3.5 px-5 rounded-btn <?= $isOutOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300' : 'bg-slate-900 hover:bg-slate-800 text-white border border-slate-800' ?> font-bold text-sm transition apple-tap flex items-center justify-center gap-2">
-                        <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        <i class="ph ph-shopping-cart text-base"></i>
                         <span>Tambah ke Keranjang</span>
                     </button>
 
@@ -206,7 +206,7 @@ require_once __DIR__ . '/includes/header.php';
                         href="<?= $waDirectUrl ?>" 
                         target="_blank" 
                         class="w-full py-3.5 px-5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm border border-brand-500/20 transition apple-tap flex items-center justify-center gap-2">
-                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <i class="ph ph-whatsapp-logo text-base"></i>
                         <span>Pesan Cepat via WhatsApp</span>
                     </a>
                 </div>
@@ -233,7 +233,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
                 <a href="<?= base_url('index.php?category=' . $product['category_id']) ?>" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
                     <span>Lihat Lainnya</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    <i class="ph ph-arrow-right text-xs"></i>
                 </a>
             </div>
 
