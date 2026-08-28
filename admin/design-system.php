@@ -416,16 +416,20 @@ require_once __DIR__ . '/includes/admin_header.php';
 <pre class="text-slate-300">&lt;?= ui_button('Beli Sekarang', ['variant' => 'primary', 'icon' => 'shopping-cart']) ?&gt;
 &lt;?= ui_button('Lihat Detail', ['variant' => 'outline', 'href' => 'product.php?id=1']) ?&gt;</pre>
 
-<pre class="text-emerald-400">// 2. Render Form Input & Toggle</pre>
-<pre class="text-slate-300">&lt;?= ui_input('username', ['label' => 'Username', 'placeholder' => 'admin', 'required' => true]) ?&gt;
+<pre class="text-emerald-400">// 2. Render Phosphor Icons (https://phosphoricons.com/)</pre>
+<pre class="text-slate-300">&lt;?= ui_icon('shopping-cart', 'text-brand-600 text-lg') ?&gt;
+&lt;?= ui_icon('shield-check', 'text-emerald-500 text-xl', 'bold') ?&gt;</pre>
+
+<pre class="text-emerald-400">// 3. Render Form Input & Toggle</pre>
+<pre class="text-slate-300">&lt;?= ui_input('username', ['label' => 'Username', 'placeholder' => 'admin', 'required' => true, 'icon' => 'user']) ?&gt;
 &lt;?= ui_toggle('is_active', 'Aktifkan Produk', true) ?&gt;</pre>
 
-<pre class="text-emerald-400">// 3. Render Status Badge & Alert</pre>
+<pre class="text-emerald-400">// 4. Render Status Badge & Alert</pre>
 <pre class="text-slate-300">&lt;?= ui_badge('Pesanan Baru', 'brand', ['dot' => true]) ?&gt;
 &lt;?= ui_alert('Perubahan berhasil disimpan.', 'success', ['dismissible' => true]) ?&gt;</pre>
 
-<pre class="text-emerald-400">// 4. Render Stat Metric Card</pre>
-<pre class="text-slate-300">&lt;?= ui_stat_card('Total Penjualan', 'Rp 15.000.000', ['icon' => 'banknote', 'trend' => '+12%']) ?&gt;</pre>
+<pre class="text-emerald-400">// 5. Render Stat Metric Card</pre>
+<pre class="text-slate-300">&lt;?= ui_stat_card('Total Penjualan', 'Rp 15.000.000', ['icon' => 'currency-dollar', 'trend' => '+12%']) ?&gt;</pre>
             </div>
         </div>
 

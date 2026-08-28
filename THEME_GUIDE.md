@@ -1,6 +1,6 @@
 # 🎨 Panduan Lengkap Kustomisasi Tema & Design System
 
-Panduan ini menjelaskan cara mengonfigurasi, mengubah, dan memperluas tema warna, corner radius, dan komponen primitif pada platform **Native-PHP Storefront & Admin**.
+Panduan ini menjelaskan cara mengonfigurasi, mengubah, dan memperluas tema warna, corner radius, sistem ikon **[Phosphor Icons](https://phosphoricons.com/)**, serta komponen primitif pada platform **Native-PHP Storefront & Admin**.
 
 ---
 
@@ -8,9 +8,10 @@ Panduan ini menjelaskan cara mengonfigurasi, mengubah, dan memperluas tema warna
 1. [Kustomisasi via Panel Admin (Tanpa Coding)](#1-kustomisasi-via-panel-admin)
 2. [Menambah Palet Warna Baru (Custom Color Palette)](#2-menambah-palet-warna-baru)
 3. [Menambah / Mengubah Preset Corner Radius](#3-menambah--mengubah-preset-corner-radius)
-4. [Menggunakan Token Design System dalam Template HTML/PHP](#4-menggunakan-token-dalam-template)
-5. [Daftar Lengkap Komponen Primitif PHP](#5-daftar-lengkap-komponen-primitif-php)
-6. [Prinsip Desain (Apple Fluid & Zero Shadow)](#6-prinsip-desain)
+4. [Sumber Ikon: Phosphor Icons Engine](#4-sumber-ikon-phosphor-icons-engine)
+5. [Menggunakan Token Design System dalam Template HTML/PHP](#5-menggunakan-token-dalam-template)
+6. [Daftar Lengkap Komponen Primitif PHP](#6-daftar-lengkap-komponen-primitif-php)
+7. [Prinsip Desain (Apple Fluid & Zero Shadow)](#7-prinsip-desain)
 
 ---
 
@@ -50,7 +51,7 @@ function get_theme_color_palettes(): array {
             '300' => '#fdba74',
             '400' => '#fb923c',
             '500' => '#f97316', // Warna aksen
-            '600' => '#ea580c', // Warna utama tombol
+            '600' => '#ea580c', // Warna utama tombol & aksen
             '700' => '#c2410c', // Hover tombol
             '800' => '#9a3412',
             '900' => '#7c2d12',
@@ -91,7 +92,65 @@ function get_theme_radius_presets(): array {
 
 ---
 
-## 4. Menggunakan Token dalam Template
+## 4. Sumber Ikon: Phosphor Icons Engine
+
+Proyek ini menggunakan **[Phosphor Icons](https://phosphoricons.com/)** (`@phosphor-icons/web@2.1.2`) sebagai sumber utama ikon. 
+
+### Keunggulan Phosphor Icons:
+- **Font & CSS-based**: Dirender seketika saat HTML dimuat tanpa *Cumulative Layout Shift* (CLS) dan tanpa delay JavaScript `createIcons()`.
+- **Fleksibel & Konsisten**: Mendukung bobot (weight) `regular`, `bold`, `fill`, dan lainnya.
+- **Koleksi Lengkap**: Lebih dari 1.000+ ikon berkualitas tinggi untuk kebutuhan e-commerce & aplikasi modern.
+
+### Cara Penggunaan Ikon:
+
+#### A. Menggunakan Helper PHP `ui_icon()`
+```php
+// Regular icon
+echo ui_icon('shopping-cart', 'text-brand-600 text-lg');
+
+// Bold weight icon
+echo ui_icon('shield-check', 'text-emerald-500 text-xl', 'bold');
+
+// Fill weight icon
+echo ui_icon('star', 'text-amber-400 text-sm', 'fill');
+```
+
+#### B. Menggunakan Tag HTML Langsung
+```html
+<!-- Regular -->
+<i class="ph ph-shopping-cart text-lg text-brand-600"></i>
+
+<!-- Bold -->
+<i class="ph-bold ph-shield-check text-xl text-emerald-500"></i>
+
+<!-- Fill -->
+<i class="ph-fill ph-star text-sm text-amber-400"></i>
+```
+
+#### C. Smart Aliases Otomatis
+Helper `ui_icon()` dan seluruh komponen primitif mendukung pemetaan nama otomatis:
+- `search` ➔ `ph-magnifying-glass`
+- `trash-2` / `trash` ➔ `ph-trash`
+- `message-circle` / `message-square` ➔ `ph-chat-circle-dots` / `ph-whatsapp-logo`
+- `chevron-right` ➔ `ph-caret-right`
+- `chevron-down` ➔ `ph-caret-down`
+- `chevron-left` ➔ `ph-caret-left`
+- `arrow-up-down` ➔ `ph-arrows-down-up`
+- `rotate-ccw` ➔ `ph-arrows-counter-clockwise`
+- `package-search` ➔ `ph-package`
+- `layout-dashboard` / `layout-grid` ➔ `ph-squares-four`
+- `settings` ➔ `ph-gear`
+- `external-link` ➔ `ph-arrow-square-out`
+- `log-out` ➔ `ph-sign-out`
+- `log-in` ➔ `ph-sign-in`
+- `banknote` / `dollar-sign` ➔ `ph-currency-dollar`
+- `alert-triangle` ➔ `ph-warning`
+- `alert-circle` ➔ `ph-warning-circle`
+- `check-circle-2` ➔ `ph-check-circle`
+
+---
+
+## 5. Menggunakan Token dalam Template
 
 Saat Anda membuat halaman PHP atau komponen baru, Anda dapat memanfaatkan token CSS & Tailwind yang otomatis tersedia:
 
@@ -114,15 +173,16 @@ Saat Anda membuat halaman PHP atau komponen baru, Anda dapat memanfaatkan token 
     <h3 class="text-base font-bold text-slate-900 tracking-tight">Judul Kartu</h3>
     <p class="text-xs text-slate-500 mt-1">Deskripsi konten kartu...</p>
     
-    <button class="mt-4 px-4 py-2 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs apple-tap">
-        Aksi Utama
+    <button class="mt-4 px-4 py-2 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs apple-tap flex items-center gap-2">
+        <i class="ph ph-shopping-cart text-sm"></i>
+        <span>Aksi Utama</span>
     </button>
 </div>
 ```
 
 ---
 
-## 5. Daftar Lengkap Komponen Primitif PHP
+## 6. Daftar Lengkap Komponen Primitif PHP
 
 Semua helper komponen didefinisikan dalam [`helpers/components.php`](file:///Users/arham/Desktop/project/Native-PHP/helpers/components.php).
 
@@ -142,12 +202,6 @@ echo ui_button('Buka Katalog', [
     'href'    => base_url('index.php'),
     'icon'    => 'shopping-bag',
 ]);
-```
-
-### Ikon Primitif (`ui_icon`)
-```php
-// Helper khusus Phosphor Icons (https://phosphoricons.com/)
-echo ui_icon('shopping-cart', 'text-brand-600 text-lg');
 ```
 
 ### 2. Form Input (`ui_input`)
@@ -196,7 +250,7 @@ echo ui_toggle('is_active', 'Aktifkan Produk', true, [
 echo ui_card('<p class="text-xs text-slate-600">Isi kartu di sini...</p>', [
     'title'    => 'Ringkasan Informasi',
     'subtitle' => 'Data statistik terbaru',
-    'icon'     => 'bar-chart',
+    'icon'     => 'chart-bar',
     'glass'    => true, // Efek glassmorphism translucent Apple
 ]);
 ```
@@ -220,16 +274,22 @@ echo ui_alert('Data berhasil disimpan ke sistem.', 'success', [
 ### 9. Stat Card Metrik Dashboard (`ui_stat_card`)
 ```php
 echo ui_stat_card('Total Penjualan', 'Rp 15.450.000', [
-    'icon'      => 'banknote',
+    'icon'      => 'currency-dollar',
     'subtitle'  => 'Bulan berjalan',
     'trend'     => '+14.2%',
     'trendType' => 'up',
 ]);
 ```
 
+### 10. Avatar & Icon Container (`ui_avatar`, `ui_icon_box`)
+```php
+echo ui_avatar('Admin Toko', ['size' => 'md']);
+echo ui_icon_box('shopping-cart', 'brand', ['size' => 'md']);
+```
+
 ---
 
-## 6. Prinsip Desain (Apple Fluid & Zero Shadow)
+## 7. Prinsip Desain (Apple Fluid & Zero Shadow)
 
 1. **Zero Shadows**: Tidak menggunakan drop-shadow (`box-shadow: none !important`). Kedalaman visual diciptakan melalui:
    - **Translucent materials**: `backdrop-blur-xl bg-white/90` di atas konten yang bergerak.

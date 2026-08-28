@@ -10,7 +10,8 @@
 function get_theme_color_palettes(): array {
     return [
         'emerald' => [
-            'name' => 'Emerald Green (Default)',
+            'name'     => 'Emerald Green (Default)',
+            'bg_class' => 'bg-emerald-600',
             '50'  => '#ecfdf5',
             '100' => '#d1fae5',
             '200' => '#a7f3d0',
@@ -24,7 +25,8 @@ function get_theme_color_palettes(): array {
             '950' => '#022c22',
         ],
         'blue' => [
-            'name' => 'Apple Classic Blue',
+            'name'     => 'Apple Classic Blue',
+            'bg_class' => 'bg-blue-600',
             '50'  => '#eff6ff',
             '100' => '#dbeafe',
             '200' => '#bfdbfe',
@@ -38,7 +40,8 @@ function get_theme_color_palettes(): array {
             '950' => '#172554',
         ],
         'indigo' => [
-            'name' => 'Modern Indigo',
+            'name'     => 'Modern Indigo',
+            'bg_class' => 'bg-indigo-600',
             '50'  => '#eef2ff',
             '100' => '#e0e7ff',
             '200' => '#c7d2fe',
@@ -52,7 +55,8 @@ function get_theme_color_palettes(): array {
             '950' => '#1e1b4b',
         ],
         'violet' => [
-            'name' => 'Electric Violet',
+            'name'     => 'Electric Violet',
+            'bg_class' => 'bg-violet-600',
             '50'  => '#f5f3ff',
             '100' => '#ede9fe',
             '200' => '#ddd6fe',
@@ -66,7 +70,8 @@ function get_theme_color_palettes(): array {
             '950' => '#2e1065',
         ],
         'rose' => [
-            'name' => 'Vibrant Rose',
+            'name'     => 'Vibrant Rose',
+            'bg_class' => 'bg-rose-600',
             '50'  => '#fff1f2',
             '100' => '#ffe4e6',
             '200' => '#fecdd3',
@@ -80,7 +85,8 @@ function get_theme_color_palettes(): array {
             '950' => '#4c0519',
         ],
         'amber' => [
-            'name' => 'Warm Amber',
+            'name'     => 'Warm Amber',
+            'bg_class' => 'bg-amber-600',
             '50'  => '#fffbeb',
             '100' => '#fef3c7',
             '200' => '#fde68a',
@@ -94,7 +100,8 @@ function get_theme_color_palettes(): array {
             '950' => '#451a03',
         ],
         'teal' => [
-            'name' => 'Nordic Teal',
+            'name'     => 'Nordic Teal',
+            'bg_class' => 'bg-teal-600',
             '50'  => '#f0fdfa',
             '100' => '#ccfbf1',
             '200' => '#99f6e4',
@@ -108,7 +115,8 @@ function get_theme_color_palettes(): array {
             '950' => '#042f2e',
         ],
         'slate' => [
-            'name' => 'Minimal Slate / Dark',
+            'name'     => 'Minimal Slate / Dark',
+            'bg_class' => 'bg-slate-600',
             '50'  => '#f8fafc',
             '100' => '#f1f5f9',
             '200' => '#e2e8f0',
@@ -256,13 +264,30 @@ function render_theme_head(): void {
             --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* 
-         * Apple Design: ABSOLUTE ZERO SHADOWS
-         * Flat surfaces, crisp hairline borders (border-slate-200/80), translucent glassmorphism (backdrop-blur-md)
-         */
+        /* Apple Design: ABSOLUTE ZERO SHADOWS & GLOBAL RESET */
         *, *::before, *::after {
             box-shadow: none !important;
             text-shadow: none !important;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Custom subtle scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
 
         /* Token-based radius utility helper classes */

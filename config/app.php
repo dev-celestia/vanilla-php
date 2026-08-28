@@ -45,8 +45,8 @@ function get_settings(): array {
     }
 
     $defaultSettings = [
-        'store_name'        => 'KatalogStore Indonesia',
-        'store_slogan'      => 'Belanja Mudah, Cepat & Terpercaya via WhatsApp',
+        'store_name'        => 'KatalogStore',
+        'store_slogan'      => 'slogan',
         'store_description' => 'Toko online terpercaya menyediakan aneka produk berkualitas dengan kemudahan pemesanan langsung melalui WhatsApp.',
         'whatsapp_number'   => '6281234567890', // Format 628...
         'store_email'       => 'kontak@katalogstore.id',

@@ -12,10 +12,11 @@ Aplikasi web toko online & katalog produk modern berbasis **Native PHP 8.x**, **
    - Halaman **Tentang Kami (About Us)** & Nilai Keunggulan Toko.
    - Halaman **Kontak & Lokasi** dengan interaksi WhatsApp langsung.
 
-2. **Apple Design System & 100% Zero Shadow**
+2. **Apple Design System, Phosphor Icons & 100% Zero Shadow**
+   - Menggunakan **[Phosphor Icons](https://phosphoricons.com/)** (`@phosphor-icons/web@2.1.2`) berbasis font & CSS (zero Cumulative Layout Shift, zero JS lag).
    - Flat crisp hairline borders (`border-slate-200/80`), translucent glass materials (`backdrop-blur-xl bg-white/90`), dan zero drop shadows.
    - Respon fisik tekan instan Apple (`apple-tap` dengan `scale 0.975`).
-   - Komponen UI primitif PHP reusable: `ui_button()`, `ui_input()`, `ui_select()`, `ui_toggle()`, `ui_card()`, `ui_badge()`, `ui_alert()`, `ui_stat_card()`, `ui_avatar()`.
+   - Komponen UI primitif PHP reusable: `ui_button()`, `ui_input()`, `ui_select()`, `ui_toggle()`, `ui_card()`, `ui_badge()`, `ui_alert()`, `ui_stat_card()`, `ui_avatar()`, `ui_icon()`.
 
 3. **Global Theme & Palette Customizer**
    - **8 Pilihan Palet Warna Primer**: Emerald, Classic Blue, Indigo, Violet, Rose, Amber, Teal, Slate.
