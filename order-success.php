@@ -99,10 +99,15 @@ require_once __DIR__ . '/includes/header.php';
                 'class'   => 'w-full',
             ]) ?>
 
-            <div class="text-center pt-2">
+            <div class="flex items-center justify-center gap-4 pt-2">
+                <a href="<?= base_url('demo.php') ?>" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700">
+                    <i class="ph ph-shopping-bag text-xs"></i>
+                    <span>Katalog Demo</span>
+                </a>
+                <span class="text-slate-300">•</span>
                 <a href="<?= base_url() ?>" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900">
-                    <i class="ph ph-arrow-left text-xs"></i>
-                    <span>Kembali ke Halaman Beranda</span>
+                    <i class="ph ph-house text-xs"></i>
+                    <span>Halaman Beranda</span>
                 </a>
             </div>
         </div>

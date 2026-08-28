@@ -22,11 +22,11 @@ require_once __DIR__ . '/includes/header.php';
     <div x-cloak x-show="$store.cart.items.length === 0">
         <?= ui_empty_state(
             'Keranjang Belanja Anda Masih Kosong',
-            'Anda belum menambahkan produk apapun. Jelajahi katalog kami untuk menemukan berbagai pilihan produk menarik!',
+            'Anda belum menambahkan produk apapun. Jelajahi katalog demo kami untuk menemukan berbagai pilihan produk menarik!',
             [
                 'icon'       => 'shopping-bag',
                 'buttonText' => 'Mulai Belanja Sekarang',
-                'buttonHref' => base_url(),
+                'buttonHref' => base_url('demo.php#katalog'),
                 'buttonIcon' => 'shopping-cart',
             ]
         ) ?>
@@ -108,9 +108,9 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- Back to shop link -->
             <div class="pt-2">
-                <a href="<?= base_url() ?>" class="inline-flex items-center gap-2 text-xs font-bold text-brand-600 hover:text-brand-700">
+                <a href="<?= base_url('demo.php#katalog') ?>" class="inline-flex items-center gap-2 text-xs font-bold text-brand-600 hover:text-brand-700">
                     <i class="ph ph-arrow-left text-xs"></i>
-                    <span>Tambah Produk Lainnya dari Katalog</span>
+                    <span>Tambah Produk Lainnya dari Katalog Demo</span>
                 </a>
             </div>
 

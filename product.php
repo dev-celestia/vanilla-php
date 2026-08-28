@@ -45,7 +45,7 @@ if ($db && ($productId > 0 || !empty($productSlug))) {
 }
 
 if (!$product) {
-    header('Location: ' . base_url('index.php'));
+    header('Location: ' . base_url('demo.php'));
     exit;
 }
 
@@ -71,7 +71,8 @@ require_once __DIR__ . '/includes/header.php';
 <!-- Breadcrumb Primitive -->
 <?= ui_breadcrumb([
     ['label' => 'Beranda', 'href' => base_url()],
-    ['label' => $product['category_name'] ?? 'Kategori', 'href' => base_url('index.php?category=' . $product['category_id'])],
+    ['label' => 'Demo E-Commerce', 'href' => base_url('demo.php')],
+    ['label' => $product['category_name'] ?? 'Kategori', 'href' => base_url('demo.php?category=' . $product['category_id'])],
     ['label' => $product['name']]
 ]) ?>
 
@@ -222,7 +223,7 @@ require_once __DIR__ . '/includes/header.php';
                     <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Produk Serupa Lainnya</h3>
                     <p class="text-xs text-slate-500 mt-0.5">Rekomendasi produk terkait dalam kategori yang sama</p>
                 </div>
-                <a href="<?= base_url('index.php?category=' . $product['category_id']) ?>" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                <a href="<?= base_url('demo.php?category=' . $product['category_id']) ?>" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
                     <span>Lihat Lainnya</span>
                     <i class="ph ph-arrow-right text-xs"></i>
                 </a>

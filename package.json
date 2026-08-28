@@ -1,0 +1,41 @@
+{
+  "name": "native-php",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm:dev:vite\" \"npm:dev:php\" --names \"VITE,PHP\" --prefix-colors \"cyan,magenta\"",
+    "dev:vite": "vite",
+    "dev:php": "php -S 0.0.0.0:8000",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-celestia/simple-native-php.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/dev-celestia/simple-native-php/issues"
+  },
+  "homepage": "https://github.com/dev-celestia/simple-native-php#readme",
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "autoprefixer": "^10.5.4",
+    "concurrently": "^10.0.5",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.2",
+    "vite-plugin-live-reload": "^3.1.0"
+  },
+  "dependencies": {
+    "@phosphor-icons/web": "^2.1.2",
+    "alpinejs": "^3.16.3"
+  }
+}

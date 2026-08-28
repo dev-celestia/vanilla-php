@@ -10,8 +10,9 @@ Panduan ini menjelaskan cara mengonfigurasi, mengubah, dan memperluas tema warna
 3. [Menambah / Mengubah Preset Corner Radius](#3-menambah--mengubah-preset-corner-radius)
 4. [Sumber Ikon: Phosphor Icons Engine](#4-sumber-ikon-phosphor-icons-engine)
 5. [Menggunakan Token Design System dalam Template HTML/PHP](#5-menggunakan-token-dalam-template)
-6. [Daftar Lengkap Komponen Primitif PHP](#6-daftar-lengkap-komponen-primitif-php)
-7. [Prinsip Desain (Apple Fluid & Zero Shadow)](#7-prinsip-desain)
+6. [Daftar Lengkap Komponen Primitif PHP (shadcn-style)](#6-daftar-lengkap-komponen-primitif-php-shadcn-style)
+7. [Penanganan Event & Interaktivitas (Event Handlers)](#7-penanganan-event--interaktivitas-event-handlers)
+8. [Prinsip Desain (Apple Fluid & Zero Shadow)](#8-prinsip-desain-apple-fluid--zero-shadow)
 
 ---
 
@@ -182,9 +183,25 @@ Saat Anda membuat halaman PHP atau komponen baru, Anda dapat memanfaatkan token 
 
 ---
 
-## 6. Daftar Lengkap Komponen Primitif PHP
+## 6. Daftar Lengkap Komponen Primitif PHP (shadcn-style)
 
-Semua helper komponen didefinisikan dalam [`helpers/components.php`](file:///Users/arham/Desktop/project/Native-PHP/helpers/components.php).
+Komponen UI terbagi modular per berkas di folder [`components/ui/`](file:///Users/arham/Desktop/project/Native-PHP/components/ui) (dan di-load otomatis via [`components/ui/index.php`](file:///Users/arham/Desktop/project/Native-PHP/components/ui/index.php) / [`helpers/components.php`](file:///Users/arham/Desktop/project/Native-PHP/helpers/components.php)).
+
+### Struktur Berkas Komponen:
+- `components/ui/button.php` (`ui_button`, `ui_btn`)
+- `components/ui/card.php` (`ui_card`)
+- `components/ui/input.php` (`ui_input`)
+- `components/ui/textarea.php` (`ui_textarea`)
+- `components/ui/select.php` (`ui_select`)
+- `components/ui/toggle.php` (`ui_toggle`)
+- `components/ui/badge.php` (`ui_badge`)
+- `components/ui/alert.php` (`ui_alert`)
+- `components/ui/avatar.php` (`ui_avatar`, `ui_icon_box`)
+- `components/ui/stat-card.php` (`ui_stat_card`)
+- `components/ui/empty-state.php` (`ui_empty_state`)
+- `components/ui/breadcrumb.php` (`ui_breadcrumb`)
+- `components/ui/product-card.php` (`ui_product_card`)
+- `components/ui/icon.php` (`ui_icon`)
 
 ### 1. Button (`ui_button` / `ui_btn`)
 ```php
@@ -289,7 +306,97 @@ echo ui_icon_box('shopping-cart', 'brand', ['size' => 'md']);
 
 ---
 
-## 7. Prinsip Desain (Apple Fluid & Zero Shadow)
+## 7. Penanganan Event & Interaktivitas (Event Handlers)
+
+Seluruh komponen UI mendukung opsi `'attrs'` untuk memasang event handler secara deklaratif (baik menggunakan **Alpine.js**, **Vanilla JavaScript**, maupun **HTMX**).
+
+### A. Alpine.js Click & State Manipulation
+```php
+// Toggle state boolean di Alpine
+echo ui_button('Buka Modal', [
+    'variant' => 'primary',
+    'icon'    => 'sparkle',
+    'attrs'   => '@click="isModalOpen = true"',
+]);
+
+// Memanggil method Store Alpine (misal: Keranjang Belanja)
+echo ui_button('Tambah ke Keranjang', [
+    'variant' => 'primary',
+    'icon'    => 'shopping-cart',
+    'attrs'   => '@click="$store.cart.addItem({ id: 10, name: \'Baju Keren\', price: 150000 }, 1)"',
+]);
+```
+
+### B. Form Input Events (Live Search / Debounce / Formatting)
+```php
+// Live search dengan debounce
+echo ui_input('search_query', [
+    'placeholder' => 'Cari produk...',
+    'icon'        => 'magnifying-glass',
+    'attrs'       => 'x-model.debounce.300ms="searchQuery" @input="fetchResults()"',
+]);
+
+// Auto uppercase dan change listener (Vanilla JS)
+echo ui_input('voucher_code', [
+    'label'       => 'Kode Voucher',
+    'placeholder' => 'Masukkan kupon...',
+    'attrs'       => 'oninput="this.value = this.value.toUpperCase()" onchange="applyVoucher(this.value)"',
+]);
+```
+
+### C. Select Dropdown Change Event
+```php
+// Alpine change event
+echo ui_select('sort_by', [
+    'newest'     => 'Terbaru',
+    'price_asc'  => 'Harga Terendah',
+    'price_desc' => 'Harga Tertinggi',
+], [
+    'label' => 'Urutkan Berdasarkan',
+    'attrs' => '@change="updateSorting($event.target.value)"',
+]);
+
+// Auto submit form saat dropdown dipilih (Vanilla JS)
+echo ui_select('kategori_id', $categoriesList, [
+    'label' => 'Filter Kategori',
+    'attrs' => 'onchange="this.form.submit()"',
+]);
+```
+
+### D. Toggle Switch Events & Two-Way Binding
+```php
+echo ui_toggle('is_featured', 'Tampilkan di Beranda', false, [
+    'helper' => 'Produk akan disematkan di bagian atas katalog.',
+    'attrs'  => 'x-model="isFeatured" @change="console.log(\'Featured status:\', isFeatured)"',
+]);
+```
+
+### E. Vanilla JavaScript (`onclick` & `addEventListener` via ID)
+```php
+// Inline confirm dialog
+echo ui_button('Hapus Data', [
+    'variant' => 'danger',
+    'icon'    => 'trash',
+    'attrs'   => 'onclick="if(confirm(\'Yakin ingin menghapus?\')) deleteItem(123)"',
+]);
+
+// Menggunakan ID untuk addEventListener
+echo ui_button('Export Data', [
+    'id'      => 'btn-export-csv',
+    'variant' => 'outline',
+    'icon'    => 'download-simple',
+]);
+```
+```javascript
+// Di bagian script:
+document.getElementById('btn-export-csv')?.addEventListener('click', () => {
+    exportToCSV();
+});
+```
+
+---
+
+## 8. Prinsip Desain (Apple Fluid & Zero Shadow)
 
 1. **Zero Shadows**: Tidak menggunakan drop-shadow (`box-shadow: none !important`). Kedalaman visual diciptakan melalui:
    - **Translucent materials**: `backdrop-blur-xl bg-white/90` di atas konten yang bergerak.
@@ -301,3 +408,4 @@ echo ui_icon_box('shopping-cart', 'brand', ['size' => 'md']);
 ---
 
 ✨ *Untuk melihat demo visual interaktif seluruh komponen dan token aktif, buka halaman **Showcase Primitif UI** di `/admin/design-system.php`.*
+

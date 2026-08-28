@@ -35,21 +35,11 @@ if ($db) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Design System Theme & Token Engine -->
+    <!-- Design System Theme & Token Engine (Dynamic CSS Variables) -->
     <?php render_theme_head(); ?>
 
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-
-    <!-- Phosphor Icons (https://phosphoricons.com/) -->
-    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
-
+    <!-- Vite Assets (Tailwind CSS, Alpine.js, Phosphor Icons) -->
+    <?= vite('resources/js/main.js') ?>
 </head>
 <body class="bg-slate-100/90 text-slate-800 font-sans antialiased flex min-h-screen" x-data="{ sidebarOpen: false }">
 

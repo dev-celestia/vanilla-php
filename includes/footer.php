@@ -58,7 +58,8 @@ $settings = get_settings();
                 <div>
                     <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Navigasi Cepat</h3>
                     <ul class="space-y-2.5 text-xs">
-                        <li><a href="<?= base_url() ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Katalog Produk</a></li>
+                        <li><a href="<?= base_url() ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Beranda Utama</a></li>
+                        <li><a href="<?= base_url('demo.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Demo E-Commerce & WA</a></li>
                         <li><a href="<?= base_url('about.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Profil Bisnis & Toko</a></li>
                         <li><a href="<?= base_url('contact.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Kontak & Bantuan</a></li>
                         <li><a href="<?= base_url('cart.php') ?>" class="hover:text-brand-300 transition flex items-center gap-1.5"><i class="ph ph-caret-right text-brand-400 text-xs"></i> Keranjang Belanja</a></li>

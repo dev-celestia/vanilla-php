@@ -235,6 +235,13 @@ function render_theme_head(): void {
     $r = $theme['radius'];
     $colorKey = $theme['color_key'];
     ?>
+    <!-- Phosphor Icons (https://phosphoricons.com/) -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+
     <!-- Design System Token Variables -->
     <style id="ds-tokens">
         :root {

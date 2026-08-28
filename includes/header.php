@@ -19,109 +19,11 @@ $settings = get_settings();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS (Play CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Design System Theme & Token Engine -->
+    <!-- Design System Theme & Token Engine (Dynamic CSS Variables) -->
     <?php render_theme_head(); ?>
 
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-
-    <!-- Phosphor Icons (https://phosphoricons.com/) -->
-    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
-
-
-    <!-- Cart Store Init -->
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.store('cart', {
-                items: JSON.parse(localStorage.getItem('native_shop_cart') || '[]'),
-                isOpen: false,
-                
-                init() {
-                    this.save();
-                },
-
-                save() {
-                    localStorage.setItem('native_shop_cart', JSON.stringify(this.items));
-                },
-
-                addItem(product, qty = 1) {
-                    const existing = this.items.find(i => i.id === product.id);
-                    const quantityToAdd = parseInt(qty) || 1;
-                    
-                    if (existing) {
-                        if (product.stock && (existing.qty + quantityToAdd) > product.stock) {
-                            alert('Maaf, jumlah pesanan melebihi stok yang tersedia (' + product.stock + ' unit).');
-                            existing.qty = product.stock;
-                        } else {
-                            existing.qty += quantityToAdd;
-                        }
-                    } else {
-                        if (product.stock && quantityToAdd > product.stock) {
-                            alert('Maaf, jumlah melebihi stok yang tersedia.');
-                            return;
-                        }
-                        this.items.push({
-                            id: product.id,
-                            name: product.name,
-                            price: parseFloat(product.price),
-                            image: product.image,
-                            stock: parseInt(product.stock) || 999,
-                            qty: quantityToAdd
-                        });
-                    }
-                    this.save();
-                    this.isOpen = true;
-                },
-
-                updateQty(id, delta) {
-                    const item = this.items.find(i => i.id === id);
-                    if (item) {
-                        const newQty = item.qty + delta;
-                        if (newQty <= 0) {
-                            this.removeItem(id);
-                        } else if (newQty > item.stock) {
-                            alert('Maksimal stok tersedia: ' + item.stock);
-                        } else {
-                            item.qty = newQty;
-                            this.save();
-                        }
-                    }
-                },
-
-                removeItem(id) {
-                    this.items = this.items.filter(i => i.id !== id);
-                    this.save();
-                },
-
-                clearCart() {
-                    this.items = [];
-                    this.save();
-                },
-
-                get count() {
-                    return this.items.reduce((sum, item) => sum + item.qty, 0);
-                },
-
-                get subtotal() {
-                    return this.items.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                },
-
-                formatRupiah(amount) {
-                    return new Intl.NumberFormat('id-ID', {
-                        style: 'currency',
-                        currency: 'IDR',
-                        minimumFractionDigits: 0
-                    }).format(amount);
-                }
-            });
-        });
-    </script>
+    <!-- Vite Assets (Tailwind CSS, Alpine.js, Phosphor Icons, Cart Store) -->
+    <?= vite('resources/js/main.js') ?>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen" x-data="{ mobileMenuOpen: false }">
 
@@ -168,14 +70,17 @@ $settings = get_settings();
 
                 <!-- Desktop Nav Links -->
                 <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                    <a href="<?= base_url() ?>" class="px-4 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= !isset($active_nav) || $active_nav === 'home' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
-                        Beranda & Katalog
+                    <a href="<?= base_url() ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= !isset($active_nav) || $active_nav === 'home' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
+                        Beranda
                     </a>
-                    <a href="<?= base_url('about.php') ?>" class="px-4 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'about' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
+                    <a href="<?= base_url('demo.php') ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'demo' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
+                        Demo E-Commerce
+                    </a>
+                    <a href="<?= base_url('about.php') ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'about' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
                         Tentang Kami
                     </a>
-                    <a href="<?= base_url('contact.php') ?>" class="px-4 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'contact' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
-                        Kontak & Lokasi
+                    <a href="<?= base_url('contact.php') ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'contact' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
+                        Kontak
                     </a>
                 </nav>
 
@@ -183,8 +88,8 @@ $settings = get_settings();
                 <div class="flex items-center gap-2 sm:gap-3">
                     
                     <!-- Search Input (Desktop) -->
-                    <form action="<?= base_url() ?>" method="GET" class="hidden lg:flex items-center relative">
-                        <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari produk..." class="w-44 focus:w-64 transition-all duration-300 pl-9 pr-4 py-2 text-xs rounded-input bg-slate-100 border border-slate-200/60 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
+                    <form action="<?= base_url('demo.php') ?>" method="GET" class="hidden lg:flex items-center relative">
+                        <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari produk demo..." class="w-40 focus:w-60 transition-all duration-300 pl-9 pr-4 py-2 text-xs rounded-input bg-slate-100 border border-slate-200/60 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
                         <i class="ph ph-magnifying-glass text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-sm"></i>
                     </form>
 
@@ -233,20 +138,23 @@ $settings = get_settings();
             @click.away="mobileMenuOpen = false" 
             class="md:hidden border-t border-slate-200/80 bg-white px-4 pt-3 pb-6 space-y-3">
             
-            <form action="<?= base_url() ?>" method="GET" class="relative">
-                <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari nama produk..." class="w-full pl-10 pr-4 py-2.5 text-sm rounded-input bg-slate-100 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
+            <form action="<?= base_url('demo.php') ?>" method="GET" class="relative">
+                <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari produk demo..." class="w-full pl-10 pr-4 py-2.5 text-sm rounded-input bg-slate-100 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
                 <i class="ph ph-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-base"></i>
             </form>
 
             <div class="space-y-1">
                 <a href="<?= base_url() ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= !isset($active_nav) || $active_nav === 'home' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    🏠 Beranda & Katalog
+                    🏠 Beranda
+                </a>
+                <a href="<?= base_url('demo.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= isset($active_nav) && $active_nav === 'demo' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    🛍️ Demo E-Commerce & WA
                 </a>
                 <a href="<?= base_url('about.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= isset($active_nav) && $active_nav === 'about' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                     🏢 Tentang Kami
                 </a>
                 <a href="<?= base_url('contact.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= isset($active_nav) && $active_nav === 'contact' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    📞 Kontak & Lokasi
+                    📞 Kontak
                 </a>
                 <a href="<?= base_url('cart.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold text-slate-700 hover:bg-slate-50 border border-transparent">
                     🛒 Halaman Keranjang Belanja

@@ -9,7 +9,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/theme.php';
-require_once __DIR__ . '/../helpers/components.php';
+require_once __DIR__ . '/../helpers/framework.php';
+require_once __DIR__ . '/../ui/index.php';
+require_once __DIR__ . '/../helpers/vite.php';
 
 // Base URL detection
 function base_url(string $path = ''): string {

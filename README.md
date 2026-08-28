@@ -1,60 +1,48 @@
-# 🚀 Lightweight Native PHP Web App (Katalog & WhatsApp Checkout)
+# ⚡ Lightweight Native PHP Micro-Framework & Web Starter
 
-Aplikasi web toko online & katalog produk modern berbasis **Native PHP 8.x**, **Tailwind CSS**, **Alpine.js**, dan **MySQL/MariaDB**. Didesain super ringan, hemat memori RAM, dan tidak membebani limit proses server hosting (100% kompatibel dengan shared hosting paket Single / cPanel).
-
----
-
-## 🌟 Fitur Utama
-
-1. **Website Basic & Profil Bisnis Responsif (HP & Laptop)**
-   - Hero banner dengan CTA pemesanan.
-   - Filter Kategori & Pencarian Produk Real-time.
-   - Halaman **Tentang Kami (About Us)** & Nilai Keunggulan Toko.
-   - Halaman **Kontak & Lokasi** dengan interaksi WhatsApp langsung.
-
-2. **Apple Design System, Phosphor Icons & 100% Zero Shadow**
-   - Menggunakan **[Phosphor Icons](https://phosphoricons.com/)** (`@phosphor-icons/web@2.1.2`) berbasis font & CSS (zero Cumulative Layout Shift, zero JS lag).
-   - Flat crisp hairline borders (`border-slate-200/80`), translucent glass materials (`backdrop-blur-xl bg-white/90`), dan zero drop shadows.
-   - Respon fisik tekan instan Apple (`apple-tap` dengan `scale 0.975`).
-   - Komponen UI primitif PHP reusable: `ui_button()`, `ui_input()`, `ui_select()`, `ui_toggle()`, `ui_card()`, `ui_badge()`, `ui_alert()`, `ui_stat_card()`, `ui_avatar()`, `ui_icon()`.
-
-3. **Global Theme & Palette Customizer**
-   - **8 Pilihan Palet Warna Primer**: Emerald, Classic Blue, Indigo, Violet, Rose, Amber, Teal, Slate.
-   - **6 Preset Corner Radius**: Sharp (0px), Subtle (6px), Standard Apple (12px), Soft (16px), Round (24px), Pill (9999px).
-   - Pengaturan instan langsung via Panel Admin (`admin/settings.php`) atau kode (`config/theme.php`).
-   - Panduan lengkap kustomisasi di [`THEME_GUIDE.md`](./THEME_GUIDE.md).
-
-4. **Interactive Shopping Cart (Keranjang Belanja)**
-   - Slide-over Cart Drawer reaktif (Alpine.js) tanpa reload halaman.
-   - Tambah/kurang jumlah barang, hapus item, dan perhitungan subtotal otomatis (Format Rupiah).
-   - Sinkronisasi penyimpanan LocalStorage agar keranjang tidak hilang saat halaman di-refresh.
-
-5. **Integrasi Checkout / Order via WhatsApp**
-   - Formulir checkout: Nama Pembeli, Nomor WhatsApp, Alamat Lengkap, dan Catatan Pesanan.
-   - Otomatis mencatat order ke database (`orders` & `order_items`) dengan kode unik transaksi.
-   - Otomatis membuat template pesan WhatsApp yang rapi dan terstruktur untuk dikirimkan ke Admin.
-
-6. **Dashboard Admin (Katalog & Pengaturan)**
-   - Login & autentikasi aman dengan Bcrypt hash & proteksi CSRF.
-   - **Manajemen Produk (CRUD):** Tambah, Ubah, Hapus produk, upload foto dengan preview, atur stok, harga normal, harga promo/diskon, dan badge unggulan.
-   - **Manajemen Kategori (CRUD):** Tambah, ubah, dan hapus kategori produk.
-   - **Riwayat Pesanan WhatsApp:** Memantau semua transaksi masuk, melihat rincian item, dan mengubah status pesanan.
-   - **Showcase & Guide Design System:** Akses living style guide di `/admin/design-system.php`.
-   - **Pengaturan Toko:** Ubah Nama Toko, Nomor WhatsApp CS/Admin, Slogan, Alamat, Sosial Media, Warna Tema, dan Radius Corner.
+Sebuah **micro-framework & starter kit web modular** berbasis **Native PHP 8.x**, **Tailwind CSS**, **Alpine.js**, dan **MySQL/MariaDB**. Dirancang khusus untuk menghasilkan website dan aplikasi web yang sangat cepat, hemat memori RAM, bebas dependensi vendor yang berat (*zero bloat*), dan 100% siap dijalankan di berbagai lingkungan (Shared Hosting / cPanel, VPS, Docker, maupun Localhost).
 
 ---
 
-## 🎨 Panduan Kustomisasi Tema
+## 🌟 Arsitektur & Keunggulan Framework
 
-Untuk panduan mendalam tentang cara mengubah warna, corner radius, token design system, dan membuat komponen baru, silakan baca dokumentasi khusus:
-👉 **[Lihat Panduan Kustomisasi Tema (THEME_GUIDE.md)](./THEME_GUIDE.md)** atau kunjungi halaman **Showcase & Guide** di `/admin/design-system.php`.
+### 1. 🚀 Inti Framework Ringan & Eksekusi Cepat (Zero Bloat)
+- **Pure PHP 8.x**: Eksekusi instan tanpa overhead runtime framework yang rumit. Respon server (TTFB) sangat rendah (< 50ms).
+- **Core Abstraction Layer (`helpers/framework.php`)**: Menyediakan helper request input (`request()`), response JSON (`json_response()`), redirect (`redirect()`), abort status (`abort()`), serta query database (`db()`, `db_fetch()`, `db_fetch_all()`, `db_query()`).
+- **Database PDO Terisolasi**: Koneksi singleton PDO dengan *Prepared Statements* untuk proteksi maksimal terhadap SQL Injection.
+- **Keamanan Berlapis**: Proteksi token CSRF terintegrasi, hashing password Bcrypt, validasi upload file, sanitasi XSS (`sanitize()`), dan guard otentikasi sesi admin.
+
+### 2. 🧩 Sistem Komponen UI Modular (ala shadcn/ui)
+Framework ini dilengkapi koleksi fungsi primitif UI modular berbasis PHP murni di folder `components/ui/`:
+- **Tombol & Tautan**: `ui_button()`
+- **Input & Form**: `ui_input()`, `ui_textarea()`, `ui_select()`, `ui_toggle()`
+- **Permukaan & Tampilan Data**: `ui_card()`, `ui_badge()`, `ui_alert()`, `ui_stat_card()`, `ui_avatar()`, `ui_empty_state()`
+- **Navigasi & Visual**: `ui_breadcrumb()`, `ui_icon()`, `ui_icon_box()`, `ui_product_card()`
+- **Living Style Guide**: Akses showcase dan dokumentasi interaktif seluruh komponen di `/admin/design-system.php`.
+
+### 3. 🎨 Dynamic Theme Engine & Apple Design System
+- **8 Palet Warna Primer**: Emerald, Classic Blue, Indigo, Violet, Rose, Amber, Teal, Slate.
+- **6 Preset Corner Radius**: Sharp (0px), Subtle (6px), Standard Apple (12px), Soft (16px), Round (24px), Pill (9999px).
+- **Estetika Modern**: Material *crisp hairline borders*, *translucent backdrop blur*, *zero shadows*, dan interaksi fisik *apple-tap*.
+- **Ikon Font Phosphor**: Integrasi **[Phosphor Icons](https://phosphoricons.com/)** berbasis CSS font tanpa resiko Cumulative Layout Shift (CLS).
+
+### 4. 📦 Modul Bawaan Siap Pakai
+- **Landing Page & Website Portofolio (`index.php`)**: Halaman beranda responsif, modern, dan informatif.
+- **Demo Modul E-Commerce & WhatsApp Checkout (`demo.php`)**: Etalase produk interaktif, live search, filter kategori, drawer keranjang belanja reaktif (Alpine.js LocalStorage), dan checkout WhatsApp otomatis.
+- **Profil Perusahaan & Kontak (`about.php`, `contact.php`)**: Halaman profil bisnis, visi misi, dan formulir pesan.
+- **Panel Admin CMS Lengkap (`admin/`)**: Dashboard metrik, CRUD produk & kategori, riwayat pesanan, pengaturan website, dan live customizer tema.
 
 ---
 
-## 🛠️ Panduan Instalasi & Konfigurasi
+## 🛠️ Panduan Instalasi & Menjalankan
 
-### 1. Konfigurasi Database
-Buka file `config/database.php` dan sesuaikan kredensial database Anda:
+### 1. Kebutuhan Sistem
+- **PHP**: Versi 8.0 ke atas (dengan ekstensi `pdo_mysql` dan `fileinfo`).
+- **Database**: MySQL 5.7+ atau MariaDB 10.3+.
+- **Web Server**: Apache / Nginx / Caddy / Built-in PHP CLI Server.
+
+### 2. Konfigurasi Database
+Salin atau sesuaikan kredensial database pada file `config/database.php`:
 ```php
 define('DB_HOST', '127.0.0.1');
 define('DB_PORT', '3306');
@@ -63,68 +51,190 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 ```
 
-### 2. Inisialisasi Database (Auto-Setup)
-Anda dapat menginisialisasi tabel database dan data awal melalui salah satu cara berikut:
-- **Cara 1 (Via Browser):** Buka `http://domain-anda/database/init.php`
-- **Cara 2 (Via phpMyAdmin):** Import file `database/schema.sql` ke database MySQL Anda.
-- **Cara 3 (Via Terminal):**
+### 3. Inisialisasi Database (Setup Otomatis)
+Jalankan salah satu metode berikut untuk membuat tabel dan data awal:
+- **Via Terminal (CLI):**
   ```bash
   php database/init.php
   ```
+- **Via Browser:**
+  Buka `http://localhost/path-proyek/database/init.php` di peramban Anda.
+- **Via phpMyAdmin / MySQL:**
+  Import file `database/schema.sql`.
+
+### 4. Menjalankan Server Lokal
+Gunakan built-in PHP server untuk pengembangan cepat:
+```bash
+php -S localhost:8000
+```
+Buka browser pada: `http://localhost:8000`
 
 ---
 
-## 🔑 Kredensial Default Admin
+## 🔑 Kredensial Default Dashboard Admin
 
-- **URL Login Admin:** `http://domain-anda/admin/login.php`
+- **URL Login Admin:** `http://localhost:8000/admin/login.php`
 - **Username:** `admin`
 - **Password:** `password123`
 
-*(Kata sandi dapat diganti kapan saja melalui menu **Pengaturan Toko & WA** di dalam dashboard admin).*
+*(Kata sandi dan data toko/website dapat diperbarui kapan saja melalui menu Pengaturan di panel admin).*
 
 ---
 
-## 📁 Struktur Direktori
+## 💻 Panduan Pengembangan (Developer Guide)
+
+### 1. Membuat Halaman Web Baru
+Cukup buat file PHP baru (misal `layanan.php`), muat konfigurasi dan header/footer:
+```php
+<?php
+$active_nav = 'layanan';
+$page_title = 'Layanan Kami - Nama Website';
+require_once __DIR__ . '/config/app.php';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<div class="max-w-7xl mx-auto px-4 py-12">
+    <?= ui_card([
+        'title' => 'Layanan Profesional',
+        'subtitle' => 'Solusi tepat untuk kebutuhan digital Anda.'
+    ], '
+        <p class="text-sm text-slate-600 mb-4">Konten halaman Anda di sini...</p>
+        ' . ui_button('Hubungi Kami', ['variant' => 'primary', 'href' => base_url('contact.php')])
+    ) ?>
+</div>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
+```
+
+### 2. Mengambil Data dari Database
+Gunakan helper query yang praktis dan aman:
+```php
+// Ambil semua data
+$items = db_fetch_all("SELECT * FROM products WHERE is_active = :status ORDER BY id DESC", [':status' => 1]);
+
+// Ambil satu baris data
+$item = db_fetch("SELECT * FROM products WHERE id = :id", [':id' => $id]);
+
+// Eksekusi insert/update
+db_query("UPDATE products SET stock = stock - 1 WHERE id = :id", [':id' => $id]);
+```
+
+### 3. Membuat REST API / JSON Endpoint
+Gunakan `request()` dan `json_response()`:
+```php
+<?php
+require_once __DIR__ . '/config/app.php';
+
+$categoryId = (int)request('category_id', 0);
+$items = db_fetch_all("SELECT id, name, price FROM products WHERE category_id = :cat_id", [':cat_id' => $categoryId]);
+
+json_response([
+    'success' => true,
+    'total'   => count($items),
+    'data'    => $items
+]);
+```
+
+### 4. Proteksi Form dengan CSRF Token
+```php
+<form method="POST" action="process.php">
+    <?= csrf_field() ?>
+    <?= ui_input('Nama Lengkap', 'name', ['required' => true]) ?>
+    <?= ui_button('Kirim', ['type' => 'submit']) ?>
+</form>
+
+<?php
+// Pada process.php:
+if (is_post()) {
+    if (!verify_csrf_token(request('csrf_token'))) {
+        abort(403, 'Sesi CSRF tidak valid.');
+    }
+    // Proses form...
+}
+?>
+```
+
+---
+
+## 📁 Struktur Direktori Proyek
 
 ```text
 Native-PHP/
 ├── config/
-│   ├── database.php        # Konfigurasi koneksi database PDO
-│   ├── theme.php           # Token Design System, Palet Warna & Radius
-│   └── app.php             # Base URL & helper settings
+│   ├── app.php             # Master bootstrapper & global config loader
+│   ├── database.php        # Konfigurasi & singleton koneksi database PDO
+│   └── theme.php           # Token Design System, Palet Warna & Corner Radius
 ├── database/
-│   ├── schema.sql          # Skema database MySQL & Data Seed
-│   └── init.php            # Script auto-setup database
+│   ├── schema.sql          # Struktur skema tabel MySQL & data seed
+│   └── init.php            # Script inisialisasi & migrasi otomatis database
+├── components/
+│   └── ui/                 # Komponen UI Primitif Reusable (shadcn-style)
+│       ├── button.php      # Komponen Button & Link
+│       ├── card.php        # Komponen Card & Container Surface
+│       ├── input.php       # Komponen Input Form & Floating Labels
+│       ├── textarea.php    # Komponen Textarea Form
+│       ├── select.php      # Komponen Select & Dropdown
+│       ├── toggle.php      # Komponen Toggle Switch
+│       ├── badge.php       # Komponen Badge & Status Chip
+│       ├── alert.php       # Komponen Banner Alert / Notifikasi
+│       ├── avatar.php      # Komponen Avatar & Icon Box
+│       ├── stat-card.php   # Komponen Metric Stat Card
+│       ├── empty-state.php # Komponen Empty State Data
+│       ├── breadcrumb.php  # Komponen Breadcrumb Navigation
+│       ├── product-card.php# Komponen Kartu Produk / Item
+│       ├── icon.php        # Komponen Phosphor Icon
+│       └── index.php       # Master component loader
 ├── helpers/
-│   ├── components.php      # Library Komponen Primitif PHP (Button, Input, Card, Badge, Alert)
-│   ├── auth.php            # Helper session login & guard
-│   ├── csrf.php            # Helper token CSRF keamanan
-│   ├── format.php          # Helper rupiah, tanggal, slug
-│   └── upload.php          # Helper upload & validasi foto
+│   ├── framework.php       # Core micro-framework utilities (request, response, db, routing)
+│   ├── components.php      # Component bridge & loader global
+│   ├── auth.php            # Guard otentikasi & session security
+│   ├── csrf.php            # Generator & validator token CSRF
+│   ├── format.php          # Formatter mata uang, tanggal, string & slug
+│   ├── upload.php          # Helper validasi & upload file gambar
+│   └── vite.php            # Helper integrasi asset bundling Vite (opsional)
 ├── includes/
-│   ├── header.php          # Header website & Alpine store cart
-│   ├── footer.php          # Footer & floating WA button
-│   └── cart_drawer.php     # Slide-over keranjang belanja
+│   ├── header.php          # Header website, meta tags, navigasi & store Alpine.js
+│   ├── footer.php          # Footer website, info kontak & floating action button
+│   └── cart_drawer.php     # Slide-over keranjang belanja reaktif
 ├── admin/
-│   ├── index.php           # Dashboard ringkasan & statistik
-│   ├── login.php           # Login admin
-│   ├── logout.php          # Logout admin
-│   ├── products.php        # Daftar & kelola katalog produk
-│   ├── product-form.php    # Form tambah & edit produk + upload
-│   ├── categories.php      # Manajemen kategori
-│   ├── orders.php          # Riwayat pesanan WhatsApp
-│   ├── settings.php        # Pengaturan toko & kustomisasi tema
-│   ├── design-system.php   # Showcase & Panduan Design System
-│   └── includes/           # Layout header/footer admin
+│   ├── index.php           # Dashboard statistik & ringkasan
+│   ├── login.php           # Halaman autentikasi login
+│   ├── logout.php          # Handler logout sesi
+│   ├── products.php        # Manajemen daftar item & produk
+│   ├── product-form.php    # Form tambah & edit data produk + file upload
+│   ├── categories.php      # Manajemen kategori konten
+│   ├── orders.php          # Manajemen riwayat transaksi / data pesanan
+│   ├── settings.php        # Pengaturan website, branding, & tema visual
+│   ├── design-system.php   # Showcase & dokumentasi hidup Design System
+│   └── includes/           # Layout header, sidebar, & footer panel admin
 ├── uploads/
-│   └── products/           # Folder foto produk upload
-├── index.php               # Halaman Beranda & Katalog
-├── product.php             # Halaman Detail Produk
-├── about.php               # Halaman Profil Bisnis & Toko
+│   └── products/           # Direktori penyimpanan file upload gambar
+├── index.php               # Halaman Beranda Utama (Landing Page & Framework Showcase)
+├── demo.php                # Halaman Demo Interaktif (Katalog & WhatsApp Checkout)
+├── product.php             # Halaman Detail Item / Produk
+├── about.php               # Halaman Profil Bisnis / Tentang Kami
 ├── contact.php             # Halaman Kontak & Pertanyaan
 ├── cart.php                # Halaman Keranjang Belanja
-├── checkout.php            # Halaman Checkout WhatsApp
-├── order-success.php       # Halaman Konfirmasi Pesanan
-├── THEME_GUIDE.md          # Panduan Kustomisasi Tema & Design Tokens
-└── README.md
+├── checkout.php            # Halaman Checkout & Formulir Pemesanan
+├── order-success.php       # Halaman Konfirmasi Pesanan Berhasil
+├── THEME_GUIDE.md          # Dokumentasi Kustomisasi Tema & Design Tokens
+└── README.md               # Dokumentasi Utama Framework
 ```
+
+---
+
+## ⚡ Dukungan Asset Bundling Vite (Opsional)
+
+Aplikasi ini mendukung dua mode frontend:
+1. **Mode Standalone / CDN (Default)**: Langsung berjalan di hosting apapun tanpa perlu instalasi Node.js/npm.
+2. **Mode Vite 6 & Tailwind CSS v4 (Opsional)**:
+   ```bash
+   npm run dev    # Server Vite HMR & live reload saat file .php diedit
+   npm run build  # Kompilasi & minifikasi aset ke folder dist/
+   ```
+
+---
+
+## 📄 Lisensi & Kontribusi
+
+Framework ini bersifat *open-source*, fleksibel, dan bebas dimodifikasi untuk proyek website profil perusahaan, aplikasi internal kantor, portal berita, landing page portofolio, maupun toko online katalog.
