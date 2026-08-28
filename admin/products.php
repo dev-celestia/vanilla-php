@@ -151,19 +151,16 @@ require_once __DIR__ . '/includes/admin_header.php';
 <!-- Product Table (Zero Shadow, Crisp Border) -->
 <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
     <?php if (empty($products)): ?>
-        <div class="p-16 text-center text-slate-400">
-            <div class="w-16 h-16 rounded-card bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-3">
-                <i class="ph ph-package text-3xl"></i>
-            </div>
-            <h3 class="text-sm font-bold text-slate-800 mb-1 tracking-tight">Tidak Ada Produk yang Cocok</h3>
-            <p class="text-xs text-slate-400 max-w-sm mx-auto mb-4">Silakan atur ulang filter pencarian atau tambahkan produk baru.</p>
-            <?= ui_button('Tambah Produk Sekarang', [
-                'variant' => 'primary',
-                'size'    => 'sm',
-                'href'    => base_url('admin/product-form.php'),
-                'icon'    => 'plus',
-            ]) ?>
-        </div>
+        <?= ui_empty_state(
+            'Tidak Ada Produk yang Cocok',
+            'Silakan atur ulang filter pencarian atau tambahkan produk baru.',
+            [
+                'icon'       => 'package',
+                'buttonText' => 'Tambah Produk Sekarang',
+                'buttonHref' => base_url('admin/product-form.php'),
+                'buttonIcon' => 'plus',
+            ]
+        ) ?>
     <?php else: ?>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">

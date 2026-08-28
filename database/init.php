@@ -12,7 +12,7 @@ function printMsg($msg, $isCli) {
     if ($isCli) {
         echo $msg . PHP_EOL;
     } else {
-        echo "<p style='font-family: monospace; line-height: 1.6; margin: 4px 0;'>$msg</p>";
+        echo "<p class='font-mono text-xs leading-relaxed my-1'>$msg</p>";
     }
 }
 

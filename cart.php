@@ -19,20 +19,17 @@ require_once __DIR__ . '/includes/header.php';
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     
     <!-- Empty Cart State -->
-    <div x-cloak x-show="$store.cart.items.length === 0" class="bg-white rounded-card border border-slate-200/80 p-16 text-center max-w-xl mx-auto my-8">
-        <div class="w-20 h-20 rounded-card bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-5">
-            <i class="ph ph-shopping-bag text-5xl"></i>
-        </div>
-        <h2 class="text-xl font-bold text-slate-900 mb-2 tracking-tight">Keranjang Belanja Anda Masih Kosong</h2>
-        <p class="text-xs text-slate-500 mb-8 max-w-sm mx-auto leading-relaxed">
-            Anda belum menambahkan produk apapun. Jelajahi katalog kami untuk menemukan berbagai pilihan produk menarik!
-        </p>
-        <?= ui_button('Mulai Belanja Sekarang', [
-            'variant' => 'primary',
-            'size'    => 'md',
-            'href'    => base_url(),
-            'icon'    => 'shopping-cart',
-        ]) ?>
+    <div x-cloak x-show="$store.cart.items.length === 0">
+        <?= ui_empty_state(
+            'Keranjang Belanja Anda Masih Kosong',
+            'Anda belum menambahkan produk apapun. Jelajahi katalog kami untuk menemukan berbagai pilihan produk menarik!',
+            [
+                'icon'       => 'shopping-bag',
+                'buttonText' => 'Mulai Belanja Sekarang',
+                'buttonHref' => base_url(),
+                'buttonIcon' => 'shopping-cart',
+            ]
+        ) ?>
     </div>
 
     <!-- Active Cart Items -->

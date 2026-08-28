@@ -125,10 +125,7 @@ require_once __DIR__ . '/includes/admin_header.php';
     <!-- Orders Table (Zero Shadow, Crisp Border) -->
     <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
         <?php if (empty($orders)): ?>
-            <div class="p-16 text-center text-slate-400 text-xs">
-                <i class="ph ph-tray text-3xl mx-auto mb-2 text-slate-300"></i>
-                Tidak ada data pesanan yang ditemukan.
-            </div>
+            <?= ui_empty_state('Tidak Ada Pesanan', 'Tidak ada data pesanan yang ditemukan.', ['icon' => 'tray']) ?>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">

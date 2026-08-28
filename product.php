@@ -68,20 +68,12 @@ $waDirectUrl = "https://wa.me/{$waNumber}?text=" . urlencode($waDirectText);
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Breadcrumb -->
-<div class="bg-white border-b border-slate-200/80 py-3.5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="flex text-xs text-slate-500 gap-2 items-center flex-wrap">
-            <a href="<?= base_url() ?>" class="hover:text-brand-600 transition">Beranda</a>
-            <i class="ph ph-caret-right text-slate-300 text-xs"></i>
-            <a href="<?= base_url('index.php?category=' . $product['category_id']) ?>" class="hover:text-brand-600 transition">
-                <?= sanitize($product['category_name'] ?? 'Kategori') ?>
-            </a>
-            <i class="ph ph-caret-right text-slate-300 text-xs"></i>
-            <span class="text-slate-800 font-semibold truncate max-w-xs sm:max-w-md"><?= sanitize($product['name']) ?></span>
-        </nav>
-    </div>
-</div>
+<!-- Breadcrumb Primitive -->
+<?= ui_breadcrumb([
+    ['label' => 'Beranda', 'href' => base_url()],
+    ['label' => $product['category_name'] ?? 'Kategori', 'href' => base_url('index.php?category=' . $product['category_id'])],
+    ['label' => $product['name']]
+]) ?>
 
 <!-- Product Main Container -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" x-data="{ orderQty: 1 }">
@@ -97,8 +89,8 @@ require_once __DIR__ . '/includes/header.php';
                         class="w-full aspect-square object-cover rounded-btn"
                     >
                     <?php if ($hasPromo): ?>
-                        <div class="absolute top-6 left-6 px-3 py-1 rounded-badge bg-rose-600 text-white text-xs font-extrabold border border-rose-500/20">
-                            HEMAT <?= $discountPct ?>%
+                        <div class="absolute top-6 left-6">
+                            <?= ui_badge('HEMAT ' . $discountPct . '%', 'danger') ?>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -106,12 +98,12 @@ require_once __DIR__ . '/includes/header.php';
                 <!-- Quick trust info -->
                 <div class="grid grid-cols-2 gap-3 text-center">
                     <div class="p-3 bg-white rounded-card border border-slate-200/80">
-                        <i class="ph ph-package text-brand-600 text-xl mx-auto mb-1"></i>
+                        <?= ui_icon_box('package', 'brand', ['size' => 'md', 'class' => 'mx-auto mb-1']) ?>
                         <p class="text-[11px] font-bold text-slate-800 tracking-tight">Quality Check</p>
                         <p class="text-[10px] text-slate-500">Dicek sebelum kirim</p>
                     </div>
                     <div class="p-3 bg-white rounded-card border border-slate-200/80">
-                        <i class="ph ph-truck text-brand-600 text-xl mx-auto mb-1"></i>
+                        <?= ui_icon_box('truck', 'brand', ['size' => 'md', 'class' => 'mx-auto mb-1']) ?>
                         <p class="text-[11px] font-bold text-slate-800 tracking-tight">Pengiriman Cepat</p>
                         <p class="text-[10px] text-slate-500">Packing aman bubble wrap</p>
                     </div>
@@ -126,7 +118,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
                 <div class="flex items-center gap-2 mb-2">
                     <?= ui_badge(sanitize($product['category_name'] ?? 'Katalog'), 'brand') ?>
-                    <?= ui_badge($isOutOfStock ? 'Stok Habis' : 'Sisa Stok: ' . $product['stock'] . ' unit', $isOutOfStock ? 'danger' : 'neutral') ?>
+                    <?= ui_badge($isOutOfStock ? 'Stok Habis' : 'Sisa Stok: ' . $product['stock'] . ' unit', $isOutOfStock ? 'danger' : 'neutral', ['dot' => true]) ?>
                 </div>
 
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
@@ -151,9 +143,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <?php if ($hasPromo): ?>
-                    <span class="px-3 py-1 rounded-badge bg-rose-100 text-rose-700 text-xs font-extrabold border border-rose-200/70">
-                        Diskon <?= $discountPct ?>%
-                    </span>
+                    <?= ui_badge('Diskon ' . $discountPct . '%', 'danger') ?>
                 <?php endif; ?>
             </div>
 
@@ -202,13 +192,14 @@ require_once __DIR__ . '/includes/header.php';
                         <span>Tambah ke Keranjang</span>
                     </button>
 
-                    <a 
-                        href="<?= $waDirectUrl ?>" 
-                        target="_blank" 
-                        class="w-full py-3.5 px-5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm border border-brand-500/20 transition apple-tap flex items-center justify-center gap-2">
-                        <i class="ph ph-whatsapp-logo text-base"></i>
-                        <span>Pesan Cepat via WhatsApp</span>
-                    </a>
+                    <?= ui_button('Pesan Cepat via WhatsApp', [
+                        'variant' => 'primary',
+                        'size'    => 'lg',
+                        'href'    => $waDirectUrl,
+                        'target'  => '_blank',
+                        'icon'    => 'whatsapp-logo',
+                        'class'   => 'w-full',
+                    ]) ?>
                 </div>
             </div>
 
@@ -239,25 +230,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <?php foreach ($relatedProducts as $rel): ?>
-                    <?php 
-                        $relPromo = !empty($rel['promo_price']) && $rel['promo_price'] < $rel['price'];
-                        $relPrice = $relPromo ? $rel['promo_price'] : $rel['price'];
-                        $relImg = upload_url($rel['image']);
-                    ?>
-                    <div class="bg-white rounded-card border border-slate-200/80 p-4 hover:border-brand-300 transition">
-                        <a href="<?= base_url('product.php?id=' . $rel['id']) ?>" class="block aspect-square rounded-btn overflow-hidden mb-3">
-                            <img src="<?= $relImg ?>" alt="<?= sanitize($rel['name']) ?>" class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                        </a>
-                        <h4 class="font-bold text-xs text-slate-900 line-clamp-2 mb-2 tracking-tight">
-                            <a href="<?= base_url('product.php?id=' . $rel['id']) ?>" class="hover:text-brand-600 transition">
-                                <?= sanitize($rel['name']) ?>
-                            </a>
-                        </h4>
-                        <div class="flex items-center justify-between mt-auto">
-                            <span class="text-xs font-extrabold text-brand-600"><?= format_rupiah($relPrice) ?></span>
-                            <a href="<?= base_url('product.php?id=' . $rel['id']) ?>" class="text-[11px] font-bold text-slate-600 hover:text-slate-900 underline">Lihat</a>
-                        </div>
-                    </div>
+                    <?= ui_product_card($rel) ?>
                 <?php endforeach; ?>
             </div>
         </div>

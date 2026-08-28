@@ -112,10 +112,6 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Design System & Tokens Customizer Section -->
         <!-- ========================================== -->
         <div class="space-y-5">
-        <!-- ========================================== -->
-        <!-- Design System & Tokens Customizer Section -->
-        <!-- ========================================== -->
-        <div class="space-y-5">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div class="flex items-center gap-2">
                     <div class="w-8 h-8 rounded-btn bg-brand-50 border border-brand-200/80 text-brand-600 flex items-center justify-center">
@@ -148,7 +144,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                 class="sr-only peer"
                             >
                             <div class="p-3 rounded-card border border-slate-200/90 peer-checked:border-brand-500 peer-checked:bg-slate-50/80 peer-checked:ring-2 peer-checked:ring-brand-500/20 transition apple-tap flex items-center gap-3">
-                                <span class="w-6 h-6 rounded-btn flex-shrink-0 border border-black/10" style="background-color: <?= $c['600'] ?>;"></span>
+                                <span class="w-6 h-6 rounded-btn flex-shrink-0 border border-black/10 <?= $c['bg_class'] ?? 'bg-brand-600' ?>"></span>
                                 <div class="min-w-0">
                                     <span class="block text-xs font-bold text-slate-900 truncate"><?= $c['name'] ?></span>
                                     <span class="block text-[10px] text-slate-500 font-mono"><?= $c['600'] ?></span>
@@ -177,7 +173,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                             <div class="p-3.5 rounded-card border border-slate-200/90 peer-checked:border-brand-500 peer-checked:bg-slate-50/80 peer-checked:ring-2 peer-checked:ring-brand-500/20 transition apple-tap space-y-1.5">
                                 <div class="flex items-center justify-between">
                                     <span class="text-xs font-bold text-slate-900"><?= $rv['name'] ?></span>
-                                    <span class="w-5 h-5 bg-brand-600 inline-block border border-brand-500/20" style="border-radius: <?= $rv['btn'] ?>;"></span>
+                                    <span class="w-5 h-5 bg-brand-600 inline-block border border-brand-500/20 <?= $rv['tailwind'] ?>"></span>
                                 </div>
                                 <p class="text-[11px] text-slate-500 leading-snug"><?= $rv['description'] ?></p>
                             </div>

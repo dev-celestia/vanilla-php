@@ -142,10 +142,10 @@ require_once __DIR__ . '/includes/admin_header.php';
     <!-- Category Grid / Table (Zero Shadow, Crisp Border) -->
     <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
         <?php if (empty($categories)): ?>
-            <div class="p-16 text-center text-slate-400 text-xs">
-                <i class="ph ph-tag text-3xl mx-auto mb-2 text-slate-300"></i>
-                Belum ada kategori produk. Silakan tambahkan kategori pertama Anda.
-            </div>
+            <?= ui_empty_state('Belum Ada Kategori', 'Belum ada kategori produk. Silakan tambahkan kategori pertama Anda.', [
+                'icon'       => 'tag',
+                'actionHtml' => '<button type="button" @click="openAdd()" class="px-5 py-2 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs apple-tap">Tambah Kategori</button>'
+            ]) ?>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">

@@ -43,9 +43,7 @@ require_once __DIR__ . '/includes/header.php';
         
         <!-- Header badge -->
         <div class="text-center pb-8 border-b border-slate-100">
-            <div class="w-16 h-16 rounded-card bg-brand-50 border border-brand-200/80 text-brand-600 flex items-center justify-center mx-auto mb-4">
-                <i class="ph ph-check-circle text-4xl"></i>
-            </div>
+            <?= ui_icon_box('check-circle', 'brand', ['size' => 'lg', 'class' => 'mx-auto mb-4']) ?>
             <?= ui_badge('Pesanan Berhasil Dicatat!', 'brand', ['dot' => true, 'class' => 'mb-2']) ?>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 Terima Kasih atas Pesanan Anda

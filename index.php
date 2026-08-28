@@ -243,127 +243,20 @@ require_once __DIR__ . '/includes/header.php';
 
     <!-- Products Grid (Zero Shadows, Flat Hairline Borders, Token Radiuses) -->
     <?php if (empty($products)): ?>
-        <div class="bg-white rounded-card border border-slate-200/80 p-12 text-center my-8">
-            <div class="w-16 h-16 rounded-btn bg-slate-100 text-slate-400 border border-slate-200/80 flex items-center justify-center mx-auto mb-4">
-                <i class="ph ph-package text-3xl"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-800 tracking-tight">Tidak Ada Produk Ditemukan</h3>
-            <p class="text-xs text-slate-500 max-w-md mx-auto mt-1 mb-6">
-                Silakan coba kata kunci lain atau pilih kategori yang berbeda.
-            </p>
-            <?= ui_button('Lihat Semua Produk', [
-                'variant' => 'secondary',
-                'size'    => 'sm',
-                'href'    => base_url('index.php#katalog'),
-            ]) ?>
-        </div>
+        <?= ui_empty_state(
+            'Tidak Ada Produk Ditemukan',
+            'Silakan coba kata kunci lain atau pilih kategori yang berbeda.',
+            [
+                'icon'       => 'package',
+                'buttonText' => 'Lihat Semua Produk',
+                'buttonHref' => base_url('index.php#katalog'),
+                'buttonIcon' => 'shopping-bag'
+            ]
+        ) ?>
     <?php else: ?>
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <?php foreach ($products as $product): ?>
-                <?php 
-                    $hasPromo = !empty($product['promo_price']) && $product['promo_price'] < $product['price'];
-                    $currentPrice = $hasPromo ? $product['promo_price'] : $product['price'];
-                    $discountPct = $hasPromo ? round((($product['price'] - $product['promo_price']) / $product['price']) * 100) : 0;
-                    $isOutOfStock = $product['stock'] <= 0;
-                    $imgUrl = upload_url($product['image']);
-                ?>
-                <div class="group bg-white rounded-card border border-slate-200/80 hover:border-brand-400 transition-colors duration-150 flex flex-col overflow-hidden">
-                    
-                    <!-- Product Image & Badges -->
-                    <div class="relative aspect-square overflow-hidden bg-slate-100">
-                        <a href="<?= base_url('product.php?id=' . $product['id']) ?>" class="block w-full h-full">
-                            <img 
-                                src="<?= $imgUrl ?>" 
-                                alt="<?= sanitize($product['name']) ?>" 
-                                loading="lazy"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            >
-                        </a>
-
-                        <!-- Badges -->
-                        <div class="absolute top-3 left-3 flex flex-col gap-1.5">
-                            <?php if ($hasPromo): ?>
-                                <span class="px-2.5 py-1 rounded-badge bg-rose-600 text-white text-[11px] font-extrabold border border-rose-500/20">
-                                    -<?= $discountPct ?>%
-                                </span>
-                            <?php endif; ?>
-                            <?php if ($product['is_featured']): ?>
-                                <span class="px-2.5 py-1 rounded-badge bg-amber-500 text-white text-[10px] font-bold border border-amber-400/20 flex items-center gap-1">
-                                    ⭐ Pilihan
-                                </span>
-                            <?php endif; ?>
-                        </div>
-
-                        <?php if ($isOutOfStock): ?>
-                            <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center">
-                                <span class="px-3 py-1.5 rounded-badge bg-slate-900 border border-slate-700 text-white text-xs font-bold">
-                                    Stok Habis
-                                </span>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-
-                    <!-- Details Content -->
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <!-- Category Name -->
-                            <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
-                                <span><?= sanitize($product['category_name'] ?? 'Umum') ?></span>
-                                <span class="font-medium <?= $isOutOfStock ? 'text-rose-500' : 'text-slate-500' ?>">
-                                    Stok: <?= $product['stock'] ?>
-                                </span>
-                            </div>
-
-                            <!-- Title -->
-                            <h3 class="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-brand-600 transition leading-snug tracking-tight">
-                                <a href="<?= base_url('product.php?id=' . $product['id']) ?>">
-                                    <?= sanitize($product['name']) ?>
-                                </a>
-                            </h3>
-                        </div>
-
-                        <div class="mt-4 pt-3 border-t border-slate-100">
-                            <!-- Pricing -->
-                            <div class="mb-3">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-base font-extrabold text-brand-600 tracking-tight">
-                                        <?= format_rupiah($currentPrice) ?>
-                                    </span>
-                                    <?php if ($hasPromo): ?>
-                                        <span class="text-xs font-medium text-slate-400 line-through">
-                                            <?= format_rupiah($product['price']) ?>
-                                        </span>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!-- Buttons (Apple Tactile Primitives) -->
-                            <div class="grid grid-cols-2 gap-2">
-                                <a 
-                                    href="<?= base_url('product.php?id=' . $product['id']) ?>" 
-                                    class="py-2.5 px-3 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80 text-xs font-bold text-center transition apple-tap">
-                                    Detail
-                                </a>
-
-                                <button 
-                                    type="button" 
-                                    <?= $isOutOfStock ? 'disabled' : '' ?>
-                                    @click="$store.cart.addItem({
-                                        id: <?= $product['id'] ?>,
-                                        name: '<?= addslashes(sanitize($product['name'])) ?>',
-                                        price: <?= (float)$currentPrice ?>,
-                                        image: '<?= $imgUrl ?>',
-                                        stock: <?= (int)$product['stock'] ?>
-                                    }, 1)"
-                                    class="py-2.5 px-3 rounded-btn <?= $isOutOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300' : 'bg-brand-600 hover:bg-brand-700 text-white border border-brand-500/20' ?> text-xs font-bold text-center transition apple-tap flex items-center justify-center gap-1.5">
-                                    <i class="ph ph-shopping-cart text-sm"></i>
-                                    <span>+ Keranjang</span>
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                <?= ui_product_card($product) ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

@@ -49,9 +49,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="pt-4 flex flex-wrap gap-4">
                 <div class="flex items-center gap-3 p-3.5 bg-white rounded-card border border-slate-200/80">
-                    <div class="w-10 h-10 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/80 flex items-center justify-center font-bold">
-                        ✓
-                    </div>
+                    <?= ui_icon_box('check-circle', 'brand', ['size' => 'md']) ?>
                     <div>
                         <h4 class="text-xs font-bold text-slate-900 tracking-tight">Garansi Kualitas</h4>
                         <p class="text-[11px] text-slate-500">100% Produk Teruji</p>
@@ -59,9 +57,7 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="flex items-center gap-3 p-3.5 bg-white rounded-card border border-slate-200/80">
-                    <div class="w-10 h-10 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/80 flex items-center justify-center font-bold">
-                        ⚡
-                    </div>
+                    <?= ui_icon_box('lightning', 'brand', ['size' => 'md']) ?>
                     <div>
                         <h4 class="text-xs font-bold text-slate-900 tracking-tight">Respon Cepat</h4>
                         <p class="text-[11px] text-slate-500">Admin Siap Melayani</p>
@@ -90,9 +86,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white p-8 rounded-card border border-slate-200/80 hover:border-brand-300 transition">
-                <div class="w-12 h-12 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/70 flex items-center justify-center mb-6">
-                    <i class="ph ph-shield-check text-2xl"></i>
-                </div>
+                <?= ui_icon_box('shield-check', 'brand', ['size' => 'lg', 'class' => 'mb-6']) ?>
                 <h4 class="text-base font-bold text-slate-900 mb-2 tracking-tight">Transparan & Terpercaya</h4>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     Harga tertera jelas tanpa biaya tersembunyi. Pelanggan dapat berdiskusi langsung perihal stok dan rincian sebelum melakukan transfer.
@@ -100,9 +94,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <div class="bg-white p-8 rounded-card border border-slate-200/80 hover:border-brand-300 transition">
-                <div class="w-12 h-12 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/70 flex items-center justify-center mb-6">
-                    <i class="ph ph-chat-circle-dots text-2xl"></i>
-                </div>
+                <?= ui_icon_box('chat-circle-dots', 'brand', ['size' => 'lg', 'class' => 'mb-6']) ?>
                 <h4 class="text-base font-bold text-slate-900 mb-2 tracking-tight">Pelayanan Personal</h4>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     Setiap interaksi dilayani oleh admin manusia secara hangat, memastikan kebutuhan pesanan Anda dipahami dengan detail.
@@ -110,9 +102,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <div class="bg-white p-8 rounded-card border border-slate-200/80 hover:border-brand-300 transition">
-                <div class="w-12 h-12 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/70 flex items-center justify-center mb-6">
-                    <i class="ph ph-truck text-2xl"></i>
-                </div>
+                <?= ui_icon_box('truck', 'brand', ['size' => 'lg', 'class' => 'mb-6']) ?>
                 <h4 class="text-base font-bold text-slate-900 mb-2 tracking-tight">Ekspedisi Fleksibel</h4>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     Bekerja sama dengan berbagai jasa kirim reguler, kilat, maupun cargo untuk ongkos kirim terbaik ke lokasi Anda.

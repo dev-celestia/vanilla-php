@@ -63,9 +63,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="space-y-4 text-xs">
                     <!-- WhatsApp -->
                     <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) ?>" target="_blank" class="flex items-start gap-4 p-4 rounded-card bg-brand-50/60 border border-brand-200/80 hover:bg-brand-100/60 transition apple-tap group">
-                        <div class="w-10 h-10 rounded-btn bg-brand-600 text-white flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                            <i class="ph ph-whatsapp-logo text-xl"></i>
-                        </div>
+                        <?= ui_icon_box('whatsapp-logo', 'primary', ['size' => 'md', 'class' => 'group-hover:scale-105 transition-transform']) ?>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Chat WhatsApp Resmi</span>
                             <span class="text-sm font-extrabold text-brand-700"><?= sanitize($settings['whatsapp_number']) ?></span>
@@ -75,9 +73,7 @@ require_once __DIR__ . '/includes/header.php';
 
                     <!-- Phone -->
                     <div class="flex items-start gap-4 p-4 rounded-card bg-slate-50 border border-slate-200/80">
-                        <div class="w-10 h-10 rounded-btn bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0">
-                            <i class="ph ph-phone text-xl"></i>
-                        </div>
+                        <?= ui_icon_box('phone', 'slate', ['size' => 'md']) ?>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Telepon / Hotline</span>
                             <span class="text-sm font-bold text-slate-800"><?= sanitize($settings['store_phone']) ?></span>
@@ -86,9 +82,7 @@ require_once __DIR__ . '/includes/header.php';
 
                     <!-- Email -->
                     <div class="flex items-start gap-4 p-4 rounded-card bg-slate-50 border border-slate-200/80">
-                        <div class="w-10 h-10 rounded-btn bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0">
-                            <i class="ph ph-envelope-simple text-xl"></i>
-                        </div>
+                        <?= ui_icon_box('envelope-simple', 'slate', ['size' => 'md']) ?>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Email Resmi</span>
                             <span class="text-sm font-bold text-slate-800"><?= sanitize($settings['store_email']) ?></span>
@@ -97,9 +91,7 @@ require_once __DIR__ . '/includes/header.php';
 
                     <!-- Address -->
                     <div class="flex items-start gap-4 p-4 rounded-card bg-slate-50 border border-slate-200/80">
-                        <div class="w-10 h-10 rounded-btn bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0">
-                            <i class="ph ph-map-pin text-xl"></i>
-                        </div>
+                        <?= ui_icon_box('map-pin', 'slate', ['size' => 'md']) ?>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Alamat Toko & Gudang</span>
                             <span class="text-xs font-semibold text-slate-700 leading-relaxed block mt-0.5">

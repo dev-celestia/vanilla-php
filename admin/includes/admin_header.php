@@ -50,9 +50,6 @@ if ($db) {
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
 
-    <style>
-        [x-cloak] { display: none !important; }
-    </style>
 </head>
 <body class="bg-slate-100/90 text-slate-800 font-sans antialiased flex min-h-screen" x-data="{ sidebarOpen: false }">
 

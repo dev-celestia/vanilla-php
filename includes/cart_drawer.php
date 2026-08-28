@@ -140,18 +140,20 @@
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
-                                <a 
-                                    href="<?= base_url('cart.php') ?>" 
-                                    class="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80 font-bold text-xs transition apple-tap text-center">
-                                    <i class="ph ph-eye text-sm"></i>
-                                    <span>Lihat Rincian</span>
-                                </a>
-                                <a 
-                                    href="<?= base_url('checkout.php') ?>" 
-                                    class="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs border border-brand-500/20 transition apple-tap text-center">
-                                    <i class="ph ph-paper-plane-tilt text-sm"></i>
-                                    <span>Pesan via WA</span>
-                                </a>
+                                <?= ui_button('Lihat Rincian', [
+                                    'variant' => 'secondary',
+                                    'size'    => 'sm',
+                                    'href'    => base_url('cart.php'),
+                                    'icon'    => 'eye',
+                                    'class'   => 'w-full text-center',
+                                ]) ?>
+                                <?= ui_button('Pesan via WA', [
+                                    'variant' => 'primary',
+                                    'size'    => 'sm',
+                                    'href'    => base_url('checkout.php'),
+                                    'icon'    => 'paper-plane-tilt',
+                                    'class'   => 'w-full text-center',
+                                ]) ?>
                             </div>
 
                             <p class="text-[11px] text-slate-400 text-center">

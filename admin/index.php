@@ -88,9 +88,7 @@ require_once __DIR__ . '/includes/admin_header.php';
             <?php foreach ($lowStockProducts as $low): ?>
                 <div class="bg-white p-3 rounded-btn border border-amber-200 flex items-center justify-between gap-3 text-xs">
                     <span class="font-bold text-slate-800 truncate"><?= sanitize($low['name']) ?></span>
-                    <span class="px-2 py-0.5 rounded-badge bg-rose-100 text-rose-700 font-bold flex-shrink-0">
-                        Sisa: <?= $low['stock'] ?>
-                    </span>
+                    <?= ui_badge('Sisa: ' . $low['stock'], 'danger') ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -111,10 +109,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         </div>
 
         <?php if (empty($recentOrders)): ?>
-            <div class="p-12 text-center text-slate-400 text-xs">
-                <i class="ph ph-tray text-3xl mx-auto mb-2 text-slate-300"></i>
-                Belum ada pesanan yang tercatat.
-            </div>
+            <?= ui_empty_state('Belum Ada Pesanan', 'Belum ada transaksi pesanan yang masuk.', ['icon' => 'tray', 'class' => 'my-0 border-0']) ?>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
