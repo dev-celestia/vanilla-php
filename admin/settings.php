@@ -1,9 +1,9 @@
 <?php
 /**
- * Admin Store Settings & WhatsApp Config + Design System Tokens
+ * Admin Store Settings & WhatsApp Config + Theme Tokens
  */
 $active_menu = 'settings';
-$page_title = 'Pengaturan Toko & Design System';
+$page_title = 'Pengaturan Toko & Tampilan';
 require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../helpers/format.php';
 require_once __DIR__ . '/../helpers/auth.php';
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->execute([':key' => $key, ':value' => $value]);
                 }
 
-                set_flash('success', 'Pengaturan toko dan token Design System berhasil disimpan.');
+                set_flash('success', 'Pengaturan toko dan tema tampilan berhasil disimpan.');
                 header('Location: ' . base_url('admin/settings.php'));
                 exit;
 
@@ -103,13 +103,13 @@ require_once __DIR__ . '/includes/admin_header.php';
         <?= ui_alert(sanitize($error), 'danger', ['dismissible' => true]) ?>
     <?php endif; ?>
 
-    <!-- Main Store & WhatsApp & Design System Settings Form -->
+    <!-- Main Store & WhatsApp & Appearance Settings Form -->
     <form action="<?= base_url('admin/settings.php') ?>" method="POST" class="bg-white rounded-card border border-slate-200/80 p-6 sm:p-8 space-y-8">
         <?= csrf_field() ?>
         <input type="hidden" name="action" value="update_settings">
 
         <!-- ========================================== -->
-        <!-- Design System & Tokens Customizer Section -->
+        <!-- Theme & Appearance Customizer Section      -->
         <!-- ========================================== -->
         <div class="space-y-5">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -118,14 +118,10 @@ require_once __DIR__ . '/includes/admin_header.php';
                         <i class="ph ph-palette text-base"></i>
                     </div>
                     <div>
-                        <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Design System Tokens & Tampilan</h3>
+                        <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Tema & Tampilan Toko</h3>
                         <p class="text-xs text-slate-500">Pilih warna primer & radius global yang berlaku di seluruh toko dan panel admin.</p>
                     </div>
                 </div>
-                <a href="<?= base_url('admin/design-system.php') ?>" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-brand-600 font-bold hover:underline">
-                    <span>Lihat Showcase</span>
-                    <i class="ph ph-arrow-square-out text-xs"></i>
-                </a>
             </div>
 
             <!-- 1. Primary Color Selection -->

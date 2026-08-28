@@ -140,13 +140,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$active_nav = 'demo';
 $page_title = 'Checkout Pesanan - ' . $settings['store_name'];
 require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="bg-white border-b border-slate-200/80 py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Formulir Checkout WhatsApp</h1>
+        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Formulir Checkout WhatsApp</h1>
         <p class="text-xs text-slate-500 mt-1">Lengkapi data pengiriman untuk membuat rincian pesanan instan ke WhatsApp.</p>
     </div>
 </div>
@@ -189,7 +190,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="lg:col-span-7 bg-white rounded-card border border-slate-200/80 p-6 sm:p-8 space-y-6">
                 
                 <div class="border-b border-slate-100 pb-4">
-                    <h2 class="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                    <h2 class="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
                         <i class="ph ph-user-check text-xl text-brand-600"></i>
                         <span>Informasi Pemesan & Pengiriman</span>
                     </h2>
@@ -237,7 +238,7 @@ require_once __DIR__ . '/includes/header.php';
                         <i class="ph ph-whatsapp-logo text-xl"></i>
                     </div>
                     <div class="text-xs">
-                        <span class="font-bold text-slate-800 block">Bagaimana Alur WhatsApp Checkout Bekerja?</span>
+                        <span class="font-semibold text-slate-800 block">Bagaimana Alur WhatsApp Checkout Bekerja?</span>
                         <p class="text-slate-500 mt-0.5 leading-relaxed">Setelah klik tombol di samping, Anda akan otomatis diarahkan ke chat WhatsApp Admin resmi dengan template format rincian pesanan yang rapi.</p>
                     </div>
                 </div>
@@ -249,8 +250,8 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="bg-white rounded-card border border-slate-200/80 p-6 sm:p-7 space-y-6">
                     
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <h3 class="font-extrabold text-base text-slate-900 tracking-tight">Rincian Pesanan</h3>
-                        <a href="<?= base_url('cart.php') ?>" class="text-xs font-bold text-brand-600 hover:underline">Ubah Keranjang</a>
+                        <h3 class="font-semibold text-base text-slate-900 tracking-tight">Rincian Pesanan</h3>
+                        <a href="<?= base_url('cart.php') ?>" class="text-xs font-semibold text-brand-600 hover:underline">Ubah Keranjang</a>
                     </div>
 
                     <!-- Mini items list -->
@@ -260,11 +261,11 @@ require_once __DIR__ . '/includes/header.php';
                                 <div class="flex items-center gap-3 min-w-0">
                                     <img :src="item.image" :alt="item.name" class="w-10 h-10 rounded-btn object-cover border border-slate-200 flex-shrink-0 bg-slate-50">
                                     <div class="min-w-0">
-                                        <p class="font-bold text-slate-800 truncate" x-text="item.name"></p>
+                                        <p class="font-semibold text-slate-800 truncate" x-text="item.name"></p>
                                         <p class="text-slate-400 text-[11px]" x-text="item.qty + 'x @ ' + $store.cart.formatRupiah(item.price)"></p>
                                     </div>
                                 </div>
-                                <span class="font-extrabold text-slate-800 flex-shrink-0" x-text="$store.cart.formatRupiah(item.price * item.qty)"></span>
+                                <span class="font-semibold text-slate-800 flex-shrink-0" x-text="$store.cart.formatRupiah(item.price * item.qty)"></span>
                             </div>
                         </template>
                     </div>
@@ -273,20 +274,20 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="pt-4 border-t border-slate-100 space-y-2.5 text-xs">
                         <div class="flex justify-between text-slate-500">
                             <span>Total Item</span>
-                            <span class="font-bold text-slate-800" x-text="$store.cart.count + ' pcs'"></span>
+                            <span class="font-semibold text-slate-800" x-text="$store.cart.count + ' pcs'"></span>
                         </div>
                         <div class="flex justify-between text-slate-500">
                             <span>Subtotal Barang</span>
-                            <span class="font-bold text-slate-800" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
+                            <span class="font-semibold text-slate-800" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                         </div>
                         <div class="flex justify-between text-slate-500">
                             <span>Ongkos Kirim</span>
-                            <span class="text-brand-600 font-bold">Dihitung Admin via WA</span>
+                            <span class="text-brand-600 font-semibold">Dihitung Admin via WA</span>
                         </div>
 
                         <div class="pt-3 border-t border-slate-200/80 flex justify-between items-baseline">
-                            <span class="text-sm font-extrabold text-slate-900">Total Perkiraan</span>
-                            <span class="text-xl font-black text-brand-600 tracking-tight" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
+                            <span class="text-sm font-semibold text-slate-900">Total Perkiraan</span>
+                            <span class="text-xl font-semibold text-brand-600 tracking-tight" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                         </div>
                     </div>
 

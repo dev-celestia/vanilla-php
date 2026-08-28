@@ -80,14 +80,14 @@ require_once __DIR__ . '/includes/admin_header.php';
 <!-- Low Stock Warning Alert if any -->
 <?php if (!empty($lowStockProducts)): ?>
     <div class="mb-8 p-5 bg-amber-50 border border-amber-200/90 rounded-card">
-        <div class="flex items-center gap-2 text-amber-800 font-bold text-xs mb-3">
+        <div class="flex items-center gap-2 text-amber-800 font-semibold text-xs mb-3">
             <i class="ph ph-warning text-base text-amber-600"></i>
             <span>Peringatan: Ada <?= count($lowStockProducts) ?> produk dengan stok menipis (≤ 5 unit)!</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <?php foreach ($lowStockProducts as $low): ?>
                 <div class="bg-white p-3 rounded-btn border border-amber-200 flex items-center justify-between gap-3 text-xs">
-                    <span class="font-bold text-slate-800 truncate"><?= sanitize($low['name']) ?></span>
+                    <span class="font-semibold text-slate-800 truncate"><?= sanitize($low['name']) ?></span>
                     <?= ui_badge('Sisa: ' . $low['stock'], 'danger') ?>
                 </div>
             <?php endforeach; ?>
@@ -102,10 +102,10 @@ require_once __DIR__ . '/includes/admin_header.php';
     <div class="lg:col-span-8 bg-white rounded-card border border-slate-200/80 overflow-hidden">
         <div class="p-6 border-b border-slate-100 flex items-center justify-between">
             <div>
-                <h2 class="text-sm font-extrabold text-slate-900 tracking-tight">Pesanan WhatsApp Terbaru</h2>
+                <h2 class="text-sm font-semibold text-slate-900 tracking-tight">Pesanan WhatsApp Terbaru</h2>
                 <p class="text-xs text-slate-400 mt-0.5">Daftar transaksi yang masuk melalui formulir pemesanan</p>
             </div>
-            <a href="<?= base_url('admin/orders.php') ?>" class="text-xs font-bold text-brand-600 hover:text-brand-700">Lihat Semua →</a>
+            <a href="<?= base_url('admin/orders.php') ?>" class="text-xs font-semibold text-brand-600 hover:text-brand-700">Lihat Semua →</a>
         </div>
 
         <?php if (empty($recentOrders)): ?>
@@ -113,7 +113,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider">
+                    <thead class="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider">
                         <tr>
                             <th class="px-6 py-3.5">Kode Pesanan</th>
                             <th class="px-6 py-3.5">Pelanggan</th>
@@ -133,7 +133,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                 };
                             ?>
                             <tr class="hover:bg-slate-50/80 transition">
-                                <td class="px-6 py-4 font-mono font-bold text-slate-900">
+                                <td class="px-6 py-4 font-mono font-semibold text-slate-900">
                                     <?= sanitize($ord['order_number']) ?>
                                     <span class="block font-sans text-[10px] text-slate-400 font-normal"><?= date('d/m/Y H:i', strtotime($ord['created_at'])) ?></span>
                                 </td>
@@ -141,7 +141,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                     <?= sanitize($ord['customer_name']) ?>
                                     <span class="block text-[11px] text-slate-400"><?= sanitize($ord['customer_phone']) ?></span>
                                 </td>
-                                <td class="px-6 py-4 font-extrabold text-brand-600">
+                                <td class="px-6 py-4 font-semibold text-brand-600">
                                     <?= format_rupiah($ord['total_amount']) ?>
                                 </td>
                                 <td class="px-6 py-4">
@@ -167,9 +167,9 @@ require_once __DIR__ . '/includes/admin_header.php';
         
         <!-- Quick Action Card -->
         <div class="bg-white p-6 rounded-card border border-slate-200/80 space-y-3">
-            <h3 class="text-sm font-extrabold text-slate-900 mb-2 tracking-tight">Aksi Cepat</h3>
+            <h3 class="text-sm font-semibold text-slate-900 mb-2 tracking-tight">Aksi Cepat</h3>
             
-            <a href="<?= base_url('admin/product-form.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-brand-50 text-brand-800 border border-brand-200/80 hover:bg-brand-100 font-bold text-xs transition apple-tap">
+            <a href="<?= base_url('admin/product-form.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-brand-50 text-brand-800 border border-brand-200/80 hover:bg-brand-100 font-semibold text-xs transition apple-tap">
                 <div class="flex items-center gap-2.5">
                     <i class="ph ph-plus-circle text-base text-brand-600"></i>
                     <span>Tambah Produk Baru</span>
@@ -177,7 +177,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 <i class="ph ph-caret-right text-base text-brand-600"></i>
             </a>
 
-            <a href="<?= base_url('admin/categories.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+            <a href="<?= base_url('admin/categories.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-semibold text-xs transition apple-tap">
                 <div class="flex items-center gap-2.5">
                     <i class="ph ph-tag text-base text-slate-500"></i>
                     <span>Kelola Kategori</span>
@@ -185,7 +185,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 <i class="ph ph-caret-right text-base text-slate-400"></i>
             </a>
 
-            <a href="<?= base_url('admin/settings.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+            <a href="<?= base_url('admin/settings.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-semibold text-xs transition apple-tap">
                 <div class="flex items-center gap-2.5">
                     <i class="ph ph-palette text-base text-slate-500"></i>
                     <span>Ganti Warna & Radius Tema</span>
@@ -197,8 +197,8 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Latest Products Box -->
         <div class="bg-white p-6 rounded-card border border-slate-200/80">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Produk Terbaru</h3>
-                <a href="<?= base_url('admin/products.php') ?>" class="text-[11px] font-bold text-brand-600 hover:underline">Semua</a>
+                <h3 class="text-sm font-semibold text-slate-900 tracking-tight">Produk Terbaru</h3>
+                <a href="<?= base_url('admin/products.php') ?>" class="text-[11px] font-semibold text-brand-600 hover:underline">Semua</a>
             </div>
 
             <div class="space-y-3">
@@ -207,7 +207,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                         <div class="flex items-center gap-3 min-w-0">
                             <img src="<?= upload_url($rp['image']) ?>" alt="<?= sanitize($rp['name']) ?>" class="w-10 h-10 rounded-btn object-cover border border-slate-200 flex-shrink-0 bg-slate-50">
                             <div class="min-w-0">
-                                <h4 class="font-bold text-slate-800 truncate tracking-tight"><?= sanitize($rp['name']) ?></h4>
+                                <h4 class="font-semibold text-slate-800 truncate tracking-tight"><?= sanitize($rp['name']) ?></h4>
                                 <span class="text-[11px] text-brand-600 font-semibold"><?= format_rupiah($rp['price']) ?></span>
                             </div>
                         </div>

@@ -42,7 +42,7 @@
                                 <i class="ph ph-shopping-bag text-xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-base font-bold text-slate-900" id="slide-over-title">Keranjang Belanja</h2>
+                                <h2 class="text-base font-semibold text-slate-900" id="slide-over-title">Keranjang Belanja</h2>
                                 <p class="text-xs text-slate-500">
                                     <span x-text="$store.cart.count">0</span> item dipilih
                                 </p>
@@ -65,12 +65,12 @@
                                 <div class="w-16 h-16 rounded-full bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-4">
                                     <i class="ph ph-shopping-cart text-3xl"></i>
                                 </div>
-                                <h3 class="text-base font-bold text-slate-800 mb-1">Keranjang Masih Kosong</h3>
+                                <h3 class="text-base font-semibold text-slate-800 mb-1">Keranjang Masih Kosong</h3>
                                 <p class="text-xs text-slate-500 max-w-xs mx-auto mb-6">Yuk temukan produk-produk menarik pilihan kami dan tambahkan ke keranjang.</p>
                                 <button 
                                     type="button" 
                                     @click="$store.cart.isOpen = false"
-                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition border border-brand-500/20 apple-tap">
+                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition border border-brand-500/20 apple-tap">
                                     <span>Mulai Belanja Sekarang</span>
                                     <i class="ph ph-arrow-right text-xs"></i>
                                 </button>
@@ -89,7 +89,7 @@
 
                                 <div class="flex-1 min-w-0 flex flex-col justify-between">
                                     <div class="flex items-start justify-between gap-2">
-                                        <h4 class="text-xs font-bold text-slate-900 truncate leading-snug" x-text="item.name"></h4>
+                                        <h4 class="text-xs font-semibold text-slate-900 truncate leading-snug" x-text="item.name"></h4>
                                         <button 
                                             type="button" 
                                             @click="$store.cart.removeItem(item.id)" 
@@ -100,21 +100,21 @@
                                     </div>
 
                                     <div class="flex items-center justify-between mt-2">
-                                        <span class="text-xs font-bold text-brand-600" x-text="$store.cart.formatRupiah(item.price)"></span>
+                                        <span class="text-xs font-semibold text-brand-600" x-text="$store.cart.formatRupiah(item.price)"></span>
 
                                         <!-- Qty control -->
                                         <div class="flex items-center border border-slate-200/90 rounded-btn bg-white overflow-hidden">
                                             <button 
                                                 type="button" 
                                                 @click="$store.cart.updateQty(item.id, -1)" 
-                                                class="px-2.5 py-1 text-slate-600 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+                                                class="px-2.5 py-1 text-slate-600 hover:bg-slate-100 font-semibold text-xs transition apple-tap">
                                                 -
                                             </button>
-                                            <span class="px-2.5 py-1 text-xs font-bold text-slate-800" x-text="item.qty"></span>
+                                            <span class="px-2.5 py-1 text-xs font-semibold text-slate-800" x-text="item.qty"></span>
                                             <button 
                                                 type="button" 
                                                 @click="$store.cart.updateQty(item.id, 1)" 
-                                                class="px-2.5 py-1 text-slate-600 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+                                                class="px-2.5 py-1 text-slate-600 hover:bg-slate-100 font-semibold text-xs transition apple-tap">
                                                 +
                                             </button>
                                         </div>
@@ -133,7 +133,7 @@
                                     <span>Subtotal Produk</span>
                                     <span class="font-medium text-slate-700" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                                 </div>
-                                <div class="flex justify-between text-sm font-extrabold text-slate-900 pt-1 border-t border-slate-200/80">
+                                <div class="flex justify-between text-sm font-semibold text-slate-900 pt-1 border-t border-slate-200/80">
                                     <span>Total Estimasi</span>
                                     <span class="text-brand-600 text-base" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                                 </div>

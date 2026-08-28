@@ -21,3 +21,6 @@ require_once __DIR__ . '/stat-card.php';
 require_once __DIR__ . '/empty-state.php';
 require_once __DIR__ . '/breadcrumb.php';
 require_once __DIR__ . '/product-card.php';
+require_once __DIR__ . '/tabs.php';
+require_once __DIR__ . '/modal.php';
+

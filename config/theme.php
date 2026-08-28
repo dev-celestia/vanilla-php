@@ -204,12 +204,20 @@ function get_theme_radius_presets(): array {
     ];
 }
 
-// Get active theme configuration based on store settings
+// Get active theme configuration based on store settings or live preview
 function get_active_theme(): array {
     $settings = function_exists('get_settings') ? get_settings() : [];
     
-    $colorKey = $settings['theme_primary_color'] ?? 'emerald';
-    $radiusKey = $settings['theme_radius'] ?? 'standard';
+    // Check for runtime preview overrides (GET parameter or session)
+    if (isset($_GET['theme']) && array_key_exists($_GET['theme'], get_theme_color_palettes())) {
+        $_SESSION['preview_theme'] = $_GET['theme'];
+    }
+    if (isset($_GET['radius']) && array_key_exists($_GET['radius'], get_theme_radius_presets())) {
+        $_SESSION['preview_radius'] = $_GET['radius'];
+    }
+
+    $colorKey = $_SESSION['preview_theme'] ?? ($settings['theme_primary_color'] ?? 'emerald');
+    $radiusKey = $_SESSION['preview_radius'] ?? ($settings['theme_radius'] ?? 'standard');
 
     $palettes = get_theme_color_palettes();
     $radiusPresets = get_theme_radius_presets();

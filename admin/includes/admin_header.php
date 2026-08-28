@@ -60,11 +60,11 @@ if ($db) {
             <!-- Store Brand -->
             <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800">
                 <a href="<?= base_url('admin/index.php') ?>" class="flex items-center gap-3 apple-tap">
-                    <div class="w-10 h-10 rounded-btn bg-brand-600 border border-brand-500/30 text-white flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-btn bg-brand-600 border border-brand-500/30 text-white flex items-center justify-center font-semibold">
                         <i class="ph ph-shield-check text-xl"></i>
                     </div>
                     <div>
-                        <span class="font-extrabold text-sm text-white tracking-tight block">Panel Admin</span>
+                        <span class="font-semibold text-sm text-white tracking-tight block">Panel Admin</span>
                         <span class="text-[11px] text-slate-500 truncate block max-w-[120px]"><?= sanitize($settings['store_name']) ?></span>
                     </div>
                 </a>
@@ -77,34 +77,34 @@ if ($db) {
             <nav class="p-4 space-y-1.5 text-xs font-semibold">
                 <a 
                     href="<?= base_url('admin/index.php') ?>" 
-                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= !isset($active_menu) || $active_menu === 'dashboard' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
+                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= !isset($active_menu) || $active_menu === 'dashboard' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-squares-four text-base"></i>
                     <span>Dashboard Utama</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/products.php') ?>" 
-                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'products' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
+                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'products' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-package text-base"></i>
                     <span>Katalog Produk</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/categories.php') ?>" 
-                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'categories' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
+                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'categories' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-tag text-base"></i>
                     <span>Kategori Produk</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/orders.php') ?>" 
-                    class="flex items-center justify-between px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'orders' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
+                    class="flex items-center justify-between px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'orders' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <div class="flex items-center gap-3">
                         <i class="ph ph-shopping-cart text-base"></i>
                         <span>Pesanan WhatsApp</span>
                     </div>
                     <?php if ($pendingOrdersCount > 0): ?>
-                        <span class="px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-extrabold">
+                        <span class="px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-semibold">
                             <?= $pendingOrdersCount ?>
                         </span>
                     <?php endif; ?>
@@ -112,20 +112,9 @@ if ($db) {
 
                 <a 
                     href="<?= base_url('admin/settings.php') ?>" 
-                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'settings' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
+                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'settings' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-gear text-base"></i>
                     <span>Pengaturan Toko & WA</span>
-                </a>
-
-                <div class="pt-3 pb-1 px-3">
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Design System</span>
-                </div>
-
-                <a 
-                    href="<?= base_url('admin/design-system.php') ?>" 
-                    class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'design_system' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-brand-400 bg-brand-950/40 hover:text-white hover:bg-slate-800/80 border border-brand-800/40' ?>">
-                    <i class="ph ph-palette text-base"></i>
-                    <span>Showcase Primitif UI</span>
                 </a>
             </nav>
         </div>
@@ -142,11 +131,11 @@ if ($db) {
 
             <div class="pt-2 border-t border-slate-800/60 flex items-center justify-between px-1">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-btn bg-slate-800 border border-slate-700/80 flex items-center justify-center font-bold text-white text-xs">
+                    <div class="w-8 h-8 rounded-btn bg-slate-800 border border-slate-700/80 flex items-center justify-center font-semibold text-white text-xs">
                         <?= strtoupper(substr($admin['username'] ?? 'A', 0, 1)) ?>
                     </div>
                     <div class="min-w-0">
-                        <p class="text-xs font-bold text-white truncate max-w-[90px]"><?= sanitize($admin['username'] ?? 'Admin') ?></p>
+                        <p class="text-xs font-semibold text-white truncate max-w-[90px]"><?= sanitize($admin['username'] ?? 'Admin') ?></p>
                         <span class="text-[10px] text-brand-400">Online</span>
                     </div>
                 </div>

@@ -57,7 +57,7 @@ if (!function_exists('ui_button')) {
                 'sm' => 'text-xs px-3.5 py-2 gap-2 tracking-tight',
                 'md' => 'text-xs sm:text-sm px-4 sm:px-5 py-2.5 sm:py-2.5 gap-2 tracking-tight',
                 'lg' => 'text-sm sm:text-base px-6 py-3 sm:py-3.5 gap-2.5 tracking-tight',
-                'xl' => 'text-base sm:text-lg px-7 py-4 gap-3 tracking-tight font-bold',
+                'xl' => 'text-base sm:text-lg px-7 py-4 gap-3 tracking-tight font-semibold',
             ];
         }
         $sizeCls = $sizeStyles[$size] ?? $sizeStyles['md'];

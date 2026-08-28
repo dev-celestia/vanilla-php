@@ -407,5 +407,5 @@ document.getElementById('btn-export-csv')?.addEventListener('click', () => {
 
 ---
 
-✨ *Untuk melihat demo visual interaktif seluruh komponen dan token aktif, buka halaman **Showcase Primitif UI** di `/admin/design-system.php`.*
+✨ *Untuk melihat demo visual interaktif seluruh komponen dan token aktif, buka halaman **Showcase Primitif UI** di `/design-system.php`.*
 

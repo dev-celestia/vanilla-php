@@ -53,7 +53,7 @@ if (!function_exists('ui_badge')) {
 
         $iconHtml = $icon ? ui_icon($icon, 'text-xs flex-shrink-0') : '';
 
-        return "<span class=\"inline-flex items-center font-bold tracking-tight border select-none $radiusCls $vStyle $sizeCls $extraCls\">$dotHtml$iconHtml<span>" . sanitize($label) . "</span></span>";
+        return "<span class=\"inline-flex items-center font-semibold tracking-tight border select-none $radiusCls $vStyle $sizeCls $extraCls\">$dotHtml$iconHtml<span>" . sanitize($label) . "</span></span>";
     }
 }
 

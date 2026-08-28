@@ -2,7 +2,7 @@
 /**
  * Shopping Cart Page
  */
-$active_nav = 'cart';
+$active_nav = 'demo';
 $page_title = 'Keranjang Belanja - ' . get_settings()['store_name'];
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
@@ -11,7 +11,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <div class="bg-white border-b border-slate-200/80 py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Keranjang Belanja Anda</h1>
+        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Keranjang Belanja Anda</h1>
         <p class="text-xs text-slate-500 mt-1">Periksa kembali daftar produk pesanan sebelum melanjutkan ke WhatsApp Checkout.</p>
     </div>
 </div>
@@ -40,11 +40,11 @@ require_once __DIR__ . '/includes/header.php';
             
             <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
                 <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                    <span class="text-xs font-bold text-slate-700 tracking-tight">Daftar Produk (<span x-text="$store.cart.count"></span> item)</span>
+                    <span class="text-xs font-semibold text-slate-700 tracking-tight">Daftar Produk (<span x-text="$store.cart.count"></span> item)</span>
                     <button 
                         type="button" 
                         @click="if(confirm('Yakin ingin mengosongkan keranjang belanja?')) $store.cart.clearCart()"
-                        class="text-xs font-bold text-rose-500 hover:text-rose-700 flex items-center gap-1 transition apple-tap">
+                        class="text-xs font-semibold text-rose-500 hover:text-rose-700 flex items-center gap-1 transition apple-tap">
                         <i class="ph ph-trash text-sm"></i>
                         <span>Kosongkan Keranjang</span>
                     </button>
@@ -61,8 +61,8 @@ require_once __DIR__ . '/includes/header.php';
                                     class="w-16 h-16 sm:w-20 sm:h-20 rounded-btn object-cover border border-slate-200 bg-white flex-shrink-0"
                                 >
                                 <div class="min-w-0">
-                                    <h3 class="font-bold text-sm text-slate-900 truncate tracking-tight" x-text="item.name"></h3>
-                                    <p class="text-xs font-bold text-brand-600 mt-1" x-text="$store.cart.formatRupiah(item.price)"></p>
+                                    <h3 class="font-semibold text-sm text-slate-900 truncate tracking-tight" x-text="item.name"></h3>
+                                    <p class="text-xs font-semibold text-brand-600 mt-1" x-text="$store.cart.formatRupiah(item.price)"></p>
                                     <span class="text-[11px] text-slate-400">Maksimal stok: <span x-text="item.stock"></span></span>
                                 </div>
                             </div>
@@ -73,14 +73,14 @@ require_once __DIR__ . '/includes/header.php';
                                     <button 
                                         type="button" 
                                         @click="$store.cart.updateQty(item.id, -1)" 
-                                        class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+                                        class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 font-semibold text-xs transition apple-tap">
                                         -
                                     </button>
-                                    <span class="px-4 py-1.5 text-xs font-bold text-slate-800" x-text="item.qty"></span>
+                                    <span class="px-4 py-1.5 text-xs font-semibold text-slate-800" x-text="item.qty"></span>
                                     <button 
                                         type="button" 
                                         @click="$store.cart.updateQty(item.id, 1)" 
-                                        class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 font-bold text-xs transition apple-tap">
+                                        class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 font-semibold text-xs transition apple-tap">
                                         +
                                     </button>
                                 </div>
@@ -88,7 +88,7 @@ require_once __DIR__ . '/includes/header.php';
                                 <!-- Subtotal per item -->
                                 <div class="text-right min-w-24">
                                     <span class="text-xs text-slate-400 block sm:hidden">Total:</span>
-                                    <span class="text-sm font-extrabold text-slate-900 tracking-tight" x-text="$store.cart.formatRupiah(item.price * item.qty)"></span>
+                                    <span class="text-sm font-semibold text-slate-900 tracking-tight" x-text="$store.cart.formatRupiah(item.price * item.qty)"></span>
                                 </div>
 
                                 <!-- Delete button -->
@@ -108,7 +108,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- Back to shop link -->
             <div class="pt-2">
-                <a href="<?= base_url('demo.php#katalog') ?>" class="inline-flex items-center gap-2 text-xs font-bold text-brand-600 hover:text-brand-700">
+                <a href="<?= base_url('demo.php#katalog') ?>" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-600 hover:text-brand-700">
                     <i class="ph ph-arrow-left text-xs"></i>
                     <span>Tambah Produk Lainnya dari Katalog Demo</span>
                 </a>
@@ -119,16 +119,16 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Right: Summary Card -->
         <div class="lg:col-span-4">
             <div class="bg-white rounded-card border border-slate-200/80 p-6 space-y-6 sticky top-28">
-                <h3 class="font-extrabold text-base text-slate-900 border-b border-slate-100 pb-3 tracking-tight">Ringkasan Belanja</h3>
+                <h3 class="font-semibold text-base text-slate-900 border-b border-slate-100 pb-3 tracking-tight">Ringkasan Belanja</h3>
 
                 <div class="space-y-3 text-xs">
                     <div class="flex justify-between text-slate-500">
                         <span>Total Jumlah Item</span>
-                        <span class="font-bold text-slate-800" x-text="$store.cart.count + ' Barang'"></span>
+                        <span class="font-semibold text-slate-800" x-text="$store.cart.count + ' Barang'"></span>
                     </div>
                     <div class="flex justify-between text-slate-500">
                         <span>Subtotal Produk</span>
-                        <span class="font-bold text-slate-800" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
+                        <span class="font-semibold text-slate-800" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                     </div>
                     <div class="flex justify-between text-slate-500">
                         <span>Ongkos Kirim</span>
@@ -136,8 +136,8 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
 
                     <div class="pt-3 border-t border-slate-100 flex justify-between items-baseline">
-                        <span class="text-sm font-extrabold text-slate-900">Total Pembayaran</span>
-                        <span class="text-xl font-black text-brand-600 tracking-tight" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
+                        <span class="text-sm font-semibold text-slate-900">Total Pembayaran</span>
+                        <span class="text-xl font-semibold text-brand-600 tracking-tight" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                     </div>
                 </div>
 

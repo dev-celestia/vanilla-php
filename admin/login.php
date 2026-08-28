@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="w-14 h-14 rounded-card bg-brand-600 border border-brand-500/30 flex items-center justify-center text-white mx-auto mb-4">
                 <i class="ph ph-shield-check text-3xl"></i>
             </div>
-            <h1 class="text-2xl font-extrabold text-white tracking-tight">Admin Dashboard</h1>
+            <h1 class="text-2xl font-semibold text-white tracking-tight">Admin Dashboard</h1>
             <p class="text-xs text-slate-400 mt-1"><?= sanitize($settings['store_name']) ?></p>
         </div>
 
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?= csrf_field() ?>
 
                 <div>
-                    <label for="username" class="block text-xs font-bold text-slate-300 mb-1.5 tracking-tight">Username</label>
+                    <label for="username" class="block text-xs font-semibold text-slate-300 mb-1.5 tracking-tight">Username</label>
                     <div class="relative">
                         <input 
                             type="text" 
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div>
-                    <label for="password" class="block text-xs font-bold text-slate-300 mb-1.5 tracking-tight">Kata Sandi (Password)</label>
+                    <label for="password" class="block text-xs font-semibold text-slate-300 mb-1.5 tracking-tight">Kata Sandi (Password)</label>
                     <div class="relative">
                         <input 
                             type="password" 
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <button 
                     type="submit" 
-                    class="w-full py-3.5 px-4 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm border border-brand-500/20 transition apple-tap flex items-center justify-center gap-2">
+                    class="w-full py-3.5 px-4 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm border border-brand-500/20 transition apple-tap flex items-center justify-center gap-2">
                     <i class="ph ph-sign-in text-base"></i>
                     <span>Masuk ke Dashboard</span>
                 </button>

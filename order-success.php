@@ -32,6 +32,7 @@ if ($db && !empty($orderNumber)) {
 // Fallback to session data if DB was not reachable
 $displayOrder = $dbOrder ?: $orderData;
 $waUrl = $dbOrder['whatsapp_url'] ?? ($orderData['wa_url'] ?? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $settings['whatsapp_number']));
+$active_nav = 'demo';
 $page_title = 'Pesanan Berhasil - ' . $settings['store_name'];
 
 require_once __DIR__ . '/includes/header.php';
@@ -45,7 +46,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="text-center pb-8 border-b border-slate-100">
             <?= ui_icon_box('check-circle', 'brand', ['size' => 'lg', 'class' => 'mx-auto mb-4']) ?>
             <?= ui_badge('Pesanan Berhasil Dicatat!', 'brand', ['dot' => true, 'class' => 'mb-2']) ?>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
                 Terima Kasih atas Pesanan Anda
             </h1>
             <p class="text-xs sm:text-sm text-slate-500 mt-2 max-w-md mx-auto leading-relaxed">
@@ -57,13 +58,13 @@ require_once __DIR__ . '/includes/header.php';
         <div class="my-6 p-5 rounded-card bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
                 <span class="text-xs text-slate-400 font-medium block">Nomor Pesanan / Invoice:</span>
-                <span class="text-base sm:text-lg font-mono font-extrabold text-slate-900 tracking-wider">
+                <span class="text-base sm:text-lg font-mono font-semibold text-slate-900 tracking-wider">
                     <?= sanitize($displayOrder['order_number'] ?? $orderNumber) ?>
                 </span>
             </div>
             <div class="text-right">
                 <span class="text-xs text-slate-400 font-medium block">Total Belanja:</span>
-                <span class="text-base sm:text-lg font-black text-brand-600 tracking-tight">
+                <span class="text-base sm:text-lg font-semibold text-brand-600 tracking-tight">
                     <?= format_rupiah($displayOrder['total_amount'] ?? ($displayOrder['total'] ?? 0)) ?>
                 </span>
             </div>
@@ -71,19 +72,19 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Customer & Item Recap -->
         <div class="space-y-4 text-xs text-slate-600 border-b border-slate-100 pb-6">
-            <h3 class="font-extrabold text-slate-900 uppercase text-[11px] tracking-wider">Data Pengiriman:</h3>
+            <h3 class="font-semibold text-slate-900 uppercase text-[11px] tracking-wider">Data Pengiriman:</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white p-4 rounded-card border border-slate-200/80">
                 <div>
                     <span class="text-slate-400 block">Nama Penerima:</span>
-                    <span class="font-bold text-slate-800"><?= sanitize($displayOrder['customer_name'] ?? ($displayOrder['name'] ?? '-')) ?></span>
+                    <span class="font-semibold text-slate-800"><?= sanitize($displayOrder['customer_name'] ?? ($displayOrder['name'] ?? '-')) ?></span>
                 </div>
                 <div>
                     <span class="text-slate-400 block">No. WhatsApp:</span>
-                    <span class="font-bold text-slate-800"><?= sanitize($displayOrder['customer_phone'] ?? ($displayOrder['phone'] ?? '-')) ?></span>
+                    <span class="font-semibold text-slate-800"><?= sanitize($displayOrder['customer_phone'] ?? ($displayOrder['phone'] ?? '-')) ?></span>
                 </div>
                 <div class="sm:col-span-2">
                     <span class="text-slate-400 block">Alamat Tujuan:</span>
-                    <span class="font-bold text-slate-800"><?= sanitize($displayOrder['customer_address'] ?? ($displayOrder['address'] ?? '-')) ?></span>
+                    <span class="font-semibold text-slate-800"><?= sanitize($displayOrder['customer_address'] ?? ($displayOrder['address'] ?? '-')) ?></span>
                 </div>
             </div>
         </div>
@@ -100,12 +101,12 @@ require_once __DIR__ . '/includes/header.php';
             ]) ?>
 
             <div class="flex items-center justify-center gap-4 pt-2">
-                <a href="<?= base_url('demo.php') ?>" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700">
+                <a href="<?= base_url('demo.php') ?>" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700">
                     <i class="ph ph-shopping-bag text-xs"></i>
                     <span>Katalog Demo</span>
                 </a>
                 <span class="text-slate-300">•</span>
-                <a href="<?= base_url() ?>" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900">
+                <a href="<?= base_url() ?>" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900">
                     <i class="ph ph-house text-xs"></i>
                     <span>Halaman Beranda</span>
                 </a>

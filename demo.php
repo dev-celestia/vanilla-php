@@ -1,9 +1,12 @@
 <?php
 /**
- * Interactive E-Commerce & WhatsApp Checkout Demo Page
+ * Standalone E-Commerce Showcase Demo Application
+ *
+ * Distinct implementation showcasing real-world Native PHP UI component primitives,
+ * dynamic Alpine.js reactive cart, and instant WhatsApp order generation.
  */
 $active_nav = 'demo';
-$page_title = 'Demo Katalog & WhatsApp Checkout';
+$page_title = 'Showcase Demo Store - Native PHP UI';
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
 
@@ -62,254 +65,184 @@ if ($db) {
         $totalProducts = count($products);
 
     } catch (PDOException $e) {
-        error_log('Query error: ' . $e->getMessage());
+        error_log('Error loading demo products: ' . $e->getMessage());
     }
 }
 
+$settings = get_settings();
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Demo Hero Banner Section (Apple Translucent Materials, Crisp Flat Edges, Zero Shadows) -->
-<section class="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden py-16 lg:py-20 border-b border-slate-800">
-    <!-- Subtle backdrop accent blur -->
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-400/5 rounded-full blur-3xl pointer-events-none"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-badge bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-bold tracking-tight">
-                    <span>🛍️</span>
-                    <span>Demo Modul E-Commerce & WhatsApp Checkout</span>
-                </div>
-                
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight sm:leading-tight">
-                    Katalog Interaktif & WhatsApp Checkout
-                </h1>
-                
-                <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Uji coba langsung pengalaman belanja online ringan: tambahkan produk ke keranjang reaktif (Alpine.js), lalu selesaikan pemesanan otomatis yang langsung terhubung ke WhatsApp Admin.
-                </p>
-
-                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
-                    <?= ui_button('Eksplorasi Katalog Produk', [
-                        'variant' => 'primary',
-                        'size'    => 'lg',
-                        'href'    => '#katalog',
-                        'icon'    => 'shopping-bag',
-                    ]) ?>
-                    
-                    <?= ui_button('Uji Keranjang Belanja', [
-                        'variant' => 'secondary',
-                        'size'    => 'lg',
-                        'href'    => 'javascript:void(0)',
-                        'icon'    => 'shopping-cart',
-                        'class'   => 'bg-slate-800 hover:bg-slate-700 text-white border-slate-700',
-                        'attributes' => [
-                            '@click' => '$store.cart.isOpen = true'
-                        ]
-                    ]) ?>
-                </div>
-
-                <!-- Features list -->
-                <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-center lg:text-left text-xs text-slate-300">
-                    <div>
-                        <p class="font-extrabold text-white text-base sm:text-lg tracking-tight">Reaktif</p>
-                        <p class="text-[11px] text-slate-400">Keranjang Tanpa Reload</p>
-                    </div>
-                    <div>
-                        <p class="font-extrabold text-white text-base sm:text-lg tracking-tight">Instan</p>
-                        <p class="text-[11px] text-slate-400">Template Pesan WhatsApp</p>
-                    </div>
-                    <div>
-                        <p class="font-extrabold text-white text-base sm:text-lg tracking-tight">Tercatat</p>
-                        <p class="text-[11px] text-slate-400">Tersimpan ke Database</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hero Feature Image / Card -->
-            <div class="lg:col-span-5 hidden lg:block">
-                <div class="relative mx-auto max-w-md">
-                    <div class="relative bg-slate-900/90 backdrop-blur-xl border border-slate-700/90 rounded-card p-6">
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                                <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                                <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                            </div>
-                            <span class="text-xs font-mono text-slate-400">Alur Checkout WhatsApp</span>
-                        </div>
-                        <div class="mt-4 space-y-3">
-                            <div class="flex gap-3 items-center bg-slate-800/70 p-3 rounded-btn border border-slate-700/60">
-                                <div class="w-10 h-10 rounded-btn bg-brand-500/20 text-brand-300 flex items-center justify-center font-bold">
-                                    🛒
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-xs font-bold text-white truncate">1. Pilih Produk & Keranjang</p>
-                                    <p class="text-[11px] text-slate-400">Otomatis kalkulasi total belanja</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-3 items-center bg-slate-800/70 p-3 rounded-btn border border-slate-700/60">
-                                <div class="w-10 h-10 rounded-btn bg-slate-700/40 text-slate-300 flex items-center justify-center font-bold">
-                                    📝
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-xs font-bold text-white truncate">2. Isi Data & Alamat</p>
-                                    <p class="text-[11px] text-slate-400">Nama, WhatsApp, alamat pengiriman</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-3 items-center bg-brand-950/60 p-3 rounded-btn border border-brand-700/40">
-                                <div class="w-10 h-10 rounded-btn bg-brand-600 text-white flex items-center justify-center font-bold">
-                                    💬
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-xs font-bold text-brand-200 truncate">3. Kirim Format Pesan ke WA</p>
-                                    <p class="text-[11px] text-brand-300/80">Admin langsung merespon & memproses</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+<!-- Distinct Showcase App Header Banner -->
+<div class="bg-gradient-to-r from-brand-900 via-slate-900 to-slate-950 text-white border-b border-slate-800 py-3 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-badge bg-brand-500 text-white font-semibold text-[10px]">LIVE DEMO</span>
+            <span class="text-slate-300 font-medium">Standalone E-Commerce Showcase App — Powered by Native PHP UI Primitives</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="<?= base_url('design-system.php') ?>" class="text-brand-300 hover:text-white transition flex items-center gap-1 font-semibold">
+                <i class="ph ph-palette"></i>
+                <span>Explore Design System</span>
+            </a>
+            <span class="text-slate-600">•</span>
+            <a href="<?= base_url() ?>" class="text-slate-400 hover:text-white transition flex items-center gap-1">
+                <i class="ph ph-arrow-left"></i>
+                <span>Return to Overview</span>
+            </a>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Main Catalog Container -->
-<section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    
-    <!-- Section Header & Filter Controls -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-200/80">
+<!-- Demo Main Container -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Storefront Showcase Header & Quick Stats -->
+    <div class="rounded-card bg-white border border-slate-200/80 p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div>
-            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Etalase Demo</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-                Katalog Produk Pilihan
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1">
-                Menampilkan <strong class="text-slate-800"><?= $totalProducts ?></strong> produk siap pesan via WhatsApp
+            <div class="flex items-center gap-2 mb-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Live Catalog Experience</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+                Apple Store Showcase & Cart
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
+                Browse demo products, test instant filtering, add items to the reactive Alpine.js cart drawer, and simulate direct WhatsApp order processing.
             </p>
         </div>
 
-        <!-- Filter & Sorting Form -->
-        <form method="GET" action="<?= base_url('demo.php') ?>#katalog" class="flex flex-wrap items-center gap-3">
-            <?php if ($categoryId > 0): ?>
-                <input type="hidden" name="category" value="<?= $categoryId ?>">
-            <?php endif; ?>
-            
-            <?php if (!empty($search)): ?>
-                <input type="hidden" name="q" value="<?= sanitize($search) ?>">
-            <?php endif; ?>
+        <div class="flex flex-wrap items-center gap-3">
+            <button 
+                type="button" 
+                @click="$store.cart.isOpen = true" 
+                class="px-5 py-3 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold transition-all apple-tap flex items-center gap-2.5">
+                <i class="ph ph-shopping-bag text-base"></i>
+                <span>Open Cart (<span x-text="$store.cart.count">0</span> items)</span>
+            </button>
 
-            <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-btn border border-slate-200/80">
-                <i class="ph ph-arrows-down-up text-slate-400 text-sm"></i>
-                <label for="sort" class="text-xs font-medium text-slate-500">Urutkan:</label>
-                <select name="sort" id="sort" onchange="this.form.submit()" class="text-xs font-semibold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
-                    <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>Terbaru / Rekomendasi</option>
-                    <option value="price_low" <?= $sort === 'price_low' ? 'selected' : '' ?>>Harga: Terendah</option>
-                    <option value="price_high" <?= $sort === 'price_high' ? 'selected' : '' ?>>Harga: Tertinggi</option>
-                    <option value="name_asc" <?= $sort === 'name_asc' ? 'selected' : '' ?>>Nama: A - Z</option>
-                </select>
-            </div>
-        </form>
+            <?= ui_button('Token Switcher', [
+                'variant' => 'secondary',
+                'size'    => 'md',
+                'href'    => base_url('design-system.php'),
+                'icon'    => 'palette',
+            ]) ?>
+        </div>
     </div>
 
-    <!-- Category Tabs -->
-    <div class="mt-6 flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar">
-        <a 
-            href="<?= base_url('demo.php' . (!empty($search) ? '?q=' . urlencode($search) : '')) ?>#katalog" 
-            class="flex-shrink-0 px-4 py-2 rounded-btn text-xs font-bold transition apple-tap <?= $categoryId === 0 ? 'bg-slate-900 text-white border border-slate-900' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80' ?>">
-            Semua Kategori (<?= count($products) ?>)
-        </a>
-        <?php foreach ($categories as $cat): ?>
-            <a 
-                href="<?= base_url('demo.php?category=' . $cat['id'] . (!empty($search) ? '&q=' . urlencode($search) : '')) ?>#katalog" 
-                class="flex-shrink-0 px-4 py-2 rounded-btn text-xs font-bold transition apple-tap <?= $categoryId == $cat['id'] ? 'bg-brand-600 text-white border border-brand-500/20' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80' ?>">
-                <?= sanitize($cat['name']) ?>
+    <!-- Filter Toolbar (Apple Segmented Bar & Search) -->
+    <div class="space-y-4">
+        
+        <!-- Category Filter Pills Bar -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <a href="<?= base_url('demo.php?' . http_build_query(array_merge($_GET, ['category' => 0]))) ?>" 
+               class="px-4 py-2 rounded-btn text-xs font-semibold whitespace-nowrap transition-all apple-tap <?= ($categoryId === 0) ? 'bg-brand-600 text-white border border-brand-500/20' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80' ?>">
+                All Categories (<?= $totalProducts ?>)
             </a>
-        <?php endforeach; ?>
+
+            <?php foreach ($categories as $cat): ?>
+                <a href="<?= base_url('demo.php?' . http_build_query(array_merge($_GET, ['category' => $cat['id']]))) ?>" 
+                   class="px-4 py-2 rounded-btn text-xs font-semibold whitespace-nowrap transition-all apple-tap <?= ($categoryId === (int)$cat['id']) ? 'bg-brand-600 text-white border border-brand-500/20' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80' ?>">
+                    <?= sanitize($cat['name']) ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Search & Sort Row -->
+        <div class="bg-white rounded-card border border-slate-200/80 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <!-- Search Query Form -->
+            <form action="<?= base_url('demo.php') ?>" method="GET" class="w-full sm:w-80 relative">
+                <?php if ($categoryId > 0): ?>
+                    <input type="hidden" name="category" value="<?= $categoryId ?>">
+                <?php endif; ?>
+                <input 
+                    type="text" 
+                    name="q" 
+                    value="<?= sanitize($search) ?>" 
+                    placeholder="Search demo products..." 
+                    class="w-full pl-10 pr-10 py-2 text-xs rounded-input bg-slate-50 border border-slate-200/80 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all">
+                <i class="ph ph-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-sm pointer-events-none"></i>
+                
+                <?php if (!empty($search)): ?>
+                    <a href="<?= base_url('demo.php?' . http_build_query(['category' => $categoryId])) ?>" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1">
+                        <i class="ph ph-x text-xs"></i>
+                    </a>
+                <?php endif; ?>
+            </form>
+
+            <!-- Sort Dropdown Form -->
+            <form action="<?= base_url('demo.php') ?>" method="GET" class="w-full sm:w-auto flex items-center gap-2">
+                <?php if ($categoryId > 0): ?>
+                    <input type="hidden" name="category" value="<?= $categoryId ?>">
+                <?php endif; ?>
+                <?php if (!empty($search)): ?>
+                    <input type="hidden" name="q" value="<?= sanitize($search) ?>">
+                <?php endif; ?>
+
+                <label for="sort-select" class="text-xs font-semibold text-slate-500 whitespace-nowrap hidden sm:inline">Sort by:</label>
+                <select 
+                    id="sort-select"
+                    name="sort" 
+                    onchange="this.form.submit()" 
+                    class="w-full sm:w-auto px-3.5 py-2 text-xs rounded-input bg-slate-50 border border-slate-200/80 text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500/20 cursor-pointer">
+                    <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>✨ Featured & Newest</option>
+                    <option value="price_low" <?= $sort === 'price_low' ? 'selected' : '' ?>>💲 Price: Low to High</option>
+                    <option value="price_high" <?= $sort === 'price_high' ? 'selected' : '' ?>>💎 Price: High to Low</option>
+                    <option value="name_asc" <?= $sort === 'name_asc' ? 'selected' : '' ?>>🔤 Alphabetical (A-Z)</option>
+                </select>
+            </form>
+
+        </div>
     </div>
 
-    <!-- Active Search Filter Badge -->
-    <?php if (!empty($search)): ?>
-        <div class="mt-4 flex items-center justify-between p-3 rounded-card bg-brand-50 border border-brand-200/80 text-xs text-brand-800">
-            <div class="flex items-center gap-2">
-                <i class="ph ph-magnifying-glass text-brand-600 text-sm"></i>
-                <span>Hasil pencarian untuk: <strong>"<?= sanitize($search) ?>"</strong></span>
-            </div>
-            <a href="<?= base_url('demo.php') ?>#katalog" class="text-brand-700 hover:text-brand-900 font-bold underline">Reset Pencarian</a>
+    <!-- Active Filter Chips -->
+    <?php if ($categoryId > 0 || !empty($search)): ?>
+        <div class="flex items-center gap-2 flex-wrap text-xs">
+            <span class="text-slate-400 font-medium">Active filters:</span>
+            <?php if (!empty($search)): ?>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-200 text-slate-800 font-semibold">
+                    <span>Query: "<?= sanitize($search) ?>"</span>
+                    <a href="<?= base_url('demo.php?' . http_build_query(['category' => $categoryId, 'sort' => $sort])) ?>" class="hover:text-rose-600"><i class="ph ph-x"></i></a>
+                </span>
+            <?php endif; ?>
+
+            <?php if ($categoryId > 0): 
+                $activeCatName = '';
+                foreach ($categories as $c) {
+                    if ((int)$c['id'] === $categoryId) {
+                        $activeCatName = $c['name'];
+                        break;
+                    }
+                }
+            ?>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200 font-semibold">
+                    <span>Category: <?= sanitize($activeCatName) ?></span>
+                    <a href="<?= base_url('demo.php?' . http_build_query(['q' => $search, 'sort' => $sort])) ?>" class="hover:text-rose-600"><i class="ph ph-x"></i></a>
+                </span>
+            <?php endif; ?>
+
+            <a href="<?= base_url('demo.php') ?>" class="text-rose-600 hover:underline font-semibold ml-1">Reset All</a>
         </div>
     <?php endif; ?>
 
-    <!-- Products Grid (Zero Shadows, Flat Hairline Borders, Token Radiuses) -->
-    <?php if (empty($products)): ?>
-        <?= ui_empty_state(
-            'Tidak Ada Produk Ditemukan',
-            'Silakan coba kata kunci lain atau pilih kategori yang berbeda.',
-            [
-                'icon'       => 'package',
-                'buttonText' => 'Lihat Semua Produk Demo',
-                'buttonHref' => base_url('demo.php#katalog'),
-                'buttonIcon' => 'shopping-bag'
-            ]
-        ) ?>
-    <?php else: ?>
-        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- Product Grid -->
+    <?php if (!empty($products)): ?>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ($products as $product): ?>
                 <?= ui_product_card($product) ?>
             <?php endforeach; ?>
         </div>
+    <?php else: ?>
+        <div class="py-12">
+            <?= ui_empty_state('No matching products found', 'Try adjusting your search query or selecting a different category.', [
+                'icon'       => 'magnifying-glass',
+                'buttonText' => 'View All Products',
+                'buttonHref' => base_url('demo.php'),
+            ]) ?>
+        </div>
     <?php endif; ?>
 
-</section>
-
-<!-- Trust & Feature Section -->
-<section class="bg-white border-y border-slate-200/80 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-card bg-brand-50 border border-brand-200/70 text-brand-600 flex items-center justify-center flex-shrink-0">
-                    <i class="ph ph-shield-check text-2xl"></i>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold text-slate-900 tracking-tight">Produk 100% Teruji</h4>
-                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Semua produk demo dikelola secara real-time dari panel admin.</p>
-                </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-card bg-brand-50 border border-brand-200/70 text-brand-600 flex items-center justify-center flex-shrink-0">
-                    <i class="ph ph-chat-teardrop-text text-2xl"></i>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold text-slate-900 tracking-tight">Pemesanan WhatsApp</h4>
-                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Format pesan otomatis dengan ringkasan pesanan & kode transaksi.</p>
-                </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-card bg-slate-100 border border-slate-200/80 text-slate-700 flex items-center justify-center flex-shrink-0">
-                    <i class="ph ph-lightning text-2xl"></i>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold text-slate-900 tracking-tight">Keranjang Cepat</h4>
-                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Penyimpanan client-side Alpine.js tanpa jeda reload halaman.</p>
-                </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-card bg-amber-50 border border-amber-200/70 text-amber-600 flex items-center justify-center flex-shrink-0">
-                    <i class="ph ph-database text-2xl"></i>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold text-slate-900 tracking-tight">Tersimpan ke Database</h4>
-                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Admin dapat mengelola data pesanan masuk melalui dashboard admin.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+</main>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

@@ -5,6 +5,9 @@
 require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../helpers/format.php';
 $settings = get_settings();
+
+// Check if currently on the demo showcase or its checkout/product pages
+$is_demo_page = (isset($active_nav) && $active_nav === 'demo') || in_array(basename($_SERVER['PHP_SELF'] ?? ''), ['demo.php', 'product.php', 'cart.php', 'checkout.php', 'order-success.php']);
 ?>
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
@@ -27,154 +30,176 @@ $settings = get_settings();
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen" x-data="{ mobileMenuOpen: false }">
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-slate-900 text-white text-xs py-2 px-4 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+    <!-- Top Slim Announcement Bar (Modern compact typography) -->
+    <div class="bg-slate-950 text-slate-400 text-[11px] py-1.5 px-4 border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-                <span class="inline-block w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
-                <span><?= sanitize($settings['hero_badge'] ?? 'Selamat Datang di Toko Kami!') ?></span>
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+                <span class="font-normal text-slate-300">Native PHP UI Component Library & Starter Stack</span>
             </div>
-            <div class="flex items-center gap-4 text-slate-300">
-                <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) ?>" target="_blank" class="hover:text-brand-300 transition flex items-center gap-1">
-                    <i class="ph ph-phone-call text-xs"></i>
-                    <span>CS WhatsApp: <?= sanitize($settings['whatsapp_number']) ?></span>
+            <div class="flex items-center gap-3 text-slate-400">
+                <a href="<?= base_url('design-system.php') ?>" class="hover:text-brand-300 transition-colors flex items-center gap-1">
+                    <i class="ph ph-palette text-[11px] text-brand-400"></i>
+                    <span>Live Token Explorer</span>
                 </a>
-                <span class="hidden sm:inline text-slate-600">•</span>
-                <a href="<?= base_url('admin/login.php') ?>" class="hover:text-white transition flex items-center gap-1 text-slate-400">
-                    <i class="ph ph-shield-check text-xs"></i>
-                    <span>Admin Panel</span>
+                <span class="text-slate-700">•</span>
+                <a href="<?= base_url('admin/login.php') ?>" class="hover:text-white transition-colors flex items-center gap-1 text-slate-400">
+                    <i class="ph ph-shield-check text-[11px]"></i>
+                    <span>Admin</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Main Navigation Bar (Translucent Apple Material, Zero Shadows, Crisp Border) -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 transition-all">
+    <!-- Main Navigation Bar (Translucent Modern Apple Material, Compact Height & Typography) -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/70 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+            <div class="flex items-center justify-between h-14 sm:h-16">
                 
-                <!-- Logo -->
-                <a href="<?= base_url() ?>" class="flex items-center gap-3 group apple-tap">
-                    <div class="w-11 h-11 rounded-btn bg-brand-600 flex items-center justify-center text-white border border-brand-500/20 group-hover:scale-105 transition-transform duration-150">
-                        <i class="ph ph-shopping-bag text-2xl"></i>
+                <!-- Logo (Compact Modern) -->
+                <a href="<?= base_url() ?>" class="flex items-center gap-2.5 group apple-tap">
+                    <div class="w-8 h-8 rounded-btn bg-brand-600 flex items-center justify-center text-white border border-brand-500/20 group-hover:scale-105 transition-transform duration-150">
+                        <i class="ph ph-code-simple text-base"></i>
                     </div>
                     <div>
-                        <span class="font-extrabold text-xl tracking-tight text-slate-900 block leading-tight">
-                            <?= sanitize($settings['store_name']) ?>
+                        <span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
+                            NativePHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
                         </span>
-                        <span class="text-[11px] text-slate-500 font-medium hidden sm:block">
-                            <?= sanitize($settings['store_slogan']) ?>
+                        <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
+                            Design System
                         </span>
                     </div>
                 </a>
 
-                <!-- Desktop Nav Links -->
-                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                    <a href="<?= base_url() ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= !isset($active_nav) || $active_nav === 'home' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
-                        Beranda
+                <!-- Desktop Nav Links (Smaller modern font text-[13px]) -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="<?= base_url() ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= !isset($active_nav) || $active_nav === 'home' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
+                        Overview
                     </a>
-                    <a href="<?= base_url('demo.php') ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'demo' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
-                        Demo E-Commerce
+                    <a href="<?= base_url('design-system.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'design_system' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
+                        Tokens
                     </a>
-                    <a href="<?= base_url('about.php') ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'about' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
-                        Tentang Kami
+                    <a href="<?= base_url('design-system.php#components') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent">
+                        Components
                     </a>
-                    <a href="<?= base_url('contact.php') ?>" class="px-3.5 py-2 text-sm font-semibold rounded-btn transition apple-tap <?= isset($active_nav) && $active_nav === 'contact' ? 'text-brand-700 bg-brand-50 border border-brand-200/80' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent' ?>">
-                        Kontak
+                    <a href="<?= base_url('demo.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= $is_demo_page ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
+                        Showcase Demo
+                    </a>
+                    <a href="<?= base_url('about.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'about' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
+                        Architecture
+                    </a>
+                    <a href="<?= base_url('contact.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'contact' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
+                        Contact
                     </a>
                 </nav>
 
-                <!-- Actions (Search, Cart, Direct WA) -->
-                <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Actions: Cart is ONLY visible on Demo pages; otherwise clean CTA/shortcuts -->
+                <div class="flex items-center gap-2">
                     
-                    <!-- Search Input (Desktop) -->
-                    <form action="<?= base_url('demo.php') ?>" method="GET" class="hidden lg:flex items-center relative">
-                        <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari produk demo..." class="w-40 focus:w-60 transition-all duration-300 pl-9 pr-4 py-2 text-xs rounded-input bg-slate-100 border border-slate-200/60 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
-                        <i class="ph ph-magnifying-glass text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-sm"></i>
-                    </form>
+                    <?php if ($is_demo_page): ?>
+                        <!-- Demo Search (Catalog Search) -->
+                        <form action="<?= base_url('demo.php') ?>" method="GET" class="hidden xl:flex items-center relative">
+                            <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Search catalog..." class="w-32 focus:w-48 transition-all duration-200 pl-7 pr-2.5 py-1 text-xs rounded-input bg-slate-100/80 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
+                            <i class="ph ph-magnifying-glass text-slate-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-xs"></i>
+                        </form>
 
-                    <!-- Cart Drawer Trigger Button -->
-                    <button 
-                        type="button" 
-                        @click="$store.cart.isOpen = true"
-                        class="relative p-2.5 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 border border-slate-200/80 transition flex items-center gap-2 group apple-tap"
-                        title="Lihat Keranjang">
-                        <i class="ph ph-shopping-cart text-lg group-hover:scale-110 transition-transform"></i>
-                        <span class="hidden sm:inline text-xs font-bold text-slate-800 group-hover:text-brand-600" x-text="$store.cart.formatRupiah($store.cart.subtotal)">Rp 0</span>
-                        
-                        <!-- Badge Count -->
-                        <span 
-                            x-show="$store.cart.count > 0" 
-                            x-cloak
-                            x-text="$store.cart.count" 
-                            class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-brand-600 text-white text-[11px] font-bold flex items-center justify-center border border-white">
-                        </span>
-                    </button>
+                        <!-- Cart Drawer Trigger Button (Only in Demo) -->
+                        <button 
+                            type="button" 
+                            @click="$store.cart.isOpen = true" 
+                            class="relative px-2.5 py-1.5 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 border border-slate-200/80 transition-colors flex items-center gap-1.5 group apple-tap text-xs font-semibold"
+                            title="View Cart Drawer">
+                            <i class="ph ph-shopping-bag text-base group-hover:scale-105 transition-transform"></i>
+                            <span class="hidden sm:inline" x-text="$store.cart.formatRupiah($store.cart.subtotal)">Rp 0</span>
+                            
+                            <!-- Badge Count -->
+                            <span 
+                                x-show="$store.cart.count > 0" 
+                                x-cloak
+                                x-text="$store.cart.count" 
+                                class="w-4 h-4 rounded-full bg-brand-600 text-white text-[9px] font-semibold flex items-center justify-center border border-white">
+                            </span>
+                        </button>
+                    <?php else: ?>
+                        <!-- Non-Demo View: Clean Modern CTAs -->
+                        <a href="<?= base_url('demo.php') ?>" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-btn text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 transition apple-tap">
+                            <i class="ph ph-shopping-bag text-xs text-brand-600"></i>
+                            <span>Live Demo</span>
+                        </a>
 
-                    <!-- WhatsApp Quick CTA -->
-                    <?= ui_button('Chat Admin', [
-                        'variant' => 'primary',
-                        'size'    => 'sm',
-                        'href'    => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) . '?text=Halo%20Admin%20' . urlencode($settings['store_name']) . ',%20saya%20ingin%20tanya%20produk',
-                        'target'  => '_blank',
-                        'icon'    => 'message-circle',
-                        'class'   => 'hidden sm:inline-flex',
-                    ]) ?>
+                        <?= ui_button('Get Starter', [
+                            'variant' => 'primary',
+                            'size'    => 'xs',
+                            'href'    => base_url('design-system.php'),
+                            'icon'    => 'sparkle',
+                            'class'   => 'hidden sm:inline-flex',
+                        ]) ?>
+                    <?php endif; ?>
 
                     <!-- Mobile Menu Button -->
                     <button 
                         @click="mobileMenuOpen = !mobileMenuOpen" 
-                        class="md:hidden p-2.5 rounded-btn text-slate-600 hover:bg-slate-100 border border-slate-200/80 apple-tap focus:outline-none">
-                        <i class="ph text-2xl" :class="mobileMenuOpen ? 'ph-x' : 'ph-list'"></i>
+                        class="md:hidden p-2 rounded-btn text-slate-600 hover:bg-slate-100 border border-slate-200/80 apple-tap focus:outline-none"
+                        aria-label="Toggle Navigation">
+                        <i class="ph text-xl" :class="mobileMenuOpen ? 'ph-x' : 'ph-list'"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu Drawer -->
+        <!-- Mobile Menu Drawer (Compact modern typography) -->
         <div 
             x-show="mobileMenuOpen" 
             x-cloak
             @click.away="mobileMenuOpen = false" 
-            class="md:hidden border-t border-slate-200/80 bg-white px-4 pt-3 pb-6 space-y-3">
+            class="md:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-2.5">
             
-            <form action="<?= base_url('demo.php') ?>" method="GET" class="relative">
-                <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari produk demo..." class="w-full pl-10 pr-4 py-2.5 text-sm rounded-input bg-slate-100 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
-                <i class="ph ph-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-base"></i>
-            </form>
-
-            <div class="space-y-1">
-                <a href="<?= base_url() ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= !isset($active_nav) || $active_nav === 'home' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    🏠 Beranda
+            <div class="space-y-1 text-[13px]">
+                <a href="<?= base_url() ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= !isset($active_nav) || $active_nav === 'home' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    Overview
                 </a>
-                <a href="<?= base_url('demo.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= isset($active_nav) && $active_nav === 'demo' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    🛍️ Demo E-Commerce & WA
+                <a href="<?= base_url('design-system.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'design_system' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    Design Tokens & Primitives
                 </a>
-                <a href="<?= base_url('about.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= isset($active_nav) && $active_nav === 'about' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    🏢 Tentang Kami
+                <a href="<?= base_url('demo.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= $is_demo_page ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    Showcase Demo
                 </a>
-                <a href="<?= base_url('contact.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold <?= isset($active_nav) && $active_nav === 'contact' ? 'bg-brand-50 text-brand-700 border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                    📞 Kontak
+                <a href="<?= base_url('about.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'about' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    Architecture & Philosophy
                 </a>
-                <a href="<?= base_url('cart.php') ?>" class="block px-4 py-2.5 rounded-btn text-sm font-semibold text-slate-700 hover:bg-slate-50 border border-transparent">
-                    🛒 Halaman Keranjang Belanja
+                <a href="<?= base_url('contact.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'contact' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
+                    Contact & Support
                 </a>
             </div>
 
-            <div class="pt-2 border-t border-slate-100">
-                <?= ui_button('Hubungi Kami via WhatsApp', [
-                    'variant' => 'primary',
-                    'size'    => 'md',
-                    'href'    => 'https://wa.me/' . preg_replace('/[^0-9]/', '', $settings['whatsapp_number']),
-                    'target'  => '_blank',
-                    'icon'    => 'message-circle',
-                    'class'   => 'w-full',
-                ]) ?>
-            </div>
+            <?php if ($is_demo_page): ?>
+                <div class="pt-2 border-t border-slate-100">
+                    <button 
+                        type="button" 
+                        @click="$store.cart.isOpen = true; mobileMenuOpen = false" 
+                        class="w-full flex items-center justify-between px-3.5 py-2 rounded-btn bg-slate-100 text-slate-800 text-xs font-semibold apple-tap">
+                        <span class="flex items-center gap-2">
+                            <i class="ph ph-shopping-bag text-base text-brand-600"></i>
+                            <span>Buka Keranjang Belanja</span>
+                        </span>
+                        <span class="px-2 py-0.5 rounded-full bg-brand-600 text-white text-[10px]" x-text="$store.cart.count">0</span>
+                    </button>
+                </div>
+            <?php else: ?>
+                <div class="pt-2 border-t border-slate-100">
+                    <?= ui_button('Explore Design Tokens', [
+                        'variant' => 'primary',
+                        'size'    => 'sm',
+                        'href'    => base_url('design-system.php'),
+                        'icon'    => 'palette',
+                        'class'   => 'w-full',
+                    ]) ?>
+                </div>
+            <?php endif; ?>
         </div>
     </header>
 
-    <!-- Slide-over Cart Drawer -->
+    <!-- Slide-over Cart Drawer (Rendered for interactions) -->
     <?php require_once __DIR__ . '/cart_drawer.php'; ?>
 
     <main class="flex-grow">

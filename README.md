@@ -18,9 +18,9 @@ Framework ini dilengkapi koleksi fungsi primitif UI modular berbasis PHP murni d
 - **Input & Form**: `ui_input()`, `ui_textarea()`, `ui_select()`, `ui_toggle()`
 - **Permukaan & Tampilan Data**: `ui_card()`, `ui_badge()`, `ui_alert()`, `ui_stat_card()`, `ui_avatar()`, `ui_empty_state()`
 - **Navigasi & Visual**: `ui_breadcrumb()`, `ui_icon()`, `ui_icon_box()`, `ui_product_card()`
-- **Living Style Guide**: Akses showcase dan dokumentasi interaktif seluruh komponen di `/admin/design-system.php`.
+- **Living Style Guide**: Akses showcase dan dokumentasi interaktif seluruh komponen di `/design-system.php`.
 
-### 3. 🎨 Dynamic Theme Engine & Apple Design System
+### 3. 🎨 Dynamic Theme Engine & Design System
 - **8 Palet Warna Primer**: Emerald, Classic Blue, Indigo, Violet, Rose, Amber, Teal, Slate.
 - **6 Preset Corner Radius**: Sharp (0px), Subtle (6px), Standard Apple (12px), Soft (16px), Round (24px), Pill (9999px).
 - **Estetika Modern**: Material *crisp hairline borders*, *translucent backdrop blur*, *zero shadows*, dan interaksi fisik *apple-tap*.
@@ -205,7 +205,6 @@ Native-PHP/
 │   ├── categories.php      # Manajemen kategori konten
 │   ├── orders.php          # Manajemen riwayat transaksi / data pesanan
 │   ├── settings.php        # Pengaturan website, branding, & tema visual
-│   ├── design-system.php   # Showcase & dokumentasi hidup Design System
 │   └── includes/           # Layout header, sidebar, & footer panel admin
 ├── uploads/
 │   └── products/           # Direktori penyimpanan file upload gambar
