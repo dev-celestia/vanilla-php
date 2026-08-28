@@ -133,7 +133,7 @@ echo ui_button('Simpan Data', [
     'variant' => 'primary', // 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'subtle'
     'size'    => 'md',      // 'xs' | 'sm' | 'md' | 'lg'
     'type'    => 'submit',
-    'icon'    => 'check',   // Nama ikon Lucide
+    'icon'    => 'check',   // Nama ikon Phosphor (misal: 'check', 'shopping-cart', 'trash')
 ]);
 
 // Button Link (<a>)
@@ -142,6 +142,12 @@ echo ui_button('Buka Katalog', [
     'href'    => base_url('index.php'),
     'icon'    => 'shopping-bag',
 ]);
+```
+
+### Ikon Primitif (`ui_icon`)
+```php
+// Helper khusus Phosphor Icons (https://phosphoricons.com/)
+echo ui_icon('shopping-cart', 'text-brand-600 text-lg');
 ```
 
 ### 2. Form Input (`ui_input`)

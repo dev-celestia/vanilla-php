@@ -112,7 +112,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 placeholder="Cari nama atau deskripsi produk..." 
                 class="w-full pl-9 pr-4 py-2.5 text-xs rounded-input bg-slate-50 border border-slate-200/90 focus:bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
             >
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+            <i class="ph ph-magnifying-glass text-slate-400 absolute left-3 top-3 text-sm"></i>
         </div>
 
         <div class="sm:col-span-3">
@@ -141,7 +141,7 @@ require_once __DIR__ . '/includes/admin_header.php';
             </button>
             <?php if (!empty($search) || $categoryId > 0 || $status !== 'all'): ?>
                 <a href="<?= base_url('admin/products.php') ?>" class="p-2.5 rounded-btn bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/80 text-xs font-bold transition apple-tap" title="Reset Filter">
-                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                    <i class="ph ph-arrows-counter-clockwise text-sm"></i>
                 </a>
             <?php endif; ?>
         </div>
@@ -153,7 +153,7 @@ require_once __DIR__ . '/includes/admin_header.php';
     <?php if (empty($products)): ?>
         <div class="p-16 text-center text-slate-400">
             <div class="w-16 h-16 rounded-card bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-3">
-                <i data-lucide="package-search" class="w-8 h-8"></i>
+                <i class="ph ph-package text-3xl"></i>
             </div>
             <h3 class="text-sm font-bold text-slate-800 mb-1 tracking-tight">Tidak Ada Produk yang Cocok</h3>
             <p class="text-xs text-slate-400 max-w-sm mx-auto mb-4">Silakan atur ulang filter pencarian atau tambahkan produk baru.</p>
@@ -237,7 +237,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                         href="<?= base_url('admin/product-form.php?id=' . $prod['id']) ?>" 
                                         class="p-2 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" 
                                         title="Edit Produk">
-                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                        <i class="ph ph-pencil-simple text-sm"></i>
                                     </a>
 
                                     <form action="<?= base_url('admin/products.php') ?>" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.')">
@@ -245,7 +245,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="product_id" value="<?= $prod['id'] ?>">
                                         <button type="submit" class="p-2 rounded-btn bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" title="Hapus Produk">
-                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                            <i class="ph ph-trash text-sm"></i>
                                         </button>
                                     </form>
                                 </div>

@@ -91,7 +91,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white p-8 rounded-card border border-slate-200/80 hover:border-brand-300 transition">
                 <div class="w-12 h-12 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/70 flex items-center justify-center mb-6">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    <i class="ph ph-shield-check text-2xl"></i>
                 </div>
                 <h4 class="text-base font-bold text-slate-900 mb-2 tracking-tight">Transparan & Terpercaya</h4>
                 <p class="text-xs text-slate-500 leading-relaxed">
@@ -101,7 +101,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="bg-white p-8 rounded-card border border-slate-200/80 hover:border-brand-300 transition">
                 <div class="w-12 h-12 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/70 flex items-center justify-center mb-6">
-                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    <i class="ph ph-chat-circle-dots text-2xl"></i>
                 </div>
                 <h4 class="text-base font-bold text-slate-900 mb-2 tracking-tight">Pelayanan Personal</h4>
                 <p class="text-xs text-slate-500 leading-relaxed">
@@ -111,7 +111,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="bg-white p-8 rounded-card border border-slate-200/80 hover:border-brand-300 transition">
                 <div class="w-12 h-12 rounded-btn bg-brand-50 text-brand-600 border border-brand-200/70 flex items-center justify-center mb-6">
-                    <i data-lucide="truck" class="w-6 h-6"></i>
+                    <i class="ph ph-truck text-2xl"></i>
                 </div>
                 <h4 class="text-base font-bold text-slate-900 mb-2 tracking-tight">Ekspedisi Fleksibel</h4>
                 <p class="text-xs text-slate-500 leading-relaxed">

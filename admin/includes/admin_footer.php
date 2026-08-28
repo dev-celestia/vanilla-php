@@ -10,13 +10,5 @@
         </footer>
 
     </div>
-
-    <!-- Initialize Lucide Icons -->
-    <script>
-        lucide.createIcons();
-        document.addEventListener('alpine:initialized', () => {
-            lucide.createIcons();
-        });
-    </script>
 </body>
 </html>

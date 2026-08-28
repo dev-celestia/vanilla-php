@@ -71,7 +71,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 @click="activeTab = 'showcase'"
                 :class="activeTab === 'showcase' ? 'bg-brand-600 text-white font-extrabold' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold'"
                 class="px-4 py-2 rounded-btn text-xs transition apple-tap flex items-center gap-2">
-                <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                <i class="ph ph-squares-four text-sm"></i>
                 <span>Komponen Primitif (Showcase)</span>
             </button>
 
@@ -80,7 +80,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 @click="activeTab = 'guide'"
                 :class="activeTab === 'guide' ? 'bg-brand-600 text-white font-extrabold' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold'"
                 class="px-4 py-2 rounded-btn text-xs transition apple-tap flex items-center gap-2">
-                <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                <i class="ph ph-book-open text-sm"></i>
                 <span>📖 Panduan Kustomisasi Tema (Guide)</span>
             </button>
         </div>
@@ -93,7 +93,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="rounded-card bg-white border border-slate-200/80 p-6 sm:p-8 space-y-6">
             <div class="border-b border-slate-100 pb-3">
                 <h3 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-cursor-click text-base text-brand-600"></i>
                     <span>1. Button Primitives (`ui_button`)</span>
                 </h3>
                 <p class="text-xs text-slate-500">Dilengkapi dengan respon pointer-down instan (`apple-tap`), scale physics, dan token rounded.</p>
@@ -106,8 +106,8 @@ require_once __DIR__ . '/includes/admin_header.php';
                     <?= ui_button('Secondary', ['variant' => 'secondary', 'icon' => 'sparkles']) ?>
                     <?= ui_button('Outline Brand', ['variant' => 'outline', 'icon' => 'tag']) ?>
                     <?= ui_button('Subtle Tint', ['variant' => 'subtle', 'icon' => 'info']) ?>
-                    <?= ui_button('Ghost Button', ['variant' => 'ghost', 'icon' => 'chevron-right', 'iconRight' => null]) ?>
-                    <?= ui_button('Danger Action', ['variant' => 'danger', 'icon' => 'trash-2']) ?>
+                    <?= ui_button('Ghost Button', ['variant' => 'ghost', 'icon' => 'caret-right', 'iconRight' => null]) ?>
+                    <?= ui_button('Danger Action', ['variant' => 'danger', 'icon' => 'trash']) ?>
                     <?= ui_button('Disabled State', ['variant' => 'primary', 'disabled' => true]) ?>
                 </div>
             </div>
@@ -127,7 +127,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="rounded-card bg-white border border-slate-200/80 p-6 sm:p-8 space-y-6">
             <div class="border-b border-slate-100 pb-3">
                 <h3 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="tag" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-tag text-base text-brand-600"></i>
                     <span>2. Badge & Status Primitives (`ui_badge`)</span>
                 </h3>
                 <p class="text-xs text-slate-500">Label status ringan dengan token rounded badge dan semantic dots.</p>
@@ -150,7 +150,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="rounded-card bg-white border border-slate-200/80 p-6 sm:p-8 space-y-6">
             <div class="border-b border-slate-100 pb-3">
                 <h3 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="edit-3" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-pencil-simple text-base text-brand-600"></i>
                     <span>3. Form Input Primitives (`ui_input`, `ui_select`, `ui_toggle`, `ui_textarea`)</span>
                 </h3>
                 <p class="text-xs text-slate-500">Input flat dengan hairline border, focus ring brand dinamis, helper text, dan state error.</p>
@@ -201,7 +201,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="rounded-card bg-white border border-slate-200/80 p-6 sm:p-8 space-y-6">
             <div class="border-b border-slate-100 pb-3">
                 <h3 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="bell" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-bell text-base text-brand-600"></i>
                     <span>4. Alert & Notice Primitives (`ui_alert`)</span>
                 </h3>
                 <p class="text-xs text-slate-500">Banner notifikasi flat dengan semantic color coding dan tombol dismiss.</p>
@@ -227,7 +227,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="space-y-4">
             <div class="flex items-center justify-between">
                 <h3 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-chart-bar text-base text-brand-600"></i>
                     <span>5. Stat Cards Primitive (`ui_stat_card`)</span>
                 </h3>
             </div>
@@ -246,7 +246,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                     'trendType' => 'up',
                 ]) ?>
                 <?= ui_stat_card('Estimasi Omset', 'Rp 18.500.000', [
-                    'icon'      => 'dollar-sign',
+                    'icon'      => 'currency-dollar',
                     'subtitle'  => 'Konfirmasi via WA',
                     'trend'     => '+8.4%',
                     'trendType' => 'up',
@@ -262,7 +262,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="rounded-card bg-white border border-slate-200/80 p-6 sm:p-8 space-y-6">
             <div class="border-b border-slate-100 pb-3">
                 <h3 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="user" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-user text-base text-brand-600"></i>
                     <span>6. Avatars & Icon Boxes (`ui_avatar`, `ui_icon_box`)</span>
                 </h3>
                 <p class="text-xs text-slate-500">Avatar dinamis dengan fallback inisial nama dan icon container serbaguna.</p>

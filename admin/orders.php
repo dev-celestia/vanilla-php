@@ -96,7 +96,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                     placeholder="Cari kode pesanan, nama pembeli, atau no. WA..." 
                     class="w-full pl-9 pr-4 py-2.5 text-xs rounded-input bg-slate-50 border border-slate-200/90 focus:bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
                 >
-                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                <i class="ph ph-magnifying-glass text-slate-400 absolute left-3 top-3 text-sm"></i>
             </div>
 
             <div class="sm:col-span-4">
@@ -114,8 +114,8 @@ require_once __DIR__ . '/includes/admin_header.php';
                     Filter
                 </button>
                 <?php if (!empty($search) || $statusFilter !== 'all'): ?>
-                    <a href="<?= base_url('admin/orders.php') ?>" class="p-2.5 rounded-btn bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/80 text-xs font-bold transition apple-tap">
-                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                    <a href="<?= base_url('admin/orders.php') ?>" class="p-2.5 rounded-btn bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/80 text-xs font-bold transition apple-tap" title="Reset Filter">
+                        <i class="ph ph-arrows-counter-clockwise text-sm"></i>
                     </a>
                 <?php endif; ?>
             </div>
@@ -126,7 +126,7 @@ require_once __DIR__ . '/includes/admin_header.php';
     <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
         <?php if (empty($orders)): ?>
             <div class="p-16 text-center text-slate-400 text-xs">
-                <i data-lucide="inbox" class="w-10 h-10 mx-auto mb-2 text-slate-300"></i>
+                <i class="ph ph-tray text-3xl mx-auto mb-2 text-slate-300"></i>
                 Tidak ada data pesanan yang ditemukan.
             </div>
         <?php else: ?>
@@ -162,50 +162,52 @@ require_once __DIR__ . '/includes/admin_header.php';
                                 <td class="px-6 py-4">
                                     <span class="font-bold text-slate-900 block"><?= sanitize($ord['customer_name']) ?></span>
                                     <a href="<?= $custWaLink ?>" target="_blank" class="inline-flex items-center gap-1 text-[11px] text-brand-600 font-semibold hover:underline mt-0.5">
-                                        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                        <i class="ph ph-whatsapp-logo text-xs"></i>
                                         <span><?= sanitize($ord['customer_phone']) ?></span>
                                     </a>
                                 </td>
 
                                 <!-- Items Count -->
-                                <td class="px-6 py-4 text-slate-600 font-medium">
-                                    <?= count($ord['items']) ?> Produk
+                                <td class="px-6 py-4 font-semibold text-slate-700">
+                                    <?= $ord['item_count'] ?> Barang
                                 </td>
 
-                                <!-- Total -->
-                                <td class="px-6 py-4 font-black text-brand-600">
+                                <!-- Total Amount -->
+                                <td class="px-6 py-4 font-extrabold text-brand-600 text-sm">
                                     <?= format_rupiah($ord['total_amount']) ?>
                                 </td>
 
-                                <!-- Status Dropdown -->
+                                <!-- Status & Quick Status Update -->
                                 <td class="px-6 py-4">
-                                    <form action="<?= base_url('admin/orders.php') ?>" method="POST" class="inline-block">
+                                    <form action="<?= base_url('admin/orders.php') ?>" method="POST" class="flex items-center gap-2">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="action" value="update_status">
                                         <input type="hidden" name="order_id" value="<?= $ord['id'] ?>">
+
                                         <select 
                                             name="status" 
                                             onchange="this.form.submit()" 
-                                            class="text-[11px] font-bold px-2.5 py-1.5 rounded-badge border focus:outline-none cursor-pointer <?= 
-                                                $ord['status'] === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-300' : 
-                                                ($ord['status'] === 'processing' ? 'bg-blue-50 text-blue-700 border-blue-300' : 
-                                                ($ord['status'] === 'cancelled' ? 'bg-rose-50 text-rose-700 border-rose-300' : 'bg-amber-50 text-amber-700 border-amber-300')) 
-                                            ?>">
-                                            <option value="pending" <?= $ord['status'] === 'pending' ? 'selected' : '' ?>>Pending</option>
-                                            <option value="processing" <?= $ord['status'] === 'processing' ? 'selected' : '' ?>>Processing</option>
-                                            <option value="completed" <?= $ord['status'] === 'completed' ? 'selected' : '' ?>>Completed</option>
-                                            <option value="cancelled" <?= $ord['status'] === 'cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                                            class="text-xs font-bold px-2.5 py-1.5 rounded-badge border cursor-pointer focus:outline-none <?= match($ord['status']) {
+                                                'completed'  => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                                                'processing' => 'bg-blue-50 text-blue-700 border-blue-200',
+                                                'cancelled'  => 'bg-rose-50 text-rose-700 border-rose-200',
+                                                default      => 'bg-amber-50 text-amber-700 border-amber-200',
+                                            } ?>">
+                                            <option value="pending" <?= $ord['status'] === 'pending' ? 'selected' : '' ?>>🟡 PENDING</option>
+                                            <option value="processing" <?= $ord['status'] === 'processing' ? 'selected' : '' ?>>🔵 DIPROSES</option>
+                                            <option value="completed" <?= $ord['status'] === 'completed' ? 'selected' : '' ?>>🟢 SELESAI</option>
+                                            <option value="cancelled" <?= $ord['status'] === 'cancelled' ? 'selected' : '' ?>>🔴 BATAL</option>
                                         </select>
                                     </form>
                                 </td>
 
-                                <!-- View Modal CTA -->
+                                <!-- Detail Action Button -->
                                 <td class="px-6 py-4 text-right">
                                     <button 
                                         type="button" 
                                         @click='openDetail(<?= json_encode($ord) ?>)'
-                                        class="px-3 py-1.5 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80 font-bold text-[11px] transition apple-tap">
-                                        Lihat Detail
+                                        class="px-3 py-1.5 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap text-xs">
+                                        Lihat Rincian
                                     </button>
                                 </td>
                             </tr>
@@ -221,20 +223,35 @@ require_once __DIR__ . '/includes/admin_header.php';
         x-cloak 
         x-show="detailModalOpen" 
         class="fixed inset-0 z-50 overflow-y-auto" 
-        role="dialog">
+        aria-labelledby="modal-title" 
+        role="dialog" 
+        aria-modal="true">
         
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            
             <div 
                 x-show="detailModalOpen"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
                 @click="detailModalOpen = false" 
                 class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity">
             </div>
 
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
             <div 
                 x-show="detailModalOpen"
-                class="inline-block align-bottom bg-white rounded-modal text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full border border-slate-200/90">
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="inline-block align-bottom bg-white rounded-modal text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-slate-200/90">
                 
                 <template x-if="selectedOrder">
                     <div>
@@ -244,7 +261,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                 <p class="text-xs font-mono text-slate-500" x-text="selectedOrder.order_number"></p>
                             </div>
                             <button type="button" @click="detailModalOpen = false" class="text-slate-400 hover:text-slate-600 p-1 rounded-btn apple-tap">
-                                <i data-lucide="x" class="w-5 h-5"></i>
+                                <i class="ph ph-x text-lg"></i>
                             </button>
                         </div>
 
@@ -308,7 +325,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                     :href="selectedOrder.whatsapp_url" 
                                     target="_blank" 
                                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold border border-brand-500/20 transition apple-tap">
-                                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                    <i class="ph ph-whatsapp-logo text-base"></i>
                                     <span>Buka Pesan di WhatsApp Web</span>
                                 </a>
                             </template>

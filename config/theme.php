@@ -311,7 +311,7 @@ function render_theme_head(): void {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+                        sans: ['"Geist"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
                     },
                     borderRadius: {
                         'btn': 'var(--radius-btn)',

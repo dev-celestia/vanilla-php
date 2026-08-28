@@ -33,7 +33,7 @@ if ($db) {
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,8 +44,11 @@ if ($db) {
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Phosphor Icons (https://phosphoricons.com/) -->
+    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
 
     <style>
         [x-cloak] { display: none !important; }
@@ -71,7 +74,7 @@ if ($db) {
             <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800">
                 <a href="<?= base_url('admin/index.php') ?>" class="flex items-center gap-3 apple-tap">
                     <div class="w-10 h-10 rounded-btn bg-brand-600 border border-brand-500/30 text-white flex items-center justify-center font-bold">
-                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        <i class="ph ph-shield-check text-xl"></i>
                     </div>
                     <div>
                         <span class="font-extrabold text-sm text-white tracking-tight block">Panel Admin</span>
@@ -79,7 +82,7 @@ if ($db) {
                     </div>
                 </a>
                 <button @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-white p-1 rounded-btn apple-tap">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                    <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
 
@@ -88,21 +91,21 @@ if ($db) {
                 <a 
                     href="<?= base_url('admin/index.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= !isset($active_menu) || $active_menu === 'dashboard' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
-                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <i class="ph ph-squares-four text-base"></i>
                     <span>Dashboard Utama</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/products.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'products' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
-                    <i data-lucide="package" class="w-4 h-4"></i>
+                    <i class="ph ph-package text-base"></i>
                     <span>Katalog Produk</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/categories.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'categories' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
-                    <i data-lucide="tags" class="w-4 h-4"></i>
+                    <i class="ph ph-tag text-base"></i>
                     <span>Kategori Produk</span>
                 </a>
 
@@ -110,7 +113,7 @@ if ($db) {
                     href="<?= base_url('admin/orders.php') ?>" 
                     class="flex items-center justify-between px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'orders' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <div class="flex items-center gap-3">
-                        <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        <i class="ph ph-shopping-cart text-base"></i>
                         <span>Pesanan WhatsApp</span>
                     </div>
                     <?php if ($pendingOrdersCount > 0): ?>
@@ -123,7 +126,7 @@ if ($db) {
                 <a 
                     href="<?= base_url('admin/settings.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'settings' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
-                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <i class="ph ph-gear text-base"></i>
                     <span>Pengaturan Toko & WA</span>
                 </a>
 
@@ -134,7 +137,7 @@ if ($db) {
                 <a 
                     href="<?= base_url('admin/design-system.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'design_system' ? 'bg-brand-600 text-white font-bold border border-brand-500/20' : 'text-brand-400 bg-brand-950/40 hover:text-white hover:bg-slate-800/80 border border-brand-800/40' ?>">
-                    <i data-lucide="palette" class="w-4 h-4"></i>
+                    <i class="ph ph-palette text-base"></i>
                     <span>Showcase Primitif UI</span>
                 </a>
             </nav>
@@ -146,7 +149,7 @@ if ($db) {
                 href="<?= base_url() ?>" 
                 target="_blank" 
                 class="flex items-center gap-2 px-3 py-2 rounded-btn text-slate-400 hover:text-brand-300 hover:bg-slate-800 text-xs transition apple-tap">
-                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <i class="ph ph-arrow-square-out text-base"></i>
                 <span>Lihat Website Toko</span>
             </a>
 
@@ -162,7 +165,7 @@ if ($db) {
                 </div>
 
                 <a href="<?= base_url('admin/logout.php') ?>" onclick="return confirm('Apakah Anda yakin ingin logout?')" class="text-slate-400 hover:text-rose-400 p-1.5 rounded-btn hover:bg-slate-800 transition apple-tap" title="Keluar">
-                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <i class="ph ph-sign-out text-base"></i>
                 </a>
             </div>
         </div>
@@ -176,7 +179,7 @@ if ($db) {
         <header class="h-20 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
             <div class="flex items-center gap-4">
                 <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-btn text-slate-600 hover:bg-slate-100 border border-slate-200/80 apple-tap">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <i class="ph ph-list text-2xl"></i>
                 </button>
                 <div>
                     <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight"><?= sanitize($page_title ?? 'Dashboard') ?></h1>

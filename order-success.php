@@ -44,7 +44,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Header badge -->
         <div class="text-center pb-8 border-b border-slate-100">
             <div class="w-16 h-16 rounded-card bg-brand-50 border border-brand-200/80 text-brand-600 flex items-center justify-center mx-auto mb-4">
-                <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+                <i class="ph ph-check-circle text-4xl"></i>
             </div>
             <?= ui_badge('Pesanan Berhasil Dicatat!', 'brand', ['dot' => true, 'class' => 'mb-2']) ?>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -97,13 +97,13 @@ require_once __DIR__ . '/includes/header.php';
                 'size'    => 'lg',
                 'href'    => $waUrl,
                 'target'  => '_blank',
-                'icon'    => 'message-circle',
+                'icon'    => 'whatsapp-logo',
                 'class'   => 'w-full',
             ]) ?>
 
             <div class="text-center pt-2">
                 <a href="<?= base_url() ?>" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900">
-                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <i class="ph ph-arrow-left text-xs"></i>
                     <span>Kembali ke Halaman Beranda</span>
                 </a>
             </div>

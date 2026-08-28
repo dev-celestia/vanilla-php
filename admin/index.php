@@ -81,7 +81,7 @@ require_once __DIR__ . '/includes/admin_header.php';
 <?php if (!empty($lowStockProducts)): ?>
     <div class="mb-8 p-5 bg-amber-50 border border-amber-200/90 rounded-card">
         <div class="flex items-center gap-2 text-amber-800 font-bold text-xs mb-3">
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600"></i>
+            <i class="ph ph-warning text-base text-amber-600"></i>
             <span>Peringatan: Ada <?= count($lowStockProducts) ?> produk dengan stok menipis (≤ 5 unit)!</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -112,7 +112,7 @@ require_once __DIR__ . '/includes/admin_header.php';
 
         <?php if (empty($recentOrders)): ?>
             <div class="p-12 text-center text-slate-400 text-xs">
-                <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-300"></i>
+                <i class="ph ph-tray text-3xl mx-auto mb-2 text-slate-300"></i>
                 Belum ada pesanan yang tercatat.
             </div>
         <?php else: ?>
@@ -176,26 +176,26 @@ require_once __DIR__ . '/includes/admin_header.php';
             
             <a href="<?= base_url('admin/product-form.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-brand-50 text-brand-800 border border-brand-200/80 hover:bg-brand-100 font-bold text-xs transition apple-tap">
                 <div class="flex items-center gap-2.5">
-                    <i data-lucide="plus-circle" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-plus-circle text-base text-brand-600"></i>
                     <span>Tambah Produk Baru</span>
                 </div>
-                <i data-lucide="chevron-right" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-caret-right text-base text-brand-600"></i>
             </a>
 
             <a href="<?= base_url('admin/categories.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-bold text-xs transition apple-tap">
                 <div class="flex items-center gap-2.5">
-                    <i data-lucide="tag" class="w-4 h-4 text-slate-500"></i>
+                    <i class="ph ph-tag text-base text-slate-500"></i>
                     <span>Kelola Kategori</span>
                 </div>
-                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                <i class="ph ph-caret-right text-base text-slate-400"></i>
             </a>
 
             <a href="<?= base_url('admin/settings.php') ?>" class="w-full flex items-center justify-between p-3.5 rounded-btn bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 font-bold text-xs transition apple-tap">
                 <div class="flex items-center gap-2.5">
-                    <i data-lucide="palette" class="w-4 h-4 text-slate-500"></i>
+                    <i class="ph ph-palette text-base text-slate-500"></i>
                     <span>Ganti Warna & Radius Tema</span>
                 </div>
-                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                <i class="ph ph-caret-right text-base text-slate-400"></i>
             </a>
         </div>
 
@@ -216,8 +216,8 @@ require_once __DIR__ . '/includes/admin_header.php';
                                 <span class="text-[11px] text-brand-600 font-semibold"><?= format_rupiah($rp['price']) ?></span>
                             </div>
                         </div>
-                        <a href="<?= base_url('admin/product-form.php?id=' . $rp['id']) ?>" class="text-slate-400 hover:text-slate-700 p-1 apple-tap">
-                            <i data-lucide="edit" class="w-3.5 h-3.5"></i>
+                        <a href="<?= base_url('admin/product-form.php?id=' . $rp['id']) ?>" class="text-slate-400 hover:text-slate-700 p-1 apple-tap" title="Edit Produk">
+                            <i class="ph ph-pencil-simple text-sm"></i>
                         </a>
                     </div>
                 <?php endforeach; ?>

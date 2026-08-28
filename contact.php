@@ -64,7 +64,7 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- WhatsApp -->
                     <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) ?>" target="_blank" class="flex items-start gap-4 p-4 rounded-card bg-brand-50/60 border border-brand-200/80 hover:bg-brand-100/60 transition apple-tap group">
                         <div class="w-10 h-10 rounded-btn bg-brand-600 text-white flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            <i class="ph ph-whatsapp-logo text-xl"></i>
                         </div>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Chat WhatsApp Resmi</span>
@@ -76,7 +76,7 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Phone -->
                     <div class="flex items-start gap-4 p-4 rounded-card bg-slate-50 border border-slate-200/80">
                         <div class="w-10 h-10 rounded-btn bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="phone" class="w-5 h-5"></i>
+                            <i class="ph ph-phone text-xl"></i>
                         </div>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Telepon / Hotline</span>
@@ -87,7 +87,7 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Email -->
                     <div class="flex items-start gap-4 p-4 rounded-card bg-slate-50 border border-slate-200/80">
                         <div class="w-10 h-10 rounded-btn bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <i class="ph ph-envelope-simple text-xl"></i>
                         </div>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Email Resmi</span>
@@ -98,7 +98,7 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Address -->
                     <div class="flex items-start gap-4 p-4 rounded-card bg-slate-50 border border-slate-200/80">
                         <div class="w-10 h-10 rounded-btn bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            <i class="ph ph-map-pin text-xl"></i>
                         </div>
                         <div>
                             <span class="text-slate-400 font-medium block text-[11px]">Alamat Toko & Gudang</span>
@@ -113,7 +113,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Operational Hours -->
             <div class="bg-white rounded-card border border-slate-200/80 p-6 space-y-3">
                 <h4 class="font-extrabold text-sm text-slate-900 tracking-tight flex items-center gap-2">
-                    <i data-lucide="clock" class="w-4 h-4 text-brand-600"></i>
+                    <i class="ph ph-clock text-base text-brand-600"></i>
                     <span>Jam Operasional Layanan</span>
                 </h4>
                 <div class="text-xs text-slate-600 space-y-1.5 pt-1">

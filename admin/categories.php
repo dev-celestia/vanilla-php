@@ -134,7 +134,7 @@ require_once __DIR__ . '/includes/admin_header.php';
             type="button" 
             @click="openAdd()"
             class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold border border-brand-500/20 transition apple-tap">
-            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <i class="ph ph-plus-circle text-base"></i>
             <span>Tambah Kategori Baru</span>
         </button>
     </div>
@@ -143,7 +143,7 @@ require_once __DIR__ . '/includes/admin_header.php';
     <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
         <?php if (empty($categories)): ?>
             <div class="p-16 text-center text-slate-400 text-xs">
-                <i data-lucide="tags" class="w-10 h-10 mx-auto mb-2 text-slate-300"></i>
+                <i class="ph ph-tag text-3xl mx-auto mb-2 text-slate-300"></i>
                 Belum ada kategori produk. Silakan tambahkan kategori pertama Anda.
             </div>
         <?php else: ?>
@@ -185,7 +185,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                             @click='openEdit(<?= json_encode($cat) ?>)'
                                             class="p-2 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" 
                                             title="Edit Kategori">
-                                            <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                            <i class="ph ph-pencil-simple text-sm"></i>
                                         </button>
 
                                         <form action="<?= base_url('admin/categories.php') ?>" method="POST" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
@@ -193,7 +193,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                             <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="category_id" value="<?= $cat['id'] ?>">
                                             <button type="submit" class="p-2 rounded-btn bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" title="Hapus Kategori">
-                                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                                <i class="ph ph-trash text-sm"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -249,7 +249,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                     <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                         <h3 class="text-base font-extrabold text-slate-900 tracking-tight" x-text="modalTitle"></h3>
                         <button type="button" @click="modalOpen = false" class="text-slate-400 hover:text-slate-600 p-1 rounded-btn apple-tap">
-                            <i data-lucide="x" class="w-5 h-5"></i>
+                            <i class="ph ph-x text-lg"></i>
                         </button>
                     </div>
 

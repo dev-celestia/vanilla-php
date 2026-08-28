@@ -172,12 +172,12 @@ require_once __DIR__ . '/includes/admin_header.php';
     <!-- Top back link -->
     <div class="flex items-center justify-between">
         <a href="<?= base_url('admin/products.php') ?>" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 transition apple-tap">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <i class="ph ph-arrow-left text-sm"></i>
             <span>Kembali ke Daftar Produk</span>
         </a>
         <?php if ($isEdit): ?>
             <a href="<?= base_url('product.php?id=' . $editId) ?>" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:underline">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                <i class="ph ph-arrow-square-out text-xs"></i>
                 <span>Lihat di Website Toko</span>
             </a>
         <?php endif; ?>
@@ -202,7 +202,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Basic Information Section -->
         <div class="space-y-4">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
-                <i data-lucide="package" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-package text-base text-brand-600"></i>
                 <span>Informasi Dasar Produk</span>
             </h3>
 
@@ -242,7 +242,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Pricing Section -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
-                <i data-lucide="banknote" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-currency-dollar text-base text-brand-600"></i>
                 <span>Harga & Promo</span>
             </h3>
 
@@ -271,7 +271,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Photo Section -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
-                <i data-lucide="image" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-image text-base text-brand-600"></i>
                 <span>Foto Produk</span>
             </h3>
 
@@ -309,7 +309,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Description Section -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
-                <i data-lucide="align-left" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-text-align-left text-base text-brand-600"></i>
                 <span>Deskripsi & Spesifikasi Produk</span>
             </h3>
 

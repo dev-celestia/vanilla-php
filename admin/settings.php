@@ -112,10 +112,14 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Design System & Tokens Customizer Section -->
         <!-- ========================================== -->
         <div class="space-y-5">
+        <!-- ========================================== -->
+        <!-- Design System & Tokens Customizer Section -->
+        <!-- ========================================== -->
+        <div class="space-y-5">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div class="flex items-center gap-2">
                     <div class="w-8 h-8 rounded-btn bg-brand-50 border border-brand-200/80 text-brand-600 flex items-center justify-center">
-                        <i data-lucide="palette" class="w-4 h-4"></i>
+                        <i class="ph ph-palette text-base"></i>
                     </div>
                     <div>
                         <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Design System Tokens & Tampilan</h3>
@@ -124,7 +128,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 </div>
                 <a href="<?= base_url('admin/design-system.php') ?>" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-brand-600 font-bold hover:underline">
                     <span>Lihat Showcase</span>
-                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <i class="ph ph-arrow-square-out text-xs"></i>
                 </a>
             </div>
 
@@ -186,7 +190,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Store Profile Section -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <i data-lucide="store" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-storefront text-base text-brand-600"></i>
                 <span>Informasi Umum Toko & Branding</span>
             </h3>
 
@@ -213,7 +217,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- WhatsApp & Contact Integration Section -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <i data-lucide="message-circle" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-whatsapp-logo text-base text-brand-600"></i>
                 <span>Integrasi WhatsApp Admin & Kontak</span>
             </h3>
 
@@ -238,7 +242,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                     'label' => 'Email Toko',
                     'value' => $settings['store_email'],
                     'type'  => 'email',
-                    'icon'  => 'mail',
+                    'icon'  => 'envelope-simple',
                 ]) ?>
             </div>
 
@@ -252,7 +256,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Hero Section Customizer -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <i data-lucide="layout" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-browser text-base text-brand-600"></i>
                 <span>Teks Banner Utama (Hero Banner Beranda)</span>
             </h3>
 
@@ -277,7 +281,7 @@ require_once __DIR__ . '/includes/admin_header.php';
         <!-- Social Media Links -->
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <i data-lucide="share-2" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-share-network text-base text-brand-600"></i>
                 <span>Media Sosial Toko</span>
             </h3>
 
@@ -286,14 +290,14 @@ require_once __DIR__ . '/includes/admin_header.php';
                     'label'       => 'Link Instagram',
                     'value'       => $settings['instagram_url'],
                     'placeholder' => 'https://instagram.com/namatoko',
-                    'icon'        => 'instagram',
+                    'icon'        => 'instagram-logo',
                 ]) ?>
 
                 <?= ui_input('facebook_url', [
                     'label'       => 'Link Facebook',
                     'value'       => $settings['facebook_url'],
                     'placeholder' => 'https://facebook.com/namatoko',
-                    'icon'        => 'facebook',
+                    'icon'        => 'facebook-logo',
                 ]) ?>
             </div>
         </div>
@@ -315,7 +319,7 @@ require_once __DIR__ . '/includes/admin_header.php';
 
         <div>
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <i data-lucide="lock" class="w-4 h-4 text-brand-600"></i>
+                <i class="ph ph-lock text-base text-brand-600"></i>
                 <span>Ubah Kata Sandi Admin</span>
             </h3>
         </div>
