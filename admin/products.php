@@ -3,7 +3,7 @@
  * Admin Product Management (List & Delete)
  */
 $active_menu = 'products';
-$page_title = 'Kelola Katalog Produk';
+$page_title = 'Product Catalog Management';
 require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../helpers/format.php';
 require_once __DIR__ . '/../helpers/auth.php';
@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 $delStmt = $db->prepare("DELETE FROM products WHERE id = :id");
                 $delStmt->execute([':id' => $deleteId]);
 
-                set_flash('success', 'Produk berhasil dihapus.');
+                set_flash('success', 'Product deleted successfully.');
                 header('Location: ' . base_url('admin/products.php'));
                 exit;
             } catch (PDOException $e) {
-                set_flash('error', 'Gagal menghapus produk: ' . $e->getMessage());
+                set_flash('error', 'Failed to delete product: ' . $e->getMessage());
             }
         }
     }
@@ -91,10 +91,10 @@ require_once __DIR__ . '/includes/admin_header.php';
 <div class="bg-white p-6 rounded-card border border-slate-200/80 mb-6 space-y-4">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h2 class="text-base font-extrabold text-slate-900 tracking-tight">Daftar Produk (<?= count($products) ?>)</h2>
-            <p class="text-xs text-slate-400">Kelola informasi harga, stok, foto, dan status tayang produk di website</p>
+            <h2 class="text-base font-extrabold text-slate-900 tracking-tight">Product Catalog (<?= count($products) ?>)</h2>
+            <p class="text-xs text-slate-400">Manage prices, inventory, images, and visibility across your store</p>
         </div>
-        <?= ui_button('Tambah Produk Baru', [
+        <?= ui_button('Add New Product', [
             'variant' => 'primary',
             'size'    => 'sm',
             'href'    => base_url('admin/product-form.php'),
@@ -109,7 +109,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                 type="text" 
                 name="q" 
                 value="<?= sanitize($search) ?>" 
-                placeholder="Cari nama atau deskripsi produk..." 
+                placeholder="Search product name or description..." 
                 class="w-full pl-9 pr-4 py-2.5 text-xs rounded-input bg-slate-50 border border-slate-200/90 focus:bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
             >
             <i class="ph ph-magnifying-glass text-slate-400 absolute left-3 top-3 text-sm"></i>
@@ -117,7 +117,7 @@ require_once __DIR__ . '/includes/admin_header.php';
 
         <div class="sm:col-span-3">
             <select name="category" class="w-full px-3 py-2.5 text-xs rounded-input bg-slate-50 border border-slate-200/90 focus:bg-white focus:border-brand-500 focus:outline-none cursor-pointer">
-                <option value="0">Semua Kategori</option>
+                <option value="0">All Categories</option>
                 <?php foreach ($categories as $cat): ?>
                     <option value="<?= $cat['id'] ?>" <?= $categoryId == $cat['id'] ? 'selected' : '' ?>>
                         <?= sanitize($cat['name']) ?>
@@ -128,10 +128,10 @@ require_once __DIR__ . '/includes/admin_header.php';
 
         <div class="sm:col-span-2">
             <select name="status" class="w-full px-3 py-2.5 text-xs rounded-input bg-slate-50 border border-slate-200/90 focus:bg-white focus:border-brand-500 focus:outline-none cursor-pointer">
-                <option value="all" <?= $status === 'all' ? 'selected' : '' ?>>Semua Status</option>
-                <option value="active" <?= $status === 'active' ? 'selected' : '' ?>>Hanya Aktif</option>
-                <option value="inactive" <?= $status === 'inactive' ? 'selected' : '' ?>>Hanya Nonaktif</option>
-                <option value="out_of_stock" <?= $status === 'out_of_stock' ? 'selected' : '' ?>>Stok Habis (0)</option>
+                <option value="all" <?= $status === 'all' ? 'selected' : '' ?>>All Status</option>
+                <option value="active" <?= $status === 'active' ? 'selected' : '' ?>>Active Only</option>
+                <option value="inactive" <?= $status === 'inactive' ? 'selected' : '' ?>>Draft / Inactive</option>
+                <option value="out_of_stock" <?= $status === 'out_of_stock' ? 'selected' : '' ?>>Out of Stock (0)</option>
             </select>
         </div>
 
@@ -152,11 +152,11 @@ require_once __DIR__ . '/includes/admin_header.php';
 <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
     <?php if (empty($products)): ?>
         <?= ui_empty_state(
-            'Tidak Ada Produk yang Cocok',
-            'Silakan atur ulang filter pencarian atau tambahkan produk baru.',
+            'No Matching Products Found',
+            'Please adjust your filter criteria or create a new product.',
             [
                 'icon'       => 'package',
-                'buttonText' => 'Tambah Produk Sekarang',
+                'buttonText' => 'Add Product Now',
                 'buttonHref' => base_url('admin/product-form.php'),
                 'buttonIcon' => 'plus',
             ]
@@ -166,12 +166,12 @@ require_once __DIR__ . '/includes/admin_header.php';
             <table class="w-full text-left text-xs">
                 <thead class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider">
                     <tr>
-                        <th class="px-6 py-4">Foto & Nama Produk</th>
-                        <th class="px-6 py-4">Kategori</th>
-                        <th class="px-6 py-4">Harga Normal / Promo</th>
-                        <th class="px-6 py-4">Stok</th>
+                        <th class="px-6 py-4">Image &amp; Product Name</th>
+                        <th class="px-6 py-4">Category</th>
+                        <th class="px-6 py-4">Price / Promo</th>
+                        <th class="px-6 py-4">Stock</th>
                         <th class="px-6 py-4">Status</th>
-                        <th class="px-6 py-4 text-right">Aksi</th>
+                        <th class="px-6 py-4 text-right">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -192,7 +192,7 @@ require_once __DIR__ . '/includes/admin_header.php';
                                         </a>
                                         <div class="flex items-center gap-2 mt-0.5">
                                             <?php if ($prod['is_featured']): ?>
-                                                <span class="text-[10px] px-1.5 py-0.5 rounded-badge bg-amber-100 text-amber-700 font-extrabold border border-amber-200">⭐ Unggulan</span>
+                                                <span class="text-[10px] px-1.5 py-0.5 rounded-badge bg-amber-100 text-amber-700 font-extrabold border border-amber-200">⭐ Featured</span>
                                             <?php endif; ?>
                                             <span class="text-[10px] text-slate-400 font-mono">ID: #<?= $prod['id'] ?></span>
                                         </div>
@@ -202,7 +202,7 @@ require_once __DIR__ . '/includes/admin_header.php';
 
                             <!-- Category -->
                             <td class="px-6 py-4 font-medium text-slate-600">
-                                <?= sanitize($prod['category_name'] ?? 'Tanpa Kategori') ?>
+                                <?= sanitize($prod['category_name'] ?? 'Uncategorized') ?>
                             </td>
 
                             <!-- Price & Promo -->
@@ -218,13 +218,13 @@ require_once __DIR__ . '/includes/admin_header.php';
                             <!-- Stock -->
                             <td class="px-6 py-4">
                                 <span class="inline-block px-2.5 py-1 rounded-badge text-xs font-bold border <?= $isOutOfStock ? 'bg-rose-50 text-rose-700 border-rose-200' : ($prod['stock'] <= 5 ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-slate-100 text-slate-700 border-slate-200') ?>">
-                                    <?= $prod['stock'] ?> unit
+                                    <?= $prod['stock'] ?> pcs
                                 </span>
                             </td>
 
                             <!-- Status -->
                             <td class="px-6 py-4">
-                                <?= ui_badge($prod['is_active'] ? 'Aktif' : 'Draft / Nonaktif', $prod['is_active'] ? 'brand' : 'neutral', ['dot' => true]) ?>
+                                <?= ui_badge($prod['is_active'] ? 'Active' : 'Draft / Inactive', $prod['is_active'] ? 'brand' : 'neutral', ['dot' => true]) ?>
                             </td>
 
                             <!-- Action Buttons -->
@@ -233,15 +233,15 @@ require_once __DIR__ . '/includes/admin_header.php';
                                     <a 
                                         href="<?= base_url('admin/product-form.php?id=' . $prod['id']) ?>" 
                                         class="p-2 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" 
-                                        title="Edit Produk">
+                                        title="Edit Product">
                                         <i class="ph ph-pencil-simple text-sm"></i>
                                     </a>
 
-                                    <form action="<?= base_url('admin/products.php') ?>" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.')">
+                                    <form action="<?= base_url('admin/products.php') ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this product? This action cannot be undone.')">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="product_id" value="<?= $prod['id'] ?>">
-                                        <button type="submit" class="p-2 rounded-btn bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" title="Hapus Produk">
+                                        <button type="submit" class="p-2 rounded-btn bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-700 font-bold transition border border-slate-200/80 apple-tap" title="Delete Product">
                                             <i class="ph ph-trash text-sm"></i>
                                         </button>
                                     </form>

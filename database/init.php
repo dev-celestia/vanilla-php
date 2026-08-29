@@ -17,7 +17,7 @@ function printMsg($msg, $isCli) {
 }
 
 if (!$isCli) {
-    echo "<!DOCTYPE html><html lang='id'><head><meta charset='UTF-8'><title>Database Setup - Vanilla Shop</title>";
+    echo "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Database Setup - Vanilla PHP</title>";
     echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
     echo "<script src='https://cdn.tailwindcss.com'></script>";
     echo "</head><body class='bg-slate-50 text-slate-800 p-6 min-h-screen flex items-center justify-center'>";
@@ -25,9 +25,9 @@ if (!$isCli) {
     echo "<div class='flex items-center space-x-3 mb-6'><div class='w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xl'>⚙️</div><h1 class='text-2xl font-bold text-slate-900'>Database Auto-Setup</h1></div>";
 }
 
-printMsg("🔄 Memulai inisialisasi database...", $isCli);
+printMsg("🔄 Starting database initialization...", $isCli);
 
-// 1. Coba koneksi ke MySQL server (tanpa database dulu untuk membuat database jika belum ada)
+// 1. Connect to MySQL server (without selecting db first to create database if not exists)
 $createdDb = false;
 try {
     $pdoRoot = new PDO(
@@ -38,12 +38,12 @@ try {
     );
     $pdoRoot->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
     $createdDb = true;
-    printMsg("✅ Database <strong>" . DB_NAME . "</strong> berhasil disiapkan pada MySQL server.", $isCli);
+    printMsg("✅ Database <strong>" . DB_NAME . "</strong> is ready on MySQL server.", $isCli);
 } catch (PDOException $e) {
-    printMsg("⚠️ Info MySQL: " . htmlspecialchars($e->getMessage()), $isCli);
+    printMsg("⚠️ MySQL Info: " . htmlspecialchars($e->getMessage()), $isCli);
 }
 
-// 2. Eksekusi skema tabel & seed data
+// 2. Execute table schema & seed data
 $db = getDB();
 
 if ($db) {
@@ -52,26 +52,26 @@ if ($db) {
         $sql = file_get_contents($sqlFile);
         try {
             $db->exec($sql);
-            printMsg("✅ Semua tabel (`admins`, `settings`, `categories`, `products`, `orders`, `order_items`) dan data awal berhasil diimpor!", $isCli);
+            printMsg("✅ All tables (`admins`, `settings`, `categories`, `products`, `orders`, `order_items`) and initial seed data imported successfully!", $isCli);
             printMsg("--------------------------------------------------", $isCli);
-            printMsg("🔑 <strong>Akun Admin Default:</strong>", $isCli);
+            printMsg("🔑 <strong>Default Admin Credentials:</strong>", $isCli);
             printMsg("   Username: <code>admin</code>", $isCli);
             printMsg("   Password: <code>password123</code>", $isCli);
             printMsg("--------------------------------------------------", $isCli);
         } catch (PDOException $e) {
-            printMsg("❌ Gagal mengeksekusi SQL: " . htmlspecialchars($e->getMessage()), $isCli);
+            printMsg("❌ Failed to execute SQL: " . htmlspecialchars($e->getMessage()), $isCli);
         }
     } else {
-        printMsg("❌ File `schema.sql` tidak ditemukan.", $isCli);
+        printMsg("❌ File `schema.sql` not found.", $isCli);
     }
 } else {
-    printMsg("❌ Tidak dapat tersambung ke database MySQL. Pastikan MySQL berjalan dan cek file <code>config/database.php</code>.", $isCli);
+    printMsg("❌ Unable to connect to MySQL database. Please verify MySQL is running and check <code>config/database.php</code>.", $isCli);
 }
 
 if (!$isCli) {
     echo "<div class='mt-6 pt-6 border-t border-slate-100 flex items-center justify-between'>";
-    echo "<a href='../index.php' class='inline-flex items-center px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl border border-emerald-500/20 transition'>Buka Toko Online →</a>";
-    echo "<a href='../admin/login.php' class='inline-flex items-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl border border-slate-800 transition'>Masuk Admin →</a>";
+    echo "<a href='../demo.php' class='inline-flex items-center px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl border border-emerald-500/20 transition'>Open Demo Store →</a>";
+    echo "<a href='../admin/login.php' class='inline-flex items-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl border border-slate-800 transition'>Admin Login →</a>";
     echo "</div>";
     echo "</div></body></html>";
 }

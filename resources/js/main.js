@@ -28,14 +28,14 @@ document.addEventListener('alpine:init', () => {
 
         if (existing) {
           if (product.stock && (existing.qty + quantityToAdd) > product.stock) {
-            alert('Maaf, jumlah pesanan melebihi stok yang tersedia (' + product.stock + ' unit).');
+            alert('Sorry, order quantity exceeds available stock (' + product.stock + ' units).');
             existing.qty = product.stock;
           } else {
             existing.qty += quantityToAdd;
           }
         } else {
           if (product.stock && quantityToAdd > product.stock) {
-            alert('Maaf, jumlah melebihi stok yang tersedia.');
+            alert('Sorry, quantity exceeds available stock.');
             return;
           }
           this.items.push({
@@ -58,7 +58,7 @@ document.addEventListener('alpine:init', () => {
           if (newQty <= 0) {
             this.removeItem(id);
           } else if (newQty > item.stock) {
-            alert('Maksimal stok tersedia: ' + item.stock);
+            alert('Maximum available stock: ' + item.stock);
           } else {
             item.qty = newQty;
             this.save();
@@ -85,11 +85,8 @@ document.addEventListener('alpine:init', () => {
       },
 
       formatRupiah(amount) {
-        return new Intl.NumberFormat('id-ID', {
-          style: 'currency',
-          currency: 'IDR',
-          minimumFractionDigits: 0
-        }).format(amount);
+        const num = parseFloat(amount) || 0;
+        return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
       }
     });
   }

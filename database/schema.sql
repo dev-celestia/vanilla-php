@@ -70,50 +70,49 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ==========================================
--- DATA AWAL (SEED DATA)
+-- INITIAL SEED DATA
 -- ==========================================
 
--- Admin Default: username: admin / password: password123
--- Hash Bcrypt dari password 'password123'
+-- Default Admin: username: admin / password: password123
 INSERT INTO `admins` (`id`, `username`, `password`, `name`, `email`) VALUES
-(1, 'admin', '$2y$10$eO1dI2eR96sZtJ9Z8F9/v.V0bX0gO7gMlmx7xK8/6C/e4q7Zp.q72', 'Admin Toko', 'admin@katalogstore.id')
+(1, 'admin', '$2y$10$eO1dI2eR96sZtJ9Z8F9/v.V0bX0gO7gMlmx7xK8/6C/e4q7Zp.q72', 'Store Administrator', 'admin@store.local')
 ON DUPLICATE KEY UPDATE `username`=`username`;
 
--- Pengaturan Toko Default
+-- Default Store Settings
 INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
-('store_name', 'KatalogStore Indonesia'),
-('store_slogan', 'Katalog Belanja Modern & Praktis via WhatsApp'),
-('store_description', 'Toko online terpercaya dengan berbagai produk pilihan terbaik. Pesan langsung dengan mudah via WhatsApp tanpa ribet!'),
-('whatsapp_number', '6281234567890'),
-('store_email', 'kontak@katalogstore.id'),
-('store_phone', '+62 812-3456-7890'),
-('store_address', 'Jl. Jenderal Sudirman No. 88, Karet Semanggi, Setiabudi, Jakarta Selatan 12930'),
-('currency', 'Rp'),
+('store_name', 'Store Showcase'),
+('store_slogan', 'Curated Modern Tech & Lifestyle'),
+('store_description', 'A modern e-commerce showcase built with Vanilla PHP UI primitives, Alpine.js reactive cart, and instant WhatsApp ordering.'),
+('whatsapp_number', '15552345678'),
+('store_email', 'contact@store.local'),
+('store_phone', '+1 (555) 234-5678'),
+('store_address', '742 Evergreen Terrace, Springfield, OR 97477'),
+('currency', '$'),
 ('instagram_url', 'https://instagram.com/'),
 ('facebook_url', 'https://facebook.com/'),
-('hero_title', 'Temukan Produk Terbaik Dengan Harga Terjangkau'),
-('hero_subtitle', 'Pilihan produk terlengkap untuk kebutuhan harian, gadget, fashion, dan rumah tangga dengan pengiriman ke seluruh Indonesia.'),
-('hero_badge', '🔥 Promo Spesial Hari Ini!'),
+('hero_title', 'Discover Premium Curated Products'),
+('hero_subtitle', 'Browse our curated catalog, add items to your interactive cart drawer, and place orders directly via WhatsApp.'),
+('hero_badge', '🔥 Special Showcase Deals!'),
 ('theme_primary_color', 'zinc'),
 ('theme_radius', 'standard')
 ON DUPLICATE KEY UPDATE `setting_key`=`setting_key`;
 
--- Kategori Produk
+-- Product Categories
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `image`, `is_active`) VALUES
-(1, 'Gadget & Elektronik', 'gadget-dan-elektronik', 'Pilihan gadget pintar, audio, dan aksesoris elektronik berkualitas tinggi.', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60', 1),
-(2, 'Fashion & Pakaian', 'fashion-dan-pakaian', 'Koleksi busana pria dan wanita kasual maupun formal modern.', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60', 1),
-(3, 'Perlengkapan Rumah', 'perlengkapan-rumah', 'Peralatan rumah tangga estetik, fungsional, dan ramah lingkungan.', 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=500&auto=format&fit=crop&q=60', 1),
-(4, 'Kesehatan & Kecantikan', 'kesehatan-dan-kecantikan', 'Produk perawatan kulit, tubuh, dan kesehatan alami pilihan.', 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&auto=format&fit=crop&q=60', 1)
+(1, 'Audio & Electronics', 'audio-and-electronics', 'High-fidelity audio, smart wearables, and electronic accessories.', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60', 1),
+(2, 'Fashion & Apparel', 'fashion-and-apparel', 'Modern casual and formal apparel collection for everyday living.', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60', 1),
+(3, 'Home & Living', 'home-and-living', 'Minimalist, aesthetic, and functional home & workspace decor.', 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=500&auto=format&fit=crop&q=60', 1),
+(4, 'Health & Beauty', 'health-and-beauty', 'Premium skincare, wellness essentials, and self-care products.', 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&auto=format&fit=crop&q=60', 1)
 ON DUPLICATE KEY UPDATE `name`=`name`;
 
--- Produk Pilihan
+-- Featured Showcase Products
 INSERT INTO `products` (`id`, `category_id`, `name`, `slug`, `description`, `price`, `promo_price`, `stock`, `image`, `is_featured`, `is_active`) VALUES
-(1, 1, 'Headphone Wireless Active Noise Cancelling ANC', 'headphone-wireless-active-noise-cancelling-anc', 'Headphone nirkabel premium dengan fitur Active Noise Cancelling (ANC) tingkat tinggi, suara bass bertenaga, daya tahan baterai hingga 40 jam, dan bantalan telinga yang empuk untuk kenyamanan sepanjang hari.', 799000, 649000, 25, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80', 1, 1),
-(2, 1, 'Smartwatch AMOLED Fitness Tracker V2', 'smartwatch-amoled-fitness-tracker-v2', 'Jam tangan pintar dengan layar AMOLED jernih, sensor detak jantung 24/7, SpO2, GPS internal, water resistant 5ATM, serta baterai awet hingga 14 hari pemakaian normal.', 899000, 749000, 18, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80', 1, 1),
-(3, 2, 'Tas Ransel Urban Anti-Air Laptop 15.6 Inch', 'tas-ransel-urban-anti-air-laptop-156-inch', 'Backpack minimalis tahan air (water repellent) berkapasitas besar, kompartemen laptop busa tebal hingga 15.6 inch, slot USB charger eksternal, dan desain ergonomis modern.', 389000, 299000, 40, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80', 1, 1),
-(4, 3, 'Diffuser Aromaterapi Ultrasonik Wood Grain 500ml', 'diffuser-aromaterapi-ultrasonik-wood-grain-500ml', 'Humidifier & diffuser aroma estetik dengan motif serat kayu alami, lampu LED 7 warna yang menenangkan, remote control nirkabel, dan sistem auto off saat air habis.', 249000, 199000, 30, 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80', 1, 1),
-(5, 3, 'Set Cangkir Keramik Estetik Nordic Minimalis', 'set-cangkir-keramik-estetik-nordic-minimalis', 'Set cangkir kopi dan teh keramik berkualitas tinggi dengan saucer dan sendok emas. Cocok untuk hadiah, perlengkapan kafe rumah, atau dekorasi meja santai.', 159000, NULL, 50, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80', 0, 1),
-(6, 1, 'Mechanical Keyboard Wireless RGB 75% Layout', 'mechanical-keyboard-wireless-rgb-75-layout', 'Keyboard mekanikal compact 75% dengan hot-swappable switch, koneksi triple mode (Bluetooth 5.0, 2.4Ghz dongle, & kabel Type-C), lampu RGB dinamis, dan keycaps PBT.', 650000, 575000, 15, 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop&q=80', 1, 1),
-(7, 2, 'Kacamata Hitam Polarized UV400 Classic Matte', 'kacamata-hitam-polarized-uv400-classic-matte', 'Kacamata sunglasses dengan lensa polarized anti silau dan proteksi sinar UV400 penuh. Frame ringan dari bahan polikarbonat fleksibel dan awet.', 189000, 129000, 60, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&auto=format&fit=crop&q=80', 0, 1),
-(8, 4, 'Serum Wajah Vitamin C + Hyaluronic Booster', 'serum-wajah-vitamin-c-hyaluronic-booster', 'Serum pencerah kulit wajah dengan formula stabil Vitamin C, Hyaluronic Acid 2%, dan Niacinamide untuk menyamarkan noda hitam serta menjaga kelembapan kulit secara intensif.', 175000, 139000, 45, 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80', 1, 1)
+(1, 1, 'Wireless Active Noise Cancelling Headphones ANC', 'wireless-active-noise-cancelling-headphones-anc', 'Premium wireless over-ear headphones with advanced Active Noise Cancellation (ANC), rich acoustic detail, 40-hour battery life, and plush memory foam earcups for all-day listening comfort.', 299.00, 249.00, 25, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80', 1, 1),
+(2, 1, 'AMOLED Smartwatch Fitness Tracker V2', 'amoled-smartwatch-fitness-tracker-v2', 'Smart wearable featuring a vivid AMOLED display, 24/7 heart rate & SpO2 biometric sensors, integrated GPS, 5ATM water resistance, and up to 14-day battery life.', 199.00, 149.00, 18, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80', 1, 1),
+(3, 2, 'Urban Water-Resistant Laptop Backpack 15.6"', 'urban-water-resistant-laptop-backpack-156-inch', 'Minimalist water-repellent backpack with dedicated 15.6" padded laptop sleeve, external quick-access USB port, and ergonomic breathable shoulder straps.', 89.00, 69.00, 40, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80', 1, 1),
+(4, 3, 'Ultrasonic Wood Grain Aromatherapy Diffuser 500ml', 'ultrasonic-wood-grain-aromatherapy-diffuser-500ml', 'Aesthetic natural wood grain humidifier and essential oil diffuser featuring 7 ambient LED mood lights, wireless remote, and auto-off safety protection.', 59.00, 45.00, 30, 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80', 1, 1),
+(5, 3, 'Minimalist Nordic Ceramic Mug & Saucer Set', 'minimalist-nordic-ceramic-mug-saucer-set', 'Artisanal matte ceramic coffee and tea set with matching saucer and gold stirring spoon. Perfect for home cafe baristas, gifts, or desk decor.', 35.00, NULL, 50, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80', 0, 1),
+(6, 1, 'Compact 75% Wireless Mechanical Keyboard RGB', 'compact-75-wireless-mechanical-keyboard-rgb', 'Compact 75% mechanical keyboard featuring hot-swappable switches, triple-mode connectivity (Bluetooth 5.0, 2.4GHz & USB-C), dynamic per-key RGB backlighting, and durable PBT keycaps.', 149.00, 119.00, 15, 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop&q=80', 1, 1),
+(7, 2, 'Classic Matte Polarized Sunglasses UV400', 'classic-matte-polarized-sunglasses-uv400', 'Timeless sunglasses engineered with anti-glare polarized lenses and complete UV400 optical protection. Ultra-lightweight flexible frame.', 49.00, 29.00, 60, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&auto=format&fit=crop&q=80', 0, 1),
+(8, 4, 'Vitamin C + Hyaluronic Booster Facial Serum', 'vitamin-c-hyaluronic-booster-facial-serum', 'Radiance boosting facial serum formulated with stable Vitamin C, 2% Hyaluronic Acid, and Niacinamide to brighten tone and restore deep hydration.', 39.00, 29.00, 45, 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80', 1, 1)
 ON DUPLICATE KEY UPDATE `name`=`name`;

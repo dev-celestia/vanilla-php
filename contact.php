@@ -8,7 +8,7 @@ require_once __DIR__ . '/helpers/format.php';
 require_once __DIR__ . '/helpers/csrf.php';
 
 $settings = get_settings();
-$page_title = 'Hubungi Kami - ' . ($settings['store_name'] ?? 'KatalogStore');
+$page_title = 'Contact Us - ' . ($settings['store_name'] ?? 'Store Showcase');
 
 $successMsg = null;
 $errorMsg = null;
@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = trim($_POST['message'] ?? '');
 
     if (empty($name) || empty($email) || empty($message)) {
-        $errorMsg = 'Mohon lengkapi seluruh formulir yang bertanda wajib.';
+        $errorMsg = 'Please complete all required fields.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errorMsg = 'Format alamat email yang Anda masukkan tidak valid.';
+        $errorMsg = 'The email address format is invalid.';
     } else {
-        $successMsg = 'Terima kasih telah menghubungi kami! Pesan Anda telah kami terima dan tim kami akan segera merespons melalui WhatsApp/Email.';
+        $successMsg = 'Thank you for reaching out! We have received your inquiry and our support team will respond shortly via WhatsApp/Email.';
     }
 }
 
@@ -40,13 +40,13 @@ require_once __DIR__ . '/includes/header.php';
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-badge bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-semibold mb-3 tracking-tight">
             <i class="ph ph-headset text-sm"></i>
-            <span>Layanan Pelanggan &amp; Bantuan</span>
+            <span>Customer Care &amp; Support</span>
         </span>
         <h1 class="text-2xl sm:text-4xl font-semibold tracking-tight text-white">
-            Hubungi <?= sanitize($settings['store_name'] ?? 'Official Store') ?>
+            Contact <?= sanitize($settings['store_name'] ?? 'Store Showcase') ?>
         </h1>
         <p class="text-slate-300 text-xs sm:text-sm sm:text-base mt-3 leading-relaxed max-w-2xl mx-auto">
-            Punya pertanyaan seputar ketersediaan produk, status pengiriman, atau ingin konsultasi belanja langsung? Kami siap membantu Anda.
+            Have questions regarding product availability, shipping status, or want instant shopping assistance? We're here to help.
         </p>
     </div>
 </section>
@@ -57,10 +57,10 @@ require_once __DIR__ . '/includes/header.php';
         <div class="flex items-center gap-2 text-xs text-slate-500">
             <a href="<?= base_url('demo.php') ?>" class="hover:text-brand-600 transition-colors flex items-center gap-1">
                 <i class="ph ph-storefront"></i>
-                <span>Katalog</span>
+                <span>Catalog</span>
             </a>
             <i class="ph ph-caret-right text-[10px] text-slate-400"></i>
-            <span class="text-slate-900 font-semibold">Hubungi Kami</span>
+            <span class="text-slate-900 font-semibold">Contact Us</span>
         </div>
     </div>
 </div>
@@ -71,38 +71,38 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Contact Information Cards -->
         <div class="lg:col-span-5 space-y-5">
             <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Kontak Resmi</span>
-                <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mt-1">Kami Siap Melayani Anda</h2>
-                <p class="text-xs sm:text-sm text-slate-500 mt-1">Pilih saluran komunikasi resmi yang paling nyaman untuk Anda.</p>
+                <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Official Channels</span>
+                <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mt-1">We're Ready to Help</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Choose the communication channel that works best for you.</p>
             </div>
 
             <!-- WhatsApp Card -->
             <?php 
-                $cleanWa = preg_replace('/[^0-9]/', '', $settings['whatsapp_number'] ?? '6281234567890');
-                $waText = urlencode("Halo Admin " . ($settings['store_name'] ?? 'Toko') . ", saya ingin bertanya seputar produk/pesanan.");
+                $cleanWa = preg_replace('/[^0-9]/', '', $settings['whatsapp_number'] ?? '15552345678');
+                $waText = urlencode("Hello Admin " . ($settings['store_name'] ?? 'Store') . ", I would like to inquire about products/orders.");
             ?>
             <a href="https://wa.me/<?= $cleanWa ?>?text=<?= $waText ?>" target="_blank" class="p-5 rounded-card bg-white border border-slate-200/80 hover:border-brand-400 hover:shadow-sm transition-all block apple-tap group">
                 <div class="flex items-center gap-4">
                     <?= ui_icon_box('whatsapp-logo', 'brand', ['size' => 'lg']) ?>
                     <div class="flex-grow">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-sm font-semibold text-slate-900 tracking-tight group-hover:text-brand-600 transition-colors">WhatsApp Customer Service</h4>
+                            <h4 class="text-sm font-semibold text-slate-900 tracking-tight group-hover:text-brand-600 transition-colors">WhatsApp Customer Support</h4>
                             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                         </div>
-                        <p class="text-xs text-slate-500 mt-0.5"><?= sanitize($settings['whatsapp_number'] ?? '+62 812-3456-7890') ?></p>
-                        <span class="text-[11px] font-semibold text-brand-600 mt-1.5 inline-flex items-center gap-1">Chat WhatsApp Langsung <i class="ph ph-arrow-right group-hover:translate-x-0.5 transition-transform"></i></span>
+                        <p class="text-xs text-slate-500 mt-0.5"><?= sanitize($settings['whatsapp_number'] ?? '+1 (555) 234-5678') ?></p>
+                        <span class="text-[11px] font-semibold text-brand-600 mt-1.5 inline-flex items-center gap-1">Chat on WhatsApp <i class="ph ph-arrow-right group-hover:translate-x-0.5 transition-transform"></i></span>
                     </div>
                 </div>
             </a>
 
             <!-- Email Card -->
-            <a href="mailto:<?= sanitize($settings['store_email'] ?? 'support@toko.com') ?>" class="p-5 rounded-card bg-white border border-slate-200/80 hover:border-brand-400 hover:shadow-sm transition-all block apple-tap group">
+            <a href="mailto:<?= sanitize($settings['store_email'] ?? 'contact@store.local') ?>" class="p-5 rounded-card bg-white border border-slate-200/80 hover:border-brand-400 hover:shadow-sm transition-all block apple-tap group">
                 <div class="flex items-center gap-4">
                     <?= ui_icon_box('envelope-simple', 'slate', ['size' => 'lg']) ?>
                     <div>
-                        <h4 class="text-sm font-semibold text-slate-900 tracking-tight group-hover:text-brand-600 transition-colors">Email Resmi</h4>
-                        <p class="text-xs text-slate-500 mt-0.5"><?= sanitize($settings['store_email'] ?? 'support@toko.com') ?></p>
-                        <span class="text-[11px] text-slate-400 mt-1 block">Respons balasan dalam 1x24 jam kerja</span>
+                        <h4 class="text-sm font-semibold text-slate-900 tracking-tight group-hover:text-brand-600 transition-colors">Official Email</h4>
+                        <p class="text-xs text-slate-500 mt-0.5"><?= sanitize($settings['store_email'] ?? 'contact@store.local') ?></p>
+                        <span class="text-[11px] text-slate-400 mt-1 block">Replies within 24 business hours</span>
                     </div>
                 </div>
             </a>
@@ -112,9 +112,9 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="flex items-start gap-4">
                     <?= ui_icon_box('map-pin', 'slate', ['size' => 'lg']) ?>
                     <div>
-                        <h4 class="text-sm font-semibold text-slate-900 tracking-tight">Lokasi &amp; Alamat Toko</h4>
+                        <h4 class="text-sm font-semibold text-slate-900 tracking-tight">Store Location &amp; Address</h4>
                         <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                            <?= nl2br(sanitize($settings['store_address'] ?? 'Jl. Jenderal Sudirman No. 123, Jakarta Selatan, Indonesia')) ?>
+                            <?= nl2br(sanitize($settings['store_address'] ?? '742 Evergreen Terrace, Springfield, OR 97477')) ?>
                         </p>
                     </div>
                 </div>
@@ -122,9 +122,9 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                     <span class="flex items-center gap-1.5">
                         <i class="ph ph-clock text-slate-400"></i>
-                        <span>Jam Operasional:</span>
+                        <span>Operating Hours:</span>
                     </span>
-                    <span class="font-semibold text-slate-700">08:00 - 21:00 WIB</span>
+                    <span class="font-semibold text-slate-700">08:00 AM - 09:00 PM</span>
                 </div>
             </div>
         </div>
@@ -133,28 +133,28 @@ require_once __DIR__ . '/includes/header.php';
         <div class="lg:col-span-7">
             <div class="p-6 sm:p-8 rounded-card bg-white border border-slate-200/80">
                 <div class="mb-6">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Formulir Pesan</span>
-                    <h3 class="text-xl font-semibold text-slate-900 tracking-tight mt-1">Kirim Pesan ke Customer Service</h3>
-                    <p class="text-xs text-slate-500 mt-0.5">Silakan isi formulir di bawah ini, tim representatif kami akan segera menghubungi Anda kembali.</p>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Send Message</span>
+                    <h3 class="text-xl font-semibold text-slate-900 tracking-tight mt-1">Leave Us a Message</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Please fill out the form below and our representative will get back to you promptly.</p>
                 </div>
 
                 <?php if ($successMsg): ?>
                     <div class="mb-6">
-                        <?= ui_alert($successMsg, 'success', ['title' => 'Pesan Berhasil Terkirim!']) ?>
+                        <?= ui_alert($successMsg, 'success', ['title' => 'Message Sent Successfully!']) ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($errorMsg): ?>
                     <div class="mb-6">
-                        <?= ui_alert($errorMsg, 'danger', ['title' => 'Pemberitahuan']) ?>
+                        <?= ui_alert($errorMsg, 'danger', ['title' => 'Notice']) ?>
                     </div>
                 <?php endif; ?>
 
                 <form method="POST" action="<?= base_url('contact.php') ?>" class="space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <?= ui_input('name', [
-                            'label'       => 'Nama Lengkap *',
-                            'placeholder' => 'Contoh: Ahmad Pratama',
+                            'label'       => 'Full Name *',
+                            'placeholder' => 'e.g. John Doe',
                             'required'    => true,
                             'icon'        => 'user',
                             'value'       => $_POST['name'] ?? '',
@@ -162,8 +162,8 @@ require_once __DIR__ . '/includes/header.php';
 
                         <?= ui_input('email', [
                             'type'        => 'email',
-                            'label'       => 'Alamat Email *',
-                            'placeholder' => 'nama@domain.com',
+                            'label'       => 'Email Address *',
+                            'placeholder' => 'john@example.com',
                             'required'    => true,
                             'icon'        => 'envelope-simple',
                             'value'       => $_POST['email'] ?? '',
@@ -173,30 +173,30 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <?= ui_input('phone', [
                             'type'        => 'tel',
-                            'label'       => 'Nomor WhatsApp / HP',
-                            'placeholder' => '0812-xxxx-xxxx',
+                            'label'       => 'WhatsApp / Phone Number',
+                            'placeholder' => '+1 (555) 234-5678',
                             'icon'        => 'phone',
                             'value'       => $_POST['phone'] ?? '',
                         ]) ?>
 
                         <?= ui_input('subject', [
-                            'label'       => 'Subjek / No. Pesanan',
-                            'placeholder' => 'Contoh: Tanya stok barang / #ORD-1234',
+                            'label'       => 'Subject / Order No.',
+                            'placeholder' => 'e.g. Stock inquiry / #ORD-1234',
                             'icon'        => 'chat-teardrop-text',
                             'value'       => $_POST['subject'] ?? '',
                         ]) ?>
                     </div>
 
                     <?= ui_textarea('message', [
-                        'label'       => 'Pesan atau Pertanyaan Anda *',
-                        'placeholder' => 'Tuliskan detail pertanyaan atau pesanan Anda di sini...',
+                        'label'       => 'Your Message or Question *',
+                        'placeholder' => 'Describe your question or order details here...',
                         'required'    => true,
                         'rows'        => 5,
                         'value'       => $_POST['message'] ?? '',
                     ]) ?>
 
                     <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <?= ui_button('Kirim Pesan Sekarang', [
+                        <?= ui_button('Send Message Now', [
                             'type'    => 'submit',
                             'variant' => 'primary',
                             'size'    => 'lg',
@@ -204,7 +204,7 @@ require_once __DIR__ . '/includes/header.php';
                             'class'   => 'w-full sm:w-auto',
                         ]) ?>
                         <span class="text-[11px] text-slate-400 text-center sm:text-right">
-                            <i class="ph ph-shield-check text-emerald-500 mr-0.5"></i> Data Anda terlindungi aman
+                            <i class="ph ph-shield-check text-emerald-500 mr-0.5"></i> Your information is safely encrypted
                         </span>
                     </div>
                 </form>

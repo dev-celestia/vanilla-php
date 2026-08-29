@@ -24,7 +24,7 @@ if ($db) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +64,7 @@ if ($db) {
                         <i class="ph ph-shield-check text-xl"></i>
                     </div>
                     <div>
-                        <span class="font-semibold text-sm text-white tracking-tight block">Panel Admin</span>
+                        <span class="font-semibold text-sm text-white tracking-tight block">Admin Panel</span>
                         <span class="text-[11px] text-slate-500 truncate block max-w-[120px]"><?= sanitize($settings['store_name']) ?></span>
                     </div>
                 </a>
@@ -79,21 +79,21 @@ if ($db) {
                     href="<?= base_url('admin/index.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= !isset($active_menu) || $active_menu === 'dashboard' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-squares-four text-base"></i>
-                    <span>Dashboard Utama</span>
+                    <span>Main Dashboard</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/products.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'products' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-package text-base"></i>
-                    <span>Katalog Produk</span>
+                    <span>Product Catalog</span>
                 </a>
 
                 <a 
                     href="<?= base_url('admin/categories.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'categories' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-tag text-base"></i>
-                    <span>Kategori Produk</span>
+                    <span>Product Categories</span>
                 </a>
 
                 <a 
@@ -101,7 +101,7 @@ if ($db) {
                     class="flex items-center justify-between px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'orders' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <div class="flex items-center gap-3">
                         <i class="ph ph-shopping-cart text-base"></i>
-                        <span>Pesanan WhatsApp</span>
+                        <span>WhatsApp Orders</span>
                     </div>
                     <?php if ($pendingOrdersCount > 0): ?>
                         <span class="px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-semibold">
@@ -114,7 +114,7 @@ if ($db) {
                     href="<?= base_url('admin/settings.php') ?>" 
                     class="flex items-center gap-3 px-3.5 py-3 rounded-btn transition apple-tap <?= isset($active_menu) && $active_menu === 'settings' ? 'bg-brand-600 text-white font-semibold border border-brand-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800/80 border border-transparent' ?>">
                     <i class="ph ph-gear text-base"></i>
-                    <span>Pengaturan Toko & WA</span>
+                    <span>Store &amp; WA Settings</span>
                 </a>
             </nav>
         </div>
@@ -122,11 +122,11 @@ if ($db) {
         <!-- Bottom User & Storefront Link -->
         <div class="p-4 border-t border-slate-800 space-y-2">
             <a 
-                href="<?= base_url() ?>" 
+                href="<?= base_url('demo.php') ?>" 
                 target="_blank" 
                 class="flex items-center gap-2 px-3 py-2 rounded-btn text-slate-400 hover:text-brand-300 hover:bg-slate-800 text-xs transition apple-tap">
                 <i class="ph ph-arrow-square-out text-base"></i>
-                <span>Lihat Website Toko</span>
+                <span>View Live Storefront</span>
             </a>
 
             <div class="pt-2 border-t border-slate-800/60 flex items-center justify-between px-1">
@@ -140,7 +140,7 @@ if ($db) {
                     </div>
                 </div>
 
-                <a href="<?= base_url('admin/logout.php') ?>" onclick="return confirm('Apakah Anda yakin ingin logout?')" class="text-slate-400 hover:text-rose-400 p-1.5 rounded-btn hover:bg-slate-800 transition apple-tap" title="Keluar">
+                <a href="<?= base_url('admin/logout.php') ?>" onclick="return confirm('Are you sure you want to log out?')" class="text-slate-400 hover:text-rose-400 p-1.5 rounded-btn hover:bg-slate-800 transition apple-tap" title="Logout">
                     <i class="ph ph-sign-out text-base"></i>
                 </a>
             </div>
@@ -159,12 +159,12 @@ if ($db) {
                 </button>
                 <div>
                     <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight"><?= sanitize($page_title ?? 'Dashboard') ?></h1>
-                    <p class="text-xs text-slate-400 hidden sm:block">Kelola katalog dan pemesanan dengan mudah.</p>
+                    <p class="text-xs text-slate-400 hidden sm:block">Manage your product catalog and customer orders easily.</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-3">
-                <?= ui_button('Tambah Produk', [
+                <?= ui_button('Add Product', [
                     'variant' => 'primary',
                     'size'    => 'sm',
                     'href'    => base_url('admin/product-form.php'),

@@ -42,9 +42,9 @@
                                 <i class="ph ph-shopping-bag text-xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-base font-semibold text-slate-900" id="slide-over-title">Keranjang Belanja</h2>
+                                <h2 class="text-base font-semibold text-slate-900" id="slide-over-title">Shopping Cart</h2>
                                 <p class="text-xs text-slate-500">
-                                    <span x-text="$store.cart.count">0</span> item dipilih
+                                    <span x-text="$store.cart.count">0</span> items selected
                                 </p>
                             </div>
                         </div>
@@ -65,13 +65,13 @@
                                 <div class="w-16 h-16 rounded-full bg-slate-100 border border-slate-200/80 text-slate-400 flex items-center justify-center mx-auto mb-4">
                                     <i class="ph ph-shopping-cart text-3xl"></i>
                                 </div>
-                                <h3 class="text-base font-semibold text-slate-800 mb-1">Keranjang Masih Kosong</h3>
-                                <p class="text-xs text-slate-500 max-w-xs mx-auto mb-6">Yuk temukan produk-produk menarik pilihan kami dan tambahkan ke keranjang.</p>
+                                <h3 class="text-base font-semibold text-slate-800 mb-1">Your Cart is Empty</h3>
+                                <p class="text-xs text-slate-500 max-w-xs mx-auto mb-6">Discover our curated products and add them to your cart.</p>
                                 <button 
                                     type="button" 
                                     @click="$store.cart.isOpen = false"
                                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition border border-brand-500/20 apple-tap">
-                                    <span>Mulai Belanja Sekarang</span>
+                                    <span>Start Shopping Now</span>
                                     <i class="ph ph-arrow-right text-xs"></i>
                                 </button>
                             </div>
@@ -94,7 +94,7 @@
                                             type="button" 
                                             @click="$store.cart.removeItem(item.id)" 
                                             class="text-slate-400 hover:text-rose-500 transition p-1 apple-tap" 
-                                            title="Hapus">
+                                            title="Remove">
                                             <i class="ph ph-trash text-sm"></i>
                                         </button>
                                     </div>
@@ -130,24 +130,24 @@
                             <!-- Subtotal calculation -->
                             <div class="space-y-1.5">
                                 <div class="flex justify-between text-xs text-slate-500">
-                                    <span>Subtotal Produk</span>
+                                    <span>Subtotal</span>
                                     <span class="font-medium text-slate-700" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                                 </div>
                                 <div class="flex justify-between text-sm font-semibold text-slate-900 pt-1 border-t border-slate-200/80">
-                                    <span>Total Estimasi</span>
+                                    <span>Estimated Total</span>
                                     <span class="text-brand-600 text-base" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
-                                <?= ui_button('Lihat Rincian', [
+                                <?= ui_button('View Details', [
                                     'variant' => 'secondary',
                                     'size'    => 'sm',
                                     'href'    => base_url('cart.php'),
                                     'icon'    => 'eye',
                                     'class'   => 'w-full text-center',
                                 ]) ?>
-                                <?= ui_button('Pesan via WA', [
+                                <?= ui_button('Order via WA', [
                                     'variant' => 'primary',
                                     'size'    => 'sm',
                                     'href'    => base_url('checkout.php'),
@@ -157,7 +157,7 @@
                             </div>
 
                             <p class="text-[11px] text-slate-400 text-center">
-                                🔒 Pesanan akan diteruskan langsung ke WhatsApp Admin resmi.
+                                🔒 Orders are forwarded directly to the official WhatsApp Admin.
                             </p>
                         </div>
                     </template>

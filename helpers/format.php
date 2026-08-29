@@ -5,7 +5,19 @@
 
 function format_rupiah(float|int|string|null $amount): string {
     $num = (float)($amount ?? 0);
-    return 'Rp ' . number_format($num, 0, ',', '.');
+    // If integer and large (like IDR), format with Rp or format as currency
+    $settings = function_exists('get_settings') ? get_settings() : [];
+    $currency = $settings['currency'] ?? '$';
+    
+    if ($currency === 'Rp' || $currency === 'IDR') {
+        return 'Rp ' . number_format($num, 0, ',', '.');
+    }
+    
+    // Default standard USD / English currency format
+    if (floor($num) == $num) {
+        return $currency . number_format($num, 0, '.', ',');
+    }
+    return $currency . number_format($num, 2, '.', ',');
 }
 
 function sanitize(?string $str): string {
@@ -30,15 +42,15 @@ function slugify(string $text): string {
     return empty($text) ? 'item-' . time() : $text;
 }
 
-function format_date(?string $datetime, string $format = 'd M Y, H:i'): string {
+function format_date(?string $datetime, string $format = 'M d, Y, H:i'): string {
     if (empty($datetime)) return '-';
     $timestamp = strtotime($datetime);
     if (!$timestamp) return $datetime;
 
     $months = [
-        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
-        5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
-        9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr',
+        5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug',
+        9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'
     ];
 
     $d = date('d', $timestamp);
@@ -46,9 +58,10 @@ function format_date(?string $datetime, string $format = 'd M Y, H:i'): string {
     $y = date('Y', $timestamp);
     $time = date('H:i', $timestamp);
 
-    return "$d {$months[$m]} $y, $time WIB";
+    return "$d {$months[$m]} $y, $time";
 }
 
 function generate_order_number(): string {
     return 'ORD-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -5));
 }
+

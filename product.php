@@ -59,11 +59,11 @@ $imgUrl = upload_url($product['image']);
 
 // Format WhatsApp direct message for single item
 $waNumber = preg_replace('/[^0-9]/', '', get_settings()['whatsapp_number']);
-$waDirectText = "Halo Admin " . get_settings()['store_name'] . ", saya ingin memesan:\n\n"
-              . "• Produk: " . $product['name'] . "\n"
-              . "• Harga: " . format_rupiah($currentPrice) . "\n"
+$waDirectText = "Hello Admin " . get_settings()['store_name'] . ", I would like to order:\n\n"
+              . "• Product: " . $product['name'] . "\n"
+              . "• Price: " . format_rupiah($currentPrice) . "\n"
               . "• Link: " . base_url('product.php?id=' . $product['id']) . "\n\n"
-              . "Mohon info ketersediaan stok & ongkirnya ya. Terima kasih!";
+              . "Please let me know about stock availability & shipping cost. Thank you!";
 $waDirectUrl = "https://wa.me/{$waNumber}?text=" . urlencode($waDirectText);
 
 require_once __DIR__ . '/includes/header.php';
@@ -71,9 +71,9 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- Breadcrumb Primitive -->
 <?= ui_breadcrumb([
-    ['label' => 'Beranda', 'href' => base_url()],
-    ['label' => 'Demo E-Commerce', 'href' => base_url('demo.php')],
-    ['label' => $product['category_name'] ?? 'Kategori', 'href' => base_url('demo.php?category=' . $product['category_id'])],
+    ['label' => 'Home', 'href' => base_url()],
+    ['label' => 'Demo Store', 'href' => base_url('demo.php')],
+    ['label' => $product['category_name'] ?? 'Category', 'href' => base_url('demo.php?category=' . $product['category_id'])],
     ['label' => $product['name']]
 ]) ?>
 
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
                     >
                     <?php if ($hasPromo): ?>
                         <div class="absolute top-6 left-6">
-                            <?= ui_badge('HEMAT ' . $discountPct . '%', 'danger') ?>
+                            <?= ui_badge('SAVE ' . $discountPct . '%', 'danger') ?>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -102,12 +102,12 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="p-3 bg-white rounded-card border border-slate-200/80">
                         <?= ui_icon_box('package', 'brand', ['size' => 'md', 'class' => 'mx-auto mb-1']) ?>
                         <p class="text-[11px] font-semibold text-slate-800 tracking-tight">Quality Check</p>
-                        <p class="text-[10px] text-slate-500">Dicek sebelum kirim</p>
+                        <p class="text-[10px] text-slate-500">Inspected before dispatch</p>
                     </div>
                     <div class="p-3 bg-white rounded-card border border-slate-200/80">
                         <?= ui_icon_box('truck', 'brand', ['size' => 'md', 'class' => 'mx-auto mb-1']) ?>
-                        <p class="text-[11px] font-semibold text-slate-800 tracking-tight">Pengiriman Cepat</p>
-                        <p class="text-[10px] text-slate-500">Packing aman bubble wrap</p>
+                        <p class="text-[11px] font-semibold text-slate-800 tracking-tight">Fast Dispatch</p>
+                        <p class="text-[10px] text-slate-500">Carefully packaged &amp; protected</p>
                     </div>
                 </div>
             </div>
@@ -119,8 +119,8 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Category & Title -->
             <div>
                 <div class="flex items-center gap-2 mb-2">
-                    <?= ui_badge(sanitize($product['category_name'] ?? 'Katalog'), 'brand') ?>
-                    <?= ui_badge($isOutOfStock ? 'Stok Habis' : 'Sisa Stok: ' . $product['stock'] . ' unit', $isOutOfStock ? 'danger' : 'neutral', ['dot' => true]) ?>
+                    <?= ui_badge(sanitize($product['category_name'] ?? 'Catalog'), 'brand') ?>
+                    <?= ui_badge($isOutOfStock ? 'Out of Stock' : 'In Stock: ' . $product['stock'] . ' units', $isOutOfStock ? 'danger' : 'neutral', ['dot' => true]) ?>
                 </div>
 
                 <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 leading-tight tracking-tight">
@@ -131,7 +131,7 @@ require_once __DIR__ . '/includes/header.php';
             <!-- Price Container (Flat Crisp Border, Zero Shadow) -->
             <div class="p-5 rounded-card bg-brand-50/60 border border-brand-200/80 flex items-center justify-between">
                 <div>
-                    <span class="text-xs text-slate-500 block mb-0.5">Harga Spesial</span>
+                    <span class="text-xs text-slate-500 block mb-0.5">Special Price</span>
                     <div class="flex items-baseline gap-3">
                         <span class="text-3xl font-semibold text-brand-600 tracking-tight">
                             <?= format_rupiah($currentPrice) ?>
@@ -145,14 +145,14 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
 
                 <?php if ($hasPromo): ?>
-                    <?= ui_badge('Diskon ' . $discountPct . '%', 'danger') ?>
+                    <?= ui_badge('Discount ' . $discountPct . '%', 'danger') ?>
                 <?php endif; ?>
             </div>
 
             <!-- Quantity Selector & Actions -->
             <div class="space-y-4 pt-2">
                 <div class="flex items-center gap-4">
-                    <span class="text-xs font-semibold text-slate-700 tracking-tight">Jumlah Pesanan:</span>
+                    <span class="text-xs font-semibold text-slate-700 tracking-tight">Quantity:</span>
                     <div class="flex items-center border border-slate-200/90 rounded-btn bg-white overflow-hidden">
                         <button 
                             type="button" 
@@ -174,7 +174,7 @@ require_once __DIR__ . '/includes/header.php';
                             +
                         </button>
                     </div>
-                    <span class="text-xs text-slate-400">Tersedia <?= $product['stock'] ?> pcs</span>
+                    <span class="text-xs text-slate-400">Available: <?= $product['stock'] ?> pcs</span>
                 </div>
 
                 <!-- CTA Buttons (Apple Tactile) -->
@@ -191,10 +191,10 @@ require_once __DIR__ . '/includes/header.php';
                         }, orderQty)"
                         class="w-full py-3.5 px-5 rounded-btn <?= $isOutOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300' : 'bg-slate-900 hover:bg-slate-800 text-white border border-slate-800' ?> font-semibold text-sm transition apple-tap flex items-center justify-center gap-2">
                         <i class="ph ph-shopping-cart text-base"></i>
-                        <span>Tambah ke Keranjang</span>
+                        <span>Add to Cart</span>
                     </button>
 
-                    <?= ui_button('Pesan Cepat via WhatsApp', [
+                    <?= ui_button('Fast Order via WhatsApp', [
                         'variant' => 'primary',
                         'size'    => 'lg',
                         'href'    => $waDirectUrl,
@@ -207,9 +207,9 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- Description -->
             <div class="pt-6 border-t border-slate-200/80 space-y-3">
-                <h3 class="text-xs font-semibold text-slate-900 uppercase tracking-wider">Deskripsi Lengkap Produk</h3>
+                <h3 class="text-xs font-semibold text-slate-900 uppercase tracking-wider">Product Description</h3>
                 <div class="text-sm text-slate-600 leading-relaxed whitespace-pre-line bg-white p-6 rounded-card border border-slate-200/80">
-                    <?= nl2br(sanitize($product['description'] ?? 'Belum ada deskripsi untuk produk ini.')) ?>
+                    <?= nl2br(sanitize($product['description'] ?? 'No description available for this product.')) ?>
                 </div>
             </div>
 
@@ -221,11 +221,11 @@ require_once __DIR__ . '/includes/header.php';
         <div class="mt-20 pt-12 border-t border-slate-200/80">
             <div class="flex items-center justify-between mb-8">
                 <div>
-                    <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Rekomendasi</span>
-                    <h2 class="text-xl font-semibold text-slate-900 tracking-tight">Produk Terkait Lainnya</h2>
+                    <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Recommendations</span>
+                    <h2 class="text-xl font-semibold text-slate-900 tracking-tight">Related Products</h2>
                 </div>
                 <a href="<?= base_url('demo.php?category=' . $product['category_id']) ?>" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
-                    <span>Lihat Lainnya</span>
+                    <span>View More</span>
                     <i class="ph ph-arrow-right text-xs"></i>
                 </a>
             </div>

@@ -128,7 +128,6 @@ Buka URL **`http://localhost:8000/scaffold.php`** langsung di peramban, masukkan
    - **Showcase / Landing Page** (`index.php`)
    - **Living Style Guide & Token Explorer** (`design-system.php`)
    - **Interactive Component Library & Docs** (`components.php`)
-   - **Filosofi Arsitektur** (`about.php`)
    - **Kontak & Pesan** (`contact.php`)
    - **Demo Storefront** (`demo.php`), Detail (`product.php`), Keranjang (`cart.php`), Checkout (`checkout.php`), & Sukses (`order-success.php`).
 

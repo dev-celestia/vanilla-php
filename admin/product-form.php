@@ -12,7 +12,7 @@ require_once __DIR__ . '/../helpers/upload.php';
 $db = getDB();
 $editId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $isEdit = $editId > 0;
-$page_title = $isEdit ? 'Ubah Informasi Produk' : 'Tambah Produk Baru';
+$page_title = $isEdit ? 'Edit Product Details' : 'Add New Product';
 
 $product = [
     'id'          => null,
@@ -43,7 +43,7 @@ if ($isEdit && $db) {
     if ($found) {
         $product = $found;
     } else {
-        set_flash('error', 'Produk tidak ditemukan.');
+        set_flash('error', 'Product not found.');
         header('Location: ' . base_url('admin/products.php'));
         exit;
     }
@@ -54,7 +54,7 @@ $error = null;
 // Handle Form Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
-        $error = 'Sesi form telah kedaluwarsa. Silakan muat ulang dan coba lagi.';
+        $error = 'Form session expired. Please reload and try again.';
     } else {
         $name = trim($_POST['name'] ?? '');
         $categoryId = !empty($_POST['category_id']) ? (int)$_POST['category_id'] : null;
@@ -67,9 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imageInputUrl = trim($_POST['image_url'] ?? '');
 
         if (empty($name)) {
-            $error = 'Nama produk wajib diisi.';
+            $error = 'Product name is required.';
         } elseif ($price <= 0) {
-            $error = 'Harga produk harus lebih dari 0.';
+            $error = 'Product price must be greater than 0.';
         } else {
             $slug = slugify($name);
 
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ':id'          => $editId
                         ]);
 
-                        set_flash('success', 'Produk berhasil diperbarui.');
+                        set_flash('success', 'Product updated successfully.');
                     } else {
                         $insertSql = "INSERT INTO products (category_id, name, slug, description, price, promo_price, stock, image, is_featured, is_active) 
                                       VALUES (:category_id, :name, :slug, :description, :price, :promo_price, :stock, :image, :is_featured, :is_active)";
@@ -150,14 +150,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ':is_active'   => $isActive
                         ]);
 
-                        set_flash('success', 'Produk baru berhasil ditambahkan.');
+                        set_flash('success', 'New product added successfully.');
                     }
 
                     header('Location: ' . base_url('admin/products.php'));
                     exit;
 
                 } catch (PDOException $e) {
-                    $error = 'Gagal menyimpan produk: ' . $e->getMessage();
+                    $error = 'Failed to save product: ' . $e->getMessage();
                 }
             }
         }
@@ -173,12 +173,12 @@ require_once __DIR__ . '/includes/admin_header.php';
     <div class="flex items-center justify-between">
         <a href="<?= base_url('admin/products.php') ?>" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 transition apple-tap">
             <i class="ph ph-arrow-left text-sm"></i>
-            <span>Kembali ke Daftar Produk</span>
+            <span>Back to Product List</span>
         </a>
         <?php if ($isEdit): ?>
             <a href="<?= base_url('product.php?id=' . $editId) ?>" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:underline">
                 <i class="ph ph-arrow-square-out text-xs"></i>
-                <span>Lihat di Website Toko</span>
+                <span>View on Live Store</span>
             </a>
         <?php endif; ?>
     </div>
@@ -203,13 +203,13 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="space-y-4">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
                 <i class="ph ph-package text-base text-brand-600"></i>
-                <span>Informasi Dasar Produk</span>
+                <span>Basic Product Information</span>
             </h3>
 
             <div>
                 <?= ui_input('name', [
-                    'label'       => 'Nama Produk',
-                    'placeholder' => 'Contoh: Headphone Wireless ANC Pro',
+                    'label'       => 'Product Name',
+                    'placeholder' => 'e.g. Wireless Noise Cancelling Headphones ANC Pro',
                     'value'       => $_POST['name'] ?? $product['name'],
                     'required'    => true,
                 ]) ?>
@@ -217,21 +217,21 @@ require_once __DIR__ . '/includes/admin_header.php';
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <?php
-                    $catOptions = ['' => 'Pilih Kategori Produk...'];
+                    $catOptions = ['' => 'Select Product Category...'];
                     foreach ($categories as $cat) {
                         $catOptions[$cat['id']] = $cat['name'];
                     }
                     $selectedCat = (string)(isset($_POST['category_id']) ? $_POST['category_id'] : $product['category_id']);
                 ?>
                 <?= ui_select('category_id', $catOptions, [
-                    'label'    => 'Kategori Produk',
+                    'label'    => 'Product Category',
                     'selected' => $selectedCat,
                 ]) ?>
 
                 <?= ui_input('stock', [
-                    'label'       => 'Jumlah Stok Tersedia',
+                    'label'       => 'Available Inventory Stock',
                     'type'        => 'number',
-                    'placeholder' => 'Contoh: 25',
+                    'placeholder' => 'e.g. 25',
                     'value'       => $_POST['stock'] ?? $product['stock'],
                     'required'    => true,
                     'attrs'       => 'min="0"',
@@ -243,27 +243,27 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
                 <i class="ph ph-currency-dollar text-base text-brand-600"></i>
-                <span>Harga & Promo</span>
+                <span>Pricing &amp; Promotion</span>
             </h3>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <?= ui_input('price', [
-                    'label'       => 'Harga Normal (Rp)',
+                    'label'       => 'Regular Price ($)',
                     'type'        => 'number',
-                    'placeholder' => 'Contoh: 750000',
+                    'placeholder' => 'e.g. 199.00',
                     'value'       => $_POST['price'] ?? $product['price'],
                     'required'    => true,
-                    'helper'      => 'Masukkan angka tanpa titik atau koma.',
-                    'attrs'       => 'min="1" step="100"',
+                    'helper'      => 'Standard selling price.',
+                    'attrs'       => 'min="0.01" step="0.01"',
                 ]) ?>
 
                 <?= ui_input('promo_price', [
-                    'label'       => 'Harga Diskon / Promo (Rp) (Opsional)',
+                    'label'       => 'Discount / Promo Price ($) (Optional)',
                     'type'        => 'number',
-                    'placeholder' => 'Contoh: 599000',
+                    'placeholder' => 'e.g. 149.00',
                     'value'       => $_POST['promo_price'] ?? $product['promo_price'],
-                    'helper'      => 'Kosongkan jika tidak ada harga diskon.',
-                    'attrs'       => 'min="0" step="100"',
+                    'helper'      => 'Leave blank if not on discount.',
+                    'attrs'       => 'min="0" step="0.01"',
                 ]) ?>
             </div>
         </div>
@@ -272,18 +272,18 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
                 <i class="ph ph-image text-base text-brand-600"></i>
-                <span>Foto Produk</span>
+                <span>Product Image</span>
             </h3>
 
             <div class="flex flex-col sm:flex-row items-start gap-6">
                 <!-- Preview Thumbnail (Zero Shadow, Crisp Border) -->
                 <div class="w-32 h-32 rounded-card overflow-hidden border border-slate-200/90 bg-slate-50 flex items-center justify-center flex-shrink-0">
-                    <img :src="previewImage" alt="Preview Foto" class="w-full h-full object-cover">
+                    <img :src="previewImage" alt="Preview Image" class="w-full h-full object-cover">
                 </div>
 
                 <div class="space-y-3 flex-1 min-w-0">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5 tracking-tight">Unggah Foto dari Komputer</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5 tracking-tight">Upload Image from Computer</label>
                         <input 
                             type="file" 
                             name="image_file" 
@@ -291,12 +291,12 @@ require_once __DIR__ . '/includes/admin_header.php';
                             @change="handleFileSelect($event)"
                             class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-btn file:border-0 file:text-xs file:font-bold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 transition cursor-pointer"
                         >
-                        <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WEBP. Maksimal 3 MB.</p>
+                        <p class="text-[11px] text-slate-400 mt-1">Formats: JPG, PNG, WEBP. Max size: 3 MB.</p>
                     </div>
 
                     <div>
                         <?= ui_input('image_url', [
-                            'label'       => 'Atau Gunakan Link Gambar (URL Eksternal)',
+                            'label'       => 'Or Use Image Link (External URL)',
                             'type'        => 'url',
                             'placeholder' => 'https://images.unsplash.com/...',
                             'value'       => str_starts_with($product['image'] ?? '', 'http') ? $product['image'] : '',
@@ -310,11 +310,11 @@ require_once __DIR__ . '/includes/admin_header.php';
         <div class="space-y-4 pt-4 border-t border-slate-100">
             <h3 class="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 tracking-tight">
                 <i class="ph ph-text-align-left text-base text-brand-600"></i>
-                <span>Deskripsi & Spesifikasi Produk</span>
+                <span>Product Description &amp; Specifications</span>
             </h3>
 
             <?= ui_textarea('description', [
-                'placeholder' => 'Tuliskan deskripsi lengkap, keunggulan, spesifikasi teknis, garansi, atau isi dalam paket...',
+                'placeholder' => 'Write comprehensive product description, highlights, technical specifications, or package contents...',
                 'rows'        => 6,
                 'value'       => $_POST['description'] ?? $product['description'],
             ]) ?>
@@ -328,14 +328,14 @@ require_once __DIR__ . '/includes/admin_header.php';
                     $isFeaturedChecked = (!isset($_POST['is_featured']) && $product['is_featured']) || (isset($_POST['is_featured']) && $_POST['is_featured'] == 1);
                 ?>
                 <div class="p-4 rounded-card bg-slate-50 border border-slate-200/80">
-                    <?= ui_toggle('is_active', 'Tayang di Website (Aktif)', $isActiveChecked, [
-                        'helper' => 'Produk dapat dilihat dan dipesan oleh pengunjung toko.',
+                    <?= ui_toggle('is_active', 'Publish to Website (Active)', $isActiveChecked, [
+                        'helper' => 'Product will be visible and orderable by storefront visitors.',
                     ]) ?>
                 </div>
 
                 <div class="p-4 rounded-card bg-slate-50 border border-slate-200/80">
-                    <?= ui_toggle('is_featured', '⭐ Jadikan Produk Unggulan', $isFeaturedChecked, [
-                        'helper' => 'Tampilkan tanda rekomendasi khusus di katalog.',
+                    <?= ui_toggle('is_featured', '⭐ Mark as Featured Product', $isFeaturedChecked, [
+                        'helper' => 'Display prominent recommendation badge on catalog.',
                     ]) ?>
                 </div>
             </div>
@@ -343,13 +343,13 @@ require_once __DIR__ . '/includes/admin_header.php';
 
         <!-- Form Action Buttons -->
         <div class="pt-6 border-t border-slate-100 flex items-center justify-end gap-3">
-            <?= ui_button('Batal', [
+            <?= ui_button('Cancel', [
                 'variant' => 'secondary',
                 'size'    => 'md',
                 'href'    => base_url('admin/products.php'),
             ]) ?>
 
-            <?= ui_button($isEdit ? 'Simpan Perubahan' : 'Simpan Produk Baru', [
+            <?= ui_button($isEdit ? 'Save Changes' : 'Create Product', [
                 'variant' => 'primary',
                 'type'    => 'submit',
                 'size'    => 'md',

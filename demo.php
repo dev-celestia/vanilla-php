@@ -78,12 +78,12 @@ require_once __DIR__ . '/includes/header.php';
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-2">
             <span class="px-2 py-0.5 rounded-badge bg-emerald-500 text-white font-semibold text-[10px]">LIVE DEMO STORE</span>
-            <span class="text-slate-300 font-medium">Katalog Toko Online &amp; WhatsApp Checkout &bull; Siap di-scaffold ke folder baru</span>
+            <span class="text-slate-300 font-medium">Online Store Catalog &amp; WhatsApp Checkout &bull; Ready to scaffold into a new folder</span>
         </div>
         <div class="flex items-center gap-3">
             <a href="<?= base_url('scaffold.php') ?>" class="text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1 font-semibold">
                 <i class="ph-bold ph-lightning"></i>
-                <span>Scaffold / Install Toko Ini</span>
+                <span>Scaffold / Install This Store</span>
             </a>
             <span class="text-slate-600">•</span>
             <a href="<?= base_url('design-system.php') ?>" class="text-brand-300 hover:text-white transition flex items-center gap-1">
@@ -93,7 +93,7 @@ require_once __DIR__ . '/includes/header.php';
             <span class="text-slate-600">•</span>
             <a href="<?= base_url() ?>" class="text-slate-400 hover:text-white transition flex items-center gap-1">
                 <i class="ph ph-arrow-left"></i>
-                <span>Kembali ke Overview</span>
+                <span>Back to Overview</span>
             </a>
         </div>
     </div>
@@ -110,7 +110,7 @@ require_once __DIR__ . '/includes/header.php';
                 <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Live Catalog Experience</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
-                Apple Store Showcase & Cart
+                Store Showcase & Cart
             </h1>
             <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
                 Browse demo products, test instant filtering, add items to the reactive Alpine.js cart drawer, and simulate direct WhatsApp order processing.

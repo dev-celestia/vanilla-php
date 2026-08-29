@@ -3,7 +3,7 @@
  * Shopping Cart Page
  */
 $active_nav = 'demo';
-$page_title = 'Keranjang Belanja - ' . get_settings()['store_name'];
+$page_title = 'Shopping Cart - ' . get_settings()['store_name'];
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/helpers/format.php';
 require_once __DIR__ . '/includes/header.php';
@@ -11,8 +11,8 @@ require_once __DIR__ . '/includes/header.php';
 
 <div class="bg-white border-b border-slate-200/80 py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Keranjang Belanja Anda</h1>
-        <p class="text-xs text-slate-500 mt-1">Periksa kembali daftar produk pesanan sebelum melanjutkan ke WhatsApp Checkout.</p>
+        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Your Shopping Cart</h1>
+        <p class="text-xs text-slate-500 mt-1">Review your selected items before proceeding to WhatsApp Checkout.</p>
     </div>
 </div>
 
@@ -21,12 +21,12 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Empty Cart State -->
     <div x-cloak x-show="$store.cart.items.length === 0">
         <?= ui_empty_state(
-            'Keranjang Belanja Anda Masih Kosong',
-            'Anda belum menambahkan produk apapun. Jelajahi katalog demo kami untuk menemukan berbagai pilihan produk menarik!',
+            'Your Shopping Cart is Empty',
+            'You have not added any products yet. Explore our demo catalog to discover great items!',
             [
                 'icon'       => 'shopping-bag',
-                'buttonText' => 'Mulai Belanja Sekarang',
-                'buttonHref' => base_url('demo.php#katalog'),
+                'buttonText' => 'Start Shopping Now',
+                'buttonHref' => base_url('demo.php'),
                 'buttonIcon' => 'shopping-cart',
             ]
         ) ?>
@@ -40,13 +40,13 @@ require_once __DIR__ . '/includes/header.php';
             
             <div class="bg-white rounded-card border border-slate-200/80 overflow-hidden">
                 <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                    <span class="text-xs font-semibold text-slate-700 tracking-tight">Daftar Produk (<span x-text="$store.cart.count"></span> item)</span>
+                    <span class="text-xs font-semibold text-slate-700 tracking-tight">Product List (<span x-text="$store.cart.count"></span> items)</span>
                     <button 
                         type="button" 
-                        @click="if(confirm('Yakin ingin mengosongkan keranjang belanja?')) $store.cart.clearCart()"
+                        @click="if(confirm('Are you sure you want to empty your shopping cart?')) $store.cart.clearCart()"
                         class="text-xs font-semibold text-rose-500 hover:text-rose-700 flex items-center gap-1 transition apple-tap">
                         <i class="ph ph-trash text-sm"></i>
-                        <span>Kosongkan Keranjang</span>
+                        <span>Empty Cart</span>
                     </button>
                 </div>
 
@@ -63,7 +63,7 @@ require_once __DIR__ . '/includes/header.php';
                                 <div class="min-w-0">
                                     <h3 class="font-semibold text-sm text-slate-900 truncate tracking-tight" x-text="item.name"></h3>
                                     <p class="text-xs font-semibold text-brand-600 mt-1" x-text="$store.cart.formatRupiah(item.price)"></p>
-                                    <span class="text-[11px] text-slate-400">Maksimal stok: <span x-text="item.stock"></span></span>
+                                    <span class="text-[11px] text-slate-400">Max stock: <span x-text="item.stock"></span></span>
                                 </div>
                             </div>
 
@@ -96,7 +96,7 @@ require_once __DIR__ . '/includes/header.php';
                                     type="button" 
                                     @click="$store.cart.removeItem(item.id)" 
                                     class="p-2 rounded-btn text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition apple-tap" 
-                                    title="Hapus produk">
+                                    title="Remove item">
                                     <i class="ph ph-trash text-base"></i>
                                 </button>
                             </div>
@@ -108,9 +108,9 @@ require_once __DIR__ . '/includes/header.php';
 
             <!-- Back to shop link -->
             <div class="pt-2">
-                <a href="<?= base_url('demo.php#katalog') ?>" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-600 hover:text-brand-700">
+                <a href="<?= base_url('demo.php') ?>" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-600 hover:text-brand-700">
                     <i class="ph ph-arrow-left text-xs"></i>
-                    <span>Tambah Produk Lainnya dari Katalog Demo</span>
+                    <span>Add More Products from Demo Catalog</span>
                 </a>
             </div>
 
@@ -119,29 +119,29 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Right: Summary Card -->
         <div class="lg:col-span-4">
             <div class="bg-white rounded-card border border-slate-200/80 p-6 space-y-6 sticky top-28">
-                <h3 class="font-semibold text-base text-slate-900 border-b border-slate-100 pb-3 tracking-tight">Ringkasan Belanja</h3>
+                <h3 class="font-semibold text-base text-slate-900 border-b border-slate-100 pb-3 tracking-tight">Order Summary</h3>
 
                 <div class="space-y-3 text-xs">
                     <div class="flex justify-between text-slate-500">
-                        <span>Total Jumlah Item</span>
-                        <span class="font-semibold text-slate-800" x-text="$store.cart.count + ' Barang'"></span>
+                        <span>Total Items</span>
+                        <span class="font-semibold text-slate-800" x-text="$store.cart.count + ' Items'"></span>
                     </div>
                     <div class="flex justify-between text-slate-500">
-                        <span>Subtotal Produk</span>
+                        <span>Product Subtotal</span>
                         <span class="font-semibold text-slate-800" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                     </div>
                     <div class="flex justify-between text-slate-500">
-                        <span>Ongkos Kirim</span>
-                        <span class="text-brand-600 font-semibold">Dihitung oleh Admin di WA</span>
+                        <span>Shipping Fee</span>
+                        <span class="text-brand-600 font-semibold">Calculated by Admin on WA</span>
                     </div>
 
                     <div class="pt-3 border-t border-slate-100 flex justify-between items-baseline">
-                        <span class="text-sm font-semibold text-slate-900">Total Pembayaran</span>
+                        <span class="text-sm font-semibold text-slate-900">Estimated Total</span>
                         <span class="text-xl font-semibold text-brand-600 tracking-tight" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                     </div>
                 </div>
 
-                <?= ui_button('Lanjut ke Formulir Checkout', [
+                <?= ui_button('Proceed to Checkout', [
                     'variant' => 'primary',
                     'size'    => 'lg',
                     'href'    => base_url('checkout.php'),
@@ -152,11 +152,11 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-400 space-y-2">
                     <div class="flex items-center gap-2">
                         <i class="ph ph-shield-check text-base text-brand-600 flex-shrink-0"></i>
-                        <span>Transaksi Terhubung Langsung ke WhatsApp</span>
+                        <span>Direct WhatsApp Order Processing</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="ph ph-lock text-base text-slate-400 flex-shrink-0"></i>
-                        <span>Data Anda Aman dan Dijamin Kerahasiaannya</span>
+                        <span>Your Data is Safe &amp; Confidential</span>
                     </div>
                 </div>
             </div>

@@ -14,13 +14,13 @@ $settings = get_settings();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
-        $error = 'Sesi keamanan kadaluarsa. Silakan coba lagi.';
+        $error = 'Security session expired. Please try again.';
     } else {
         $username = trim($_POST['username'] ?? '');
         $password = trim($_POST['password'] ?? '');
 
         if (empty($username) || empty($password)) {
-            $error = 'Username dan password wajib diisi.';
+            $error = 'Username and password are required.';
         } else {
             $db = getDB();
             if ($db) {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['admin_name'] = $admin['name'];
                         $_SESSION['admin_email'] = $admin['email'];
 
-                        set_flash('success', 'Selamat datang kembali, ' . $admin['name'] . '!');
+                        set_flash('success', 'Welcome back, ' . $admin['name'] . '!');
                         header('Location: ' . base_url('admin/index.php'));
                         exit;
                     } else {
@@ -44,15 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($username === 'admin' && $password === 'password123') {
                             $_SESSION['admin_id'] = 1;
                             $_SESSION['admin_username'] = 'admin';
-                            $_SESSION['admin_name'] = 'Administrator Default';
-                            $_SESSION['admin_email'] = 'admin@katalogstore.id';
+                            $_SESSION['admin_name'] = 'Default Administrator';
+                            $_SESSION['admin_email'] = 'admin@example.com';
 
-                            set_flash('success', 'Selamat datang di Panel Admin!');
+                            set_flash('success', 'Welcome to the Admin Dashboard!');
                             header('Location: ' . base_url('admin/index.php'));
                             exit;
                         }
 
-                        $error = 'Username atau kata sandi yang Anda masukkan salah.';
+                        $error = 'Invalid username or password.';
                     }
                 } catch (PDOException $e) {
                     // Fallback to default
@@ -60,12 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['admin_id'] = 1;
                         $_SESSION['admin_username'] = 'admin';
                         $_SESSION['admin_name'] = 'Administrator';
-                        $_SESSION['admin_email'] = 'admin@katalogstore.id';
+                        $_SESSION['admin_email'] = 'admin@example.com';
 
                         header('Location: ' . base_url('admin/index.php'));
                         exit;
                     }
-                    $error = 'Terjadi gangguan koneksi database. Silakan jalankan installer database di /database/init.php.';
+                    $error = 'Database connection error. Please run the database setup at /database/init.php.';
                 }
             } else {
                 // Emergency bypass for local setup
@@ -73,23 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['admin_id'] = 1;
                     $_SESSION['admin_username'] = 'admin';
                     $_SESSION['admin_name'] = 'Administrator (Demo)';
-                    $_SESSION['admin_email'] = 'admin@katalogstore.id';
+                    $_SESSION['admin_email'] = 'admin@example.com';
 
                     header('Location: ' . base_url('admin/index.php'));
                     exit;
                 }
-                $error = 'Database belum terhubung. Silakan setup database terlebih dahulu.';
+                $error = 'Database is not connected. Please setup database credentials.';
             }
         }
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Administrator - <?= sanitize($settings['store_name']) ?></title>
+    <title>Administrator Login - <?= sanitize($settings['store_name']) ?></title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div>
-                    <label for="password" class="block text-xs font-semibold text-slate-300 mb-1.5 tracking-tight">Kata Sandi (Password)</label>
+                    <label for="password" class="block text-xs font-semibold text-slate-300 mb-1.5 tracking-tight">Password</label>
                     <div class="relative">
                         <input 
                             type="password" 
@@ -163,18 +163,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     type="submit" 
                     class="w-full py-3.5 px-4 rounded-btn bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm border border-brand-500/20 transition apple-tap flex items-center justify-center gap-2">
                     <i class="ph ph-sign-in text-base"></i>
-                    <span>Masuk ke Dashboard</span>
+                    <span>Sign In to Dashboard</span>
                 </button>
             </form>
 
             <div class="pt-4 border-t border-slate-800 text-center space-y-2">
                 <div class="text-[11px] text-slate-400">
-                    Kredensial Default: <span class="text-brand-300 font-mono">admin</span> / <span class="text-brand-300 font-mono">password123</span>
+                    Default Credentials: <span class="text-brand-300 font-mono">admin</span> / <span class="text-brand-300 font-mono">password123</span>
                 </div>
                 <div>
                     <a href="<?= base_url() ?>" class="text-xs text-slate-400 hover:text-white transition inline-flex items-center gap-1">
                         <i class="ph ph-arrow-left text-xs"></i>
-                        <span>Kembali ke Website Utama</span>
+                        <span>Return to Live Store</span>
                     </a>
                 </div>
             </div>

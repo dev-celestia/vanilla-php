@@ -14,15 +14,15 @@ $settings = get_settings();
     <?php if ($show_wa_chat): ?>
     <!-- Floating WhatsApp Direct Chat Widget (Apple Tactile, Zero Shadow, Clean Border) -->
     <a 
-        href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) ?>?text=Halo%20Admin,%20saya%20tertarik%20dengan%20produk%20di%20toko%20Anda" 
+        href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) ?>?text=Hello%20Admin,%20I'm%20interested%20in%20products%20from%20your%20store" 
         target="_blank" 
         class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-full border border-brand-400/30 transition-all duration-150 apple-tap group"
-        title="Chat Langsung via WhatsApp">
+        title="Direct WhatsApp Chat">
         <div class="relative">
             <i class="ph ph-chat-circle-dots text-2xl"></i>
             <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-brand-300 ring-2 ring-brand-600 animate-ping"></span>
         </div>
-        <span class="font-semibold text-xs sm:text-sm tracking-tight pr-1">Chat WhatsApp</span>
+        <span class="font-semibold text-xs sm:text-sm tracking-tight pr-1">WhatsApp Chat</span>
     </a>
     <?php endif; ?>
 

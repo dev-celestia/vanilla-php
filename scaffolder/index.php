@@ -23,7 +23,7 @@ $isCli = (php_sapi_name() === 'cli');
 /**
  * Format folder name / path into a readable store title
  */
-function format_folder_name_to_title($path, $fallback = 'Toko Online Saya', $rootDir = null) {
+function format_folder_name_to_title($path, $fallback = 'My Online Store', $rootDir = null) {
     if (empty($path) || $path === '.' || $path === './') {
         $raw = basename($rootDir ?: dirname(__DIR__));
     } else {
@@ -65,12 +65,12 @@ if ($isCli) {
 }
 
 if (empty($cliAppName)) {
-    $cliAppName = format_folder_name_to_title($cliTargetDir, 'Toko Online Saya', $rootDir);
+    $cliAppName = format_folder_name_to_title($cliTargetDir, 'My Online Store', $rootDir);
 }
 
 $action = $_POST['action'] ?? ($isCli ? 'run' : '');
 $targetPathInput = trim($_POST['target_path'] ?? ($isCli ? ($cliTargetDir ?: '') : ''));
-$appName = trim($_POST['app_name'] ?? ($isCli ? $cliAppName : format_folder_name_to_title($targetPathInput ?: '.', 'Toko Online Saya', $rootDir)));
+$appName = trim($_POST['app_name'] ?? ($isCli ? $cliAppName : format_folder_name_to_title($targetPathInput ?: '.', 'My Online Store', $rootDir)));
 
 function scaffold_log($msg, $isCli, $type = 'info') {
     if ($isCli) {
@@ -225,13 +225,13 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
         $cleanNav = '<!-- Desktop Nav Links -->
                 <nav class="hidden md:flex items-center space-x-1">
                     <a href="<?= base_url() ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= !isset($active_nav) || $active_nav === \'home\' ? \'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold\' : \'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent\' ?>">
-                        <i class="ph ph-storefront mr-1"></i> Katalog
+                        <i class="ph ph-storefront mr-1"></i> Catalog
                     </a>
                     <a href="<?= base_url(\'cart.php\') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === \'cart\' ? \'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold\' : \'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent\' ?>">
-                        <i class="ph ph-shopping-bag mr-1"></i> Keranjang
+                        <i class="ph ph-shopping-bag mr-1"></i> Cart
                     </a>
                     <a href="<?= base_url(\'contact.php\') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === \'contact\' ? \'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold\' : \'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent\' ?>">
-                        Hubungi Kami
+                        Contact Us
                     </a>
                 </nav>';
 
@@ -243,19 +243,19 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
         );
 
         file_put_contents($headerFile, $header);
-        $results[] = ['type' => 'success', 'msg' => 'Navigasi <code>includes/header.php</code> dibersihkan untuk toko online.'];
-        scaffold_log('Navigasi includes/header.php disesuaikan.', $isCli, 'success');
+        $results[] = ['type' => 'success', 'msg' => 'Navigation in <code>includes/header.php</code> configured for online store.'];
+        scaffold_log('Navigation includes/header.php customized.', $isCli, 'success');
     }
 
     $footerFile = $targetDir . '/includes/footer.php';
     if (file_exists($footerFile)) {
         $footer = file_get_contents($footerFile);
         $footer = str_replace('<?= base_url(\'design-system.php\') ?>', '<?= base_url(\'cart.php\') ?>', $footer);
-        $footer = str_replace('Token Explorer', 'Keranjang Belanja', $footer);
-        $footer = str_replace('Component Primitives', 'Checkout Pesanan', $footer);
-        $footer = str_replace('Overview & Architecture', 'Katalog Produk', $footer);
+        $footer = str_replace('Token Explorer', 'Shopping Cart', $footer);
+        $footer = str_replace('Component Primitives', 'Order Checkout', $footer);
+        $footer = str_replace('Overview & Architecture', 'Product Catalog', $footer);
         file_put_contents($footerFile, $footer);
-        $results[] = ['type' => 'success', 'msg' => 'Footer <code>includes/footer.php</code> dibersihkan.'];
+        $results[] = ['type' => 'success', 'msg' => 'Footer in <code>includes/footer.php</code> configured.'];
     }
 
     // ----------------------------------------------------
@@ -278,11 +278,11 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
         $envContent .= "DB_USER=" . (defined('DB_USER') ? DB_USER : 'root') . "\n";
         $envContent .= "DB_PASS=" . (defined('DB_PASS') ? DB_PASS : '') . "\n\n";
         $envContent .= "# WhatsApp Store Configuration\n";
-        $envContent .= "STORE_WHATSAPP=6281234567890\n";
+        $envContent .= "STORE_WHATSAPP=15552345678\n";
 
         file_put_contents($targetEnv, $envContent);
-        $results[] = ['type' => 'success', 'msg' => 'File konfigurasi <code>.env</code> otomatis dibuat.'];
-        scaffold_log('File .env otomatis dibuat.', $isCli, 'success');
+        $results[] = ['type' => 'success', 'msg' => 'Configuration file <code>.env</code> generated automatically.'];
+        scaffold_log('.env configuration created.', $isCli, 'success');
     }
 
     // ----------------------------------------------------
@@ -291,7 +291,7 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
     if (!$skipDb && defined('DB_HOST')) {
         $sqlFile = $targetDir . '/database/schema.sql';
         if (file_exists($sqlFile)) {
-            scaffold_log('Menjalankan Inisialisasi Database...', $isCli, 'step');
+            scaffold_log('Running Database Initialization...', $isCli, 'step');
             try {
                 $pdoRoot = new PDO(
                     sprintf('mysql:host=%s;port=%s;charset=utf8mb4', DB_HOST, DB_PORT),
@@ -311,12 +311,12 @@ function run_scaffolding($sourceDir, $rawTargetDir, $isCli, $customAppName = '',
                         $stmt->execute([':val' => $customAppName]);
                     }
 
-                    $results[] = ['type' => 'success', 'msg' => 'Database <strong>' . DB_NAME . '</strong> & tabel berhasil disiapkan!'];
-                    scaffold_log('Database ' . DB_NAME . ' & tabel berhasil disiapkan!', $isCli, 'success');
+                    $results[] = ['type' => 'success', 'msg' => 'Database <strong>' . DB_NAME . '</strong> & tables initialized!'];
+                    scaffold_log('Database ' . DB_NAME . ' & tables initialized!', $isCli, 'success');
                 }
             } catch (PDOException $e) {
-                $results[] = ['type' => 'warn', 'msg' => 'Catatan Database: ' . htmlspecialchars($e->getMessage())];
-                scaffold_log('Catatan Database: ' . $e->getMessage(), $isCli, 'warn');
+                $results[] = ['type' => 'warn', 'msg' => 'Database Note: ' . htmlspecialchars($e->getMessage())];
+                scaffold_log('Database Note: ' . $e->getMessage(), $isCli, 'warn');
             }
         }
     }
@@ -338,40 +338,39 @@ if ($isCli) {
 
     // If no target directory was specified or --help was requested
     if (empty($cliTargetDir) || $cliHelp) {
-        echo "ℹ️  PENGGUNAAN:\n";
+        echo "ℹ️  USAGE:\n";
         echo "   php scaffold.php <target-folder> [options]\n\n";
-        echo "📌 CONTOH PENGGUNAAN:\n";
-        echo "   php scaffold.php ../toko-koleksi --name=\"Koleksi Fashion\"\n";
-        echo "   php scaffold.php /var/www/my-store --name=\"Toko Saya\"\n";
-        echo "   php scaffold.php ../proyek-baru --no-db\n\n";
-        echo "⚙️  PILIHAN (OPTIONS):\n";
-        echo "   --name=\"Nama Toko\"   Menentukan nama toko/brand (default: dari nama folder)\n";
-        echo "   --no-db              Lewati pembuatan skema database MySQL\n";
-        echo "   --in-place           Jalankan pada direktori saat ini tanpa menghapus template\n";
-        echo "   --help, -h           Tampilkan petunjuk penggunaan ini\n\n";
-        echo "🌐 Atau buka Web GUI Installer di browser:\n";
+        echo "📌 EXAMPLES:\n";
+        echo "   php scaffold.php ../my-collection --name=\"Fashion Collection\"\n";
+        echo "   php scaffold.php /var/www/my-store --name=\"My Store\"\n";
+        echo "   php scaffold.php ../new-project --no-db\n\n";
+        echo "⚙️  OPTIONS:\n";
+        echo "   --name=\"Store Name\"   Define store/brand name (default: from folder name)\n";
+        echo "   --no-db              Skip MySQL database schema creation\n";
+        echo "   --in-place           Run in the current directory without deleting templates\n";
+        echo "   --help, -h           Show this help manual\n\n";
+        echo "🌐 Or open the Web GUI Installer in your browser:\n";
         echo "   http://localhost:8000/scaffold.php\n\n";
-        echo "🛡️  Keamanan: Perintah tanpa argumen target tidak akan menghapus/mengubah file template proyek saat ini.\n\n";
         exit(0);
     }
 
     $output = run_scaffolding($rootDir, $cliTargetDir, true, $cliAppName, $cliSkipDb, $manifest);
 
     echo "\n--------------------------------------------------------\n";
-    echo "🎉 Scaffolding & Setup Development Selesai!\n";
-    echo "📍 Lokasi App: " . $output['targetDir'] . "\n";
+    echo "🎉 Scaffolding & Setup Completed Successfully!\n";
+    echo "📍 App Location: " . $output['targetDir'] . "\n";
     echo "--------------------------------------------------------\n";
-    echo "🔑 Kredensial Admin Default:\n";
+    echo "🔑 Default Admin Credentials:\n";
     echo "   Username: admin\n";
     echo "   Password: password123\n";
     echo "   Login:    http://localhost:8000/admin/login.php\n\n";
-    echo "🛠️ Langkah Pengembangan Lanjutan (Extend Features):\n";
+    echo "🛠️ Development Next Steps (Extend Features):\n";
     if ($output['isExternal']) {
-        echo "   1. Masuk folder proyek:  cd " . $output['targetDir'] . "\n";
+        echo "   1. Navigate to project:      cd " . $output['targetDir'] . "\n";
     }
-    echo "   2. Install node dependencies: pnpm install (atau npm install)\n";
-    echo "   3. Jalankan Dev Server:       pnpm dev (Vite + Tailwind HMR)\n";
-    echo "   4. Inisialisasi Ulang DB:     pnpm db:init (atau php database/init.php)\n\n";
+    echo "   2. Install node dependencies: pnpm install (or npm install)\n";
+    echo "   3. Run Dev Server:            pnpm dev (Vite + Tailwind HMR)\n";
+    echo "   4. Re-seed Database:          pnpm db:init (or php database/init.php)\n\n";
     exit(0);
 }
 
@@ -387,7 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -408,7 +407,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
         <div class="flex items-center gap-3.5 mb-6">
             <div>
                 <h1 class="text-xl font-bold text-white tracking-tight"><?= htmlspecialchars($manifest['name'] ?? 'Feature Installer & Scaffolder') ?></h1>
-                <p class="text-xs text-slate-400"><?= htmlspecialchars($manifest['description'] ?? 'Scaffold Toko Online & Admin CMS Bersih ke Lokasi Pilihan') ?></p>
+                <p class="text-xs text-slate-400"><?= htmlspecialchars($manifest['description'] ?? 'Scaffold a Clean Online Store & Admin CMS to Your Chosen Folder') ?></p>
             </div>
         </div>
 
@@ -416,10 +415,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
             <!-- Results View -->
             <div class="space-y-3 mb-6 bg-slate-900/80 rounded-2xl p-5 border border-slate-800 text-xs">
                 <p class="font-semibold text-slate-200 text-sm mb-2 flex items-center gap-2">
-                    <i class="ph ph-check-circle text-emerald-400 text-base"></i> Proses Scaffolding Berhasil!
+                    <i class="ph ph-check-circle text-emerald-400 text-base"></i> Scaffolding Completed Successfully!
                 </p>
                 <p class="text-slate-400 pb-2 border-b border-slate-800">
-                    📍 <strong>Lokasi Hasil:</strong> <code class="bg-slate-950 px-2 py-0.5 rounded text-emerald-400 font-mono"><?= htmlspecialchars($outputData['targetDir']) ?></code>
+                    📍 <strong>Target Location:</strong> <code class="bg-slate-950 px-2 py-0.5 rounded text-emerald-400 font-mono"><?= htmlspecialchars($outputData['targetDir']) ?></code>
                 </p>
                 <?php foreach ($outputData['results'] as $res): ?>
                     <div class="flex items-start gap-2 text-slate-300">
@@ -430,22 +429,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
             </div>
 
             <div class="p-4 bg-emerald-950/40 border border-emerald-500/30 rounded-2xl mb-6 text-xs text-emerald-300">
-                <p class="font-semibold mb-1">🔑 Akses Panel Admin Default:</p>
+                <p class="font-semibold mb-1">🔑 Default Admin Credentials:</p>
                 <p>Username: <code class="bg-emerald-900/60 px-1.5 py-0.5 rounded text-white">admin</code> | Password: <code class="bg-emerald-900/60 px-1.5 py-0.5 rounded text-white">password123</code></p>
             </div>
 
             <?php if (!$outputData['isExternal']): ?>
                 <div class="grid grid-cols-2 gap-3">
-                    <a href="<?= function_exists('base_url') ? base_url() : '../' ?>" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition">
-                        <i class="ph ph-storefront text-base"></i> Buka Toko Online
+                    <a href="<?= function_exists('base_url') ? base_url('demo.php') : '../demo.php' ?>" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition">
+                        <i class="ph ph-storefront text-base"></i> Open Online Store
                     </a>
                     <a href="<?= function_exists('base_url') ? base_url('admin/login.php') : '../admin/login.php' ?>" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs border border-slate-700 transition">
-                        <i class="ph ph-shield-check text-base"></i> Masuk Admin
+                        <i class="ph ph-shield-check text-base"></i> Admin Login
                     </a>
                 </div>
             <?php else: ?>
                 <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-xs space-y-2">
-                    <p class="font-semibold text-white">🚀 Cara Menjalankan Project Baru Anda:</p>
+                    <p class="font-semibold text-white">🚀 How to Run Your New Project:</p>
                     <div class="bg-slate-950 p-3 rounded-xl font-mono text-[11px] text-slate-300 space-y-1">
                         <div>cd <?= htmlspecialchars($outputData['targetDir']) ?></div>
                         <div>php -S 0.0.0.0:8000</div>
@@ -460,27 +459,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'scaffold') {
 
                 <div class="space-y-1.5">
                     <label class="text-xs font-semibold text-slate-300 flex items-center justify-between">
-                        <span>Target Destination Path (Folder Tujuan Baru)</span>
-                        <span class="text-[11px] text-emerald-400 font-normal">Contoh: <code>../toko-baru</code></span>
+                        <span>Target Destination Path</span>
+                        <span class="text-[11px] text-emerald-400 font-normal">e.g. <code>../new-store</code></span>
                     </label>
                     <div class="relative">
                         <i class="ph ph-folder text-slate-500 absolute left-3.5 top-3 text-base"></i>
-                        <input type="text" id="target_path_input" name="target_path" value="../toko-baru" placeholder="Contoh: ../toko-baru atau /var/www/my-shop" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs font-mono focus:outline-none focus:border-emerald-500 transition" required>
+                        <input type="text" id="target_path_input" name="target_path" value="../new-store" placeholder="e.g. ../new-store or /var/www/my-shop" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs font-mono focus:outline-none focus:border-emerald-500 transition" required>
                     </div>
-                    <p class="text-[11px] text-slate-400">Menyalin modul toko (demo sebagai <code>index.php</code>) ke folder baru tanpa mengubah project saat ini.</p>
+                    <p class="text-[11px] text-slate-400">Copies clean store template (with demo as <code>index.php</code>) to the new destination without altering the current repository.</p>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="text-xs font-semibold text-slate-300">Nama Toko / Brand Anda</label>
+                    <label class="text-xs font-semibold text-slate-300">Store / Brand Name</label>
                     <div class="relative">
                         <i class="ph ph-storefront text-slate-500 absolute left-3.5 top-3 text-base"></i>
-                        <input type="text" id="app_name_input" name="app_name" value="<?= htmlspecialchars(format_folder_name_to_title('../toko-baru', 'Toko Baru', $rootDir)) ?>" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-emerald-500 transition" required>
+                        <input type="text" id="app_name_input" name="app_name" value="<?= htmlspecialchars(format_folder_name_to_title('../new-store', 'My Store', $rootDir)) ?>" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-emerald-500 transition" required>
                     </div>
                 </div>
 
                 <div class="pt-3">
                     <button type="submit" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-tight transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950">
-                        <i class="ph-bold ph-lightning text-base"></i> Salin Toko ke Folder Baru
+                        <i class="ph-bold ph-lightning text-base"></i> Scaffold Store to New Folder
                     </button>
                 </div>
             </form>

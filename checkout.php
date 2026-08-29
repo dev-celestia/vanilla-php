@@ -12,7 +12,7 @@ $error = null;
 // Handle Form Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
-        $error = 'Sesi form telah kedaluwarsa. Silakan muat ulang halaman dan coba lagi.';
+        $error = 'Form session expired. Please refresh the page and try again.';
     } else {
         $name = trim($_POST['customer_name'] ?? '');
         $phone = trim($_POST['customer_phone'] ?? '');
@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cartItems = json_decode($cartJson, true);
 
         if (empty($name) || empty($phone) || empty($address)) {
-            $error = 'Mohon lengkapi Nama, Nomor WhatsApp, dan Alamat Pengiriman.';
+            $error = 'Please fill in your Name, WhatsApp Number, and Delivery Address.';
         } elseif (empty($cartItems) || !is_array($cartItems)) {
-            $error = 'Keranjang belanja Anda kosong. Silakan pilih produk terlebih dahulu.';
+            $error = 'Your shopping cart is empty. Please select products first.';
         } else {
             $db = getDB();
             $orderNumber = generate_order_number();
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $processedItems[] = [
                     'id'       => $item['id'] ?? null,
-                    'name'     => $item['name'] ?? 'Produk',
+                    'name'     => $item['name'] ?? 'Product',
                     'price'    => $price,
                     'qty'      => $qty,
                     'subtotal' => $subtotal
@@ -51,18 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $waAdminNumber = preg_replace('/[^0-9]/', '', $settings['whatsapp_number']);
             $currentDateStr = format_date(date('Y-m-d H:i:s'));
 
-            $waMessage = "Halo Admin *" . $settings['store_name'] . "*,\n";
-            $waMessage .= "Saya ingin konfirmasi pemesanan baru:\n\n";
-            $waMessage .= "📋 *KODE PESANAN:* `" . $orderNumber . "`\n";
-            $waMessage .= "📅 *WAKTU:* " . $currentDateStr . "\n\n";
-            $waMessage .= "👤 *DATA PEMBELI:*\n";
-            $waMessage .= "• Nama: *" . $name . "*\n";
-            $waMessage .= "• No. WA: " . $phone . "\n";
-            $waMessage .= "• Alamat: " . $address . "\n";
+            $waMessage = "Hello Admin *" . $settings['store_name'] . "*,\n";
+            $waMessage .= "I would like to confirm a new order:\n\n";
+            $waMessage .= "📋 *ORDER NUMBER:* `" . $orderNumber . "`\n";
+            $waMessage .= "📅 *DATE:* " . $currentDateStr . "\n\n";
+            $waMessage .= "👤 *CUSTOMER DETAILS:*\n";
+            $waMessage .= "• Name: *" . $name . "*\n";
+            $waMessage .= "• WhatsApp: " . $phone . "\n";
+            $waMessage .= "• Address: " . $address . "\n";
             if (!empty($notes)) {
-                $waMessage .= "• Catatan: " . $notes . "\n";
+                $waMessage .= "• Notes: " . $notes . "\n";
             }
-            $waMessage .= "\n🛒 *RINCIAN BARANG:*\n";
+            $waMessage .= "\n🛒 *ORDER ITEMS:*\n";
 
             $index = 1;
             foreach ($processedItems as $pItem) {
@@ -70,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $index++;
             }
 
-            $waMessage .= "\n💰 *TOTAL BELANJA:* *" . format_rupiah($totalAmount) . "*\n\n";
-            $waMessage .= "Mohon informasi ongkir & nomor rekening pembayarannya ya. Terima kasih! 🙏";
+            $waMessage .= "\n💰 *TOTAL AMOUNT:* *" . format_rupiah($totalAmount) . "*\n\n";
+            $waMessage .= "Please provide shipping cost & payment details. Thank you! 🙏";
 
             $waUrl = "https://api.whatsapp.com/send?phone=" . $waAdminNumber . "&text=" . urlencode($waMessage);
 
@@ -141,14 +141,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $active_nav = 'demo';
-$page_title = 'Checkout Pesanan - ' . $settings['store_name'];
+$page_title = 'Checkout Order - ' . $settings['store_name'];
 require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="bg-white border-b border-slate-200/80 py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Formulir Checkout WhatsApp</h1>
-        <p class="text-xs text-slate-500 mt-1">Lengkapi data pengiriman untuk membuat rincian pesanan instan ke WhatsApp.</p>
+        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">WhatsApp Checkout</h1>
+        <p class="text-xs text-slate-500 mt-1">Complete your delivery details to generate an instant WhatsApp order summary.</p>
     </div>
 </div>
 
@@ -162,12 +162,12 @@ require_once __DIR__ . '/includes/header.php';
     <!-- If cart is empty -->
     <div x-cloak x-show="$store.cart.items.length === 0">
         <?= ui_empty_state(
-            'Keranjang Belanja Anda Kosong',
-            'Silakan pilih produk yang Anda minati di katalog sebelum melanjutkan proses checkout.',
+            'Your Shopping Cart is Empty',
+            'Please select products from the catalog before proceeding to checkout.',
             [
                 'icon'       => 'shopping-cart',
-                'buttonText' => 'Kembali ke Katalog Produk',
-                'buttonHref' => base_url(),
+                'buttonText' => 'Back to Product Catalog',
+                'buttonHref' => base_url('demo.php'),
                 'buttonIcon' => 'arrow-left',
             ]
         ) ?>
@@ -192,41 +192,41 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="border-b border-slate-100 pb-4">
                     <h2 class="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
                         <i class="ph ph-user-check text-xl text-brand-600"></i>
-                        <span>Informasi Pemesan & Pengiriman</span>
+                        <span>Customer &amp; Delivery Information</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Pastikan data yang dimasukkan benar agar pengiriman lancar.</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Please ensure accurate information for prompt delivery.</p>
                 </div>
 
                 <div class="space-y-4">
                     <?= ui_input('customer_name', [
-                        'label'       => 'Nama Lengkap',
-                        'placeholder' => 'Contoh: Budi Pratama',
+                        'label'       => 'Full Name',
+                        'placeholder' => 'e.g. John Doe',
                         'value'       => $_POST['customer_name'] ?? '',
                         'required'    => true,
                         'icon'        => 'user',
                     ]) ?>
 
                     <?= ui_input('customer_phone', [
-                        'label'       => 'Nomor WhatsApp Aktif',
+                        'label'       => 'Active WhatsApp / Phone Number',
                         'type'        => 'tel',
-                        'placeholder' => 'Contoh: 081234567890',
+                        'placeholder' => 'e.g. +1 (555) 234-5678',
                         'value'       => $_POST['customer_phone'] ?? '',
                         'required'    => true,
-                        'helper'      => 'Nomor ini akan digunakan admin untuk konfirmasi resi & pengiriman.',
+                        'helper'      => 'Used by admin for order confirmation & tracking updates.',
                         'icon'        => 'phone',
                     ]) ?>
 
                     <?= ui_textarea('customer_address', [
-                        'label'       => 'Alamat Lengkap Pengiriman',
+                        'label'       => 'Full Delivery Address',
                         'rows'        => 3,
-                        'placeholder' => 'Contoh: Jl. Melati No. 12, RT 03/RW 02, Kel. Menteng, Kec. Menteng, Jakarta Pusat 10310',
+                        'placeholder' => 'e.g. 742 Evergreen Terrace, Springfield, OR 97477',
                         'value'       => $_POST['customer_address'] ?? '',
                         'required'    => true,
                     ]) ?>
 
                     <?= ui_input('customer_notes', [
-                        'label'       => 'Catatan Pesanan (Opsional)',
-                        'placeholder' => 'Contoh: Titipkan di satpam jika tidak ada orang / Packing tambahan',
+                        'label'       => 'Order Notes (Optional)',
+                        'placeholder' => 'e.g. Leave with building security / extra protective packaging',
                         'value'       => $_POST['customer_notes'] ?? '',
                         'icon'        => 'pencil-simple',
                     ]) ?>
@@ -238,8 +238,8 @@ require_once __DIR__ . '/includes/header.php';
                         <i class="ph ph-whatsapp-logo text-xl"></i>
                     </div>
                     <div class="text-xs">
-                        <span class="font-semibold text-slate-800 block">Bagaimana Alur WhatsApp Checkout Bekerja?</span>
-                        <p class="text-slate-500 mt-0.5 leading-relaxed">Setelah klik tombol di samping, Anda akan otomatis diarahkan ke chat WhatsApp Admin resmi dengan template format rincian pesanan yang rapi.</p>
+                        <span class="font-semibold text-slate-800 block">How Does WhatsApp Checkout Work?</span>
+                        <p class="text-slate-500 mt-0.5 leading-relaxed">After clicking the button, you will be automatically redirected to the official WhatsApp Admin chat with a pre-formatted order summary.</p>
                     </div>
                 </div>
 
@@ -250,8 +250,8 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="bg-white rounded-card border border-slate-200/80 p-6 sm:p-7 space-y-6">
                     
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <h3 class="font-semibold text-base text-slate-900 tracking-tight">Rincian Pesanan</h3>
-                        <a href="<?= base_url('cart.php') ?>" class="text-xs font-semibold text-brand-600 hover:underline">Ubah Keranjang</a>
+                        <h3 class="font-semibold text-base text-slate-900 tracking-tight">Order Summary</h3>
+                        <a href="<?= base_url('cart.php') ?>" class="text-xs font-semibold text-brand-600 hover:underline">Edit Cart</a>
                     </div>
 
                     <!-- Mini items list -->
@@ -273,26 +273,26 @@ require_once __DIR__ . '/includes/header.php';
                     <!-- Totals -->
                     <div class="pt-4 border-t border-slate-100 space-y-2.5 text-xs">
                         <div class="flex justify-between text-slate-500">
-                            <span>Total Item</span>
+                            <span>Total Items</span>
                             <span class="font-semibold text-slate-800" x-text="$store.cart.count + ' pcs'"></span>
                         </div>
                         <div class="flex justify-between text-slate-500">
-                            <span>Subtotal Barang</span>
+                            <span>Subtotal</span>
                             <span class="font-semibold text-slate-800" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                         </div>
                         <div class="flex justify-between text-slate-500">
-                            <span>Ongkos Kirim</span>
-                            <span class="text-brand-600 font-semibold">Dihitung Admin via WA</span>
+                            <span>Shipping Fee</span>
+                            <span class="text-brand-600 font-semibold">Calculated by Admin on WA</span>
                         </div>
 
                         <div class="pt-3 border-t border-slate-200/80 flex justify-between items-baseline">
-                            <span class="text-sm font-semibold text-slate-900">Total Perkiraan</span>
+                            <span class="text-sm font-semibold text-slate-900">Estimated Total</span>
                             <span class="text-xl font-semibold text-brand-600 tracking-tight" x-text="$store.cart.formatRupiah($store.cart.subtotal)"></span>
                         </div>
                     </div>
 
                     <!-- Submit Button (Apple Tactile) -->
-                    <?= ui_button('Proses Pesanan via WhatsApp', [
+                    <?= ui_button('Place Order via WhatsApp', [
                         'variant' => 'primary',
                         'type'    => 'submit',
                         'size'    => 'lg',
@@ -301,7 +301,7 @@ require_once __DIR__ . '/includes/header.php';
                     ]) ?>
 
                     <p class="text-[11px] text-slate-400 text-center">
-                        Nomor WhatsApp CS: <strong><?= sanitize($settings['whatsapp_number']) ?></strong>
+                        Support WhatsApp: <strong><?= sanitize($settings['whatsapp_number']) ?></strong>
                     </p>
 
                 </div>

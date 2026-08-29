@@ -2,7 +2,7 @@
 /**
  * Product Card Component Primitive (ui_product_card)
  *
- * Apple Store-inspired e-commerce showcase card with discount badge, stock status,
+ * Store-inspired e-commerce showcase card with discount badge, stock status,
  * image zoom micro-interaction, and Alpine.js cart interaction.
  */
 

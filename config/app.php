@@ -39,30 +39,53 @@ function upload_url(string $filename = ''): string {
     return base_url('uploads/products/' . $filename);
 }
 
-// Load store settings from database with default fallback
+// Global Static File-Based Application & Theme Configuration
+function app_config(?string $key = null, $default = null) {
+    static $config = [
+        // App / Store Info
+        'store_name'          => 'Store Showcase',
+        'store_slogan'        => 'Curated Modern Tech & Lifestyle',
+        'store_description'   => 'A modern e-commerce showcase built with Vanilla PHP UI primitives, Alpine.js reactive cart, and instant WhatsApp ordering.',
+        'whatsapp_number'     => '15552345678', // Format without plus
+        'store_email'         => 'contact@store.local',
+        'store_phone'         => '+1 (555) 234-5678',
+        'store_address'       => '742 Evergreen Terrace, Springfield, OR 97477',
+        'currency'            => '$',
+        'instagram_url'       => 'https://instagram.com/',
+        'facebook_url'        => 'https://facebook.com/',
+        'hero_title'          => 'Discover Premium Curated Products',
+        'hero_subtitle'       => 'Browse our curated catalog, add items to your interactive cart drawer, and place orders directly via WhatsApp.',
+        'hero_badge'          => '✨ Featured Showcase Collection',
+
+        // Theme & Design System (Static Configuration)
+        // Options: 'zinc', 'emerald', 'blue', 'indigo', 'violet', 'rose', 'amber', 'teal', 'slate'
+        'theme_primary_color' => 'zinc',
+
+        // Corner Radius Preset (Static Configuration)
+        // Options: 'sharp' (0px), 'subtle' (6px), 'standard' (12px), 'soft' (16px), 'round' (24px), 'pill' (9999px)
+        'theme_radius'        => 'sharp',
+    ];
+
+    if ($key === null) {
+        return $config;
+    }
+    return $config[$key] ?? $default;
+}
+
+if (!function_exists('config')) {
+    function config(?string $key = null, $default = null) {
+        return app_config($key, $default);
+    }
+}
+
+// Load store settings (file config is single source of truth for theme; DB merges dynamic store info)
 function get_settings(): array {
     static $settings = null;
     if ($settings !== null) {
         return $settings;
     }
 
-    $defaultSettings = [
-        'store_name'        => 'KatalogStore',
-        'store_slogan'      => 'slogan',
-        'store_description' => 'Toko online terpercaya menyediakan aneka produk berkualitas dengan kemudahan pemesanan langsung melalui WhatsApp.',
-        'whatsapp_number'   => '6281234567890', // Format 628...
-        'store_email'       => 'kontak@katalogstore.id',
-        'store_phone'       => '+62 812-3456-7890',
-        'store_address'     => 'Jl. Sudirman No. 123, Jakarta Pusat, DKI Jakarta 10220',
-        'currency'          => 'Rp',
-        'instagram_url'     => 'https://instagram.com/',
-        'facebook_url'      => 'https://facebook.com/',
-        'hero_title'        => 'Katalog Produk Pilihan Berkualitas',
-        'hero_subtitle'     => 'Pilih barang favorit Anda, masukkan ke keranjang, dan pesan instan via WhatsApp langsung ke admin kami.',
-        'hero_badge'        => '✨ Promo Spesial Bulan Ini',
-        'theme_primary_color' => 'zinc',
-        'theme_radius'      => 'standard'
-    ];
+    $defaultSettings = app_config();
 
     $db = getDB();
     if ($db) {
@@ -70,6 +93,8 @@ function get_settings(): array {
             $stmt = $db->query("SELECT setting_key, setting_value FROM settings");
             $dbSettings = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
             if (!empty($dbSettings)) {
+                // Ensure static file-based theme configuration always takes precedence
+                unset($dbSettings['theme_primary_color'], $dbSettings['theme_radius']);
                 $settings = array_merge($defaultSettings, $dbSettings);
                 return $settings;
             }

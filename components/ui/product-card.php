@@ -18,8 +18,8 @@ if (!function_exists('ui_product_card')) {
         $imgUrl = upload_url($product['image'] ?? '');
         $prodUrl = base_url('product.php?id=' . $product['id']);
         $extraCls = $options['class'] ?? '';
-        $categoryName = sanitize($product['category_name'] ?? 'Umum');
-        $prodName = sanitize($product['name'] ?? 'Produk');
+        $categoryName = sanitize($product['category_name'] ?? 'General');
+        $prodName = sanitize($product['name'] ?? 'Product');
         $escapedName = addslashes($prodName);
 
         $promoBadge = $hasPromo 
@@ -27,11 +27,11 @@ if (!function_exists('ui_product_card')) {
             : '';
         
         $featuredBadge = !empty($product['is_featured']) 
-            ? '<span class="px-2.5 py-1 rounded-badge bg-amber-500 text-white text-[10px] font-bold border border-amber-400/20 flex items-center gap-1">⭐ Pilihan</span>' 
+            ? '<span class="px-2.5 py-1 rounded-badge bg-amber-500 text-white text-[10px] font-bold border border-amber-400/20 flex items-center gap-1">⭐ Featured</span>' 
             : '';
 
         $stockOverlay = $isOutOfStock 
-            ? '<div class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center"><span class="px-3 py-1.5 rounded-badge bg-slate-900 border border-slate-700 text-white text-xs font-bold">Stok Habis</span></div>' 
+            ? '<div class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center"><span class="px-3 py-1.5 rounded-badge bg-slate-900 border border-slate-700 text-white text-xs font-bold">Out of Stock</span></div>' 
             : '';
 
         $promoStrike = $hasPromo 
@@ -63,7 +63,7 @@ if (!function_exists('ui_product_card')) {
                     <div class=\"flex items-center justify-between text-[11px] text-slate-400 mb-1\">
                         <span>$categoryName</span>
                         <span class=\"font-medium " . ($isOutOfStock ? 'text-rose-500' : 'text-slate-500') . "\">
-                            Stok: " . (int)$product['stock'] . "
+                            Stock: " . (int)$product['stock'] . "
                         </span>
                     </div>
                     <h3 class=\"font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-brand-600 transition leading-snug tracking-tight\">
@@ -83,7 +83,7 @@ if (!function_exists('ui_product_card')) {
 
                     <div class=\"grid grid-cols-2 gap-2\">
                         <a href=\"$prodUrl\" class=\"py-2.5 px-3 rounded-btn bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80 text-xs font-bold text-center transition apple-tap\">
-                            Detail
+                            Details
                         </a>
 
                         <button 
@@ -98,7 +98,7 @@ if (!function_exists('ui_product_card')) {
                             }, 1)\" 
                             class=\"py-2.5 px-3 rounded-btn $cartBtnClass text-xs font-bold text-center transition apple-tap flex items-center justify-center gap-1.5\">
                             $cartIcon
-                            <span>+ Keranjang</span>
+                            <span>+ Add to Cart</span>
                         </button>
                     </div>
                 </div>

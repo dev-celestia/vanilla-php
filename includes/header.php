@@ -10,7 +10,7 @@ $settings = get_settings();
 $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'checkout', 'contact'])) || in_array(basename($_SERVER['PHP_SELF'] ?? ''), ['demo.php', 'product.php', 'cart.php', 'checkout.php', 'order-success.php', 'contact.php']);
 ?>
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
             <?php if ($is_demo_page): ?>
                 <div class="flex items-center gap-2">
                     <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="font-normal text-slate-300">Storefront Demo &bull; Belanja Cepat Langsung via WhatsApp</span>
+                    <span class="font-normal text-slate-300">Storefront Demo &bull; Instant Ordering via WhatsApp</span>
                 </div>
                 <div class="flex items-center gap-3 text-slate-400">
                     <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1">
@@ -46,12 +46,12 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <span class="text-slate-700">•</span>
                     <a href="<?= base_url('scaffold.php') ?>" class="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center gap-1">
                         <i class="ph-bold ph-lightning text-[11px]"></i>
-                        <span>Scaffold Proyek Toko Ini</span>
+                        <span>Scaffold This Store Project</span>
                     </a>
                     <span class="text-slate-700">•</span>
                     <a href="<?= base_url() ?>" class="hover:text-white transition-colors flex items-center gap-1">
                         <i class="ph ph-arrow-left text-[11px]"></i>
-                        <span>Kembali ke Framework UI</span>
+                        <span>Back to UI Framework</span>
                     </a>
                     <span class="text-slate-700">•</span>
                     <a href="<?= base_url('admin/login.php') ?>" class="hover:text-white transition-colors flex items-center gap-1 text-slate-400">
@@ -105,7 +105,7 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                         </div>
                         <div>
                             <span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
-                                <?= sanitize($settings['store_name'] ?? 'KatalogStore') ?>
+                                <?= sanitize($settings['store_name'] ?? 'Store Showcase') ?>
                             </span>
                             <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
                                 <?= sanitize($settings['store_slogan'] ?? 'Official Online Store') ?>
@@ -116,16 +116,13 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <!-- Storefront Desktop Nav Links -->
                     <nav class="hidden md:flex items-center space-x-1">
                         <a href="<?= base_url('demo.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= !isset($active_nav) || $active_nav === 'demo' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
-                            <i class="ph ph-storefront mr-1"></i> Katalog
+                            <i class="ph ph-storefront mr-1"></i> Catalog
                         </a>
                         <a href="<?= base_url('cart.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'cart' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
-                            <i class="ph ph-shopping-bag mr-1"></i> Keranjang
-                        </a>
-                        <a href="<?= base_url('about.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'about' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
-                            Tentang Kami
+                            <i class="ph ph-shopping-bag mr-1"></i> Cart
                         </a>
                         <a href="<?= base_url('contact.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'contact' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
-                            Hubungi Kami
+                            Contact Us
                         </a>
                     </nav>
 
@@ -133,7 +130,7 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <div class="flex items-center gap-2">
                         <!-- Search input -->
                         <form action="<?= base_url('demo.php') ?>" method="GET" class="hidden xl:flex items-center relative">
-                            <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Cari barang..." class="w-32 focus:w-48 transition-all duration-200 pl-7 pr-2.5 py-1 text-xs rounded-input bg-slate-100/80 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
+                            <input type="text" name="q" value="<?= sanitize($_GET['q'] ?? '') ?>" placeholder="Search products..." class="w-32 focus:w-48 transition-all duration-200 pl-7 pr-2.5 py-1 text-xs rounded-input bg-slate-100/80 border border-slate-200/70 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20">
                             <i class="ph ph-magnifying-glass text-slate-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-xs"></i>
                         </form>
 
@@ -142,9 +139,9 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                             type="button" 
                             @click="$store.cart.isOpen = true" 
                             class="relative px-2.5 py-1.5 rounded-btn bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 border border-slate-200/80 transition-colors flex items-center gap-1.5 group apple-tap text-xs font-semibold"
-                            title="Buka Keranjang Belanja">
+                            title="Open Shopping Cart">
                             <i class="ph ph-shopping-bag text-base group-hover:scale-105 transition-transform"></i>
-                            <span class="hidden sm:inline" x-text="$store.cart.formatRupiah($store.cart.subtotal)">Rp 0</span>
+                            <span class="hidden sm:inline" x-text="$store.cart.formatRupiah($store.cart.subtotal)">$0</span>
                             
                             <!-- Badge Count -->
                             <span 
@@ -181,17 +178,9 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     <!-- ============================================== -->
                     <!-- Framework Logo -->
                     <a href="<?= base_url() ?>" class="flex items-center gap-2.5 group apple-tap">
-                        <div class="w-8 h-8 rounded-btn bg-brand-600 flex items-center justify-center text-white border border-brand-500/20 group-hover:scale-105 transition-transform duration-150">
-                            <i class="ph ph-code-simple text-base"></i>
-                        </div>
-                        <div>
-                            <span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
-                                VanillaPHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
-                            </span>
-                            <span class="text-[10px] text-slate-400 font-normal hidden lg:block leading-none mt-0.5">
-                                Design System
-                            </span>
-                        </div>
+                        <span class="font-semibold text-sm tracking-tight text-slate-900 block leading-none flex items-center gap-1">
+                            VanillaPHP <span class="px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[10px] font-semibold border border-brand-200/80">UI</span>
+                        </span>
                     </a>
 
                     <!-- Framework Desktop Nav Links -->
@@ -204,9 +193,6 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                         </a>
                         <a href="<?= base_url('components.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'components' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
                             UI Components
-                        </a>
-                        <a href="<?= base_url('about.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'about' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
-                            Architecture
                         </a>
                         <a href="<?= base_url('demo.php') ?>" class="px-3 py-1.5 text-[13px] font-medium rounded-btn transition-colors apple-tap <?= isset($active_nav) && $active_nav === 'demo' ? 'text-brand-700 bg-brand-50/80 border border-brand-200/60 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent' ?>">
                             <i class="ph ph-shopping-bag mr-1 text-brand-600"></i> Live Demo
@@ -256,25 +242,22 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
             <?php if ($is_demo_page): ?>
                 <div class="space-y-1 text-[13px]">
                     <a href="<?= base_url('demo.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= !isset($active_nav) || $active_nav === 'demo' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                        <i class="ph ph-storefront mr-1"></i> Katalog Produk
+                        <i class="ph ph-storefront mr-1"></i> Product Catalog
                     </a>
                     <a href="<?= base_url('cart.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'cart' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                        <i class="ph ph-shopping-bag mr-1"></i> Keranjang Belanja
-                    </a>
-                    <a href="<?= base_url('about.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'about' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                        Tentang Kami
+                        <i class="ph ph-shopping-bag mr-1"></i> Shopping Cart
                     </a>
                     <a href="<?= base_url('contact.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'contact' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                        Hubungi Kami
+                        Contact Us
                     </a>
                     <a href="<?= base_url('scaffold.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/80">
-                        <i class="ph-bold ph-lightning mr-1"></i> Scaffold Toko Ini
+                        <i class="ph-bold ph-lightning mr-1"></i> Scaffold This Store
                     </a>
                     <a href="https://github.com/dev-celestia/vanilla-php" target="_blank" rel="noopener noreferrer" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
                         <i class="ph-bold ph-github-logo mr-1"></i> GitHub Repository
                     </a>
                     <a href="<?= base_url() ?>" class="block px-3.5 py-2 rounded-btn font-medium text-slate-500 hover:bg-slate-50 border border-transparent">
-                        <i class="ph ph-arrow-left mr-1"></i> Kembali ke Framework
+                        <i class="ph ph-arrow-left mr-1"></i> Back to Framework
                     </a>
                 </div>
 
@@ -285,7 +268,7 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                         class="w-full flex items-center justify-between px-3.5 py-2 rounded-btn bg-slate-100 text-slate-800 text-xs font-semibold apple-tap">
                         <span class="flex items-center gap-2">
                             <i class="ph ph-shopping-bag text-base text-brand-600"></i>
-                            <span>Buka Keranjang Belanja</span>
+                            <span>Open Shopping Cart</span>
                         </span>
                         <span class="px-2 py-0.5 rounded-full bg-brand-600 text-white text-[10px]" x-text="$store.cart.count">0</span>
                     </button>
@@ -300,9 +283,6 @@ $is_demo_page = (isset($active_nav) && in_array($active_nav, ['demo', 'cart', 'c
                     </a>
                     <a href="<?= base_url('components.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'components' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
                         UI Components
-                    </a>
-                    <a href="<?= base_url('about.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium <?= isset($active_nav) && $active_nav === 'about' ? 'bg-brand-50 text-brand-700 font-semibold border border-brand-200/80' : 'text-slate-700 hover:bg-slate-50 border border-transparent' ?>">
-                        Architecture & Philosophy
                     </a>
                     <a href="<?= base_url('demo.php') ?>" class="block px-3.5 py-2 rounded-btn font-medium text-slate-700 hover:bg-slate-50 border border-transparent">
                         <i class="ph ph-shopping-bag mr-1 text-brand-600"></i> Showcase Demo
